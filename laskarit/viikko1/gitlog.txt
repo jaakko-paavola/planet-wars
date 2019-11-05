@@ -1,0 +1,122 @@
+commit 144b40ec41423b55a43d7db30b50864b0fd350ab
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 20:45:06 2019 +0200
+
+    poisto ja uudelleennimeäminen
+
+ tiedostoja/file1 => file22 | 0
+ tiedostoja/file2           | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 02f8de424cff9553cdece5132ee1b1b407303182
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 20:42:21 2019 +0200
+
+    tiedostoja-hakemisto ja 3 tiedostoa lisätty
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c04dd57c62682862459a2d4ba8930bcca1768656
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 19:34:07 2019 +0200
+
+    muokattu tiedostoja
+
+ eka.txt    | 7 +------
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 7 deletions(-)
+
+commit d70cdb39cd935e42cae6a82e455c9a2bdd4f60f0
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 19:31:25 2019 +0200
+
+    tiedoston uudelleennimeäminen eka.txt:ksi
+
+ eka.txt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit 83bbded7d3c96a928e8d3efc397ddd4ba6b08c85
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 19:31:13 2019 +0200
+
+    tiedoston uudelleennimeäminen eka.txt:ksi
+
+ tiedosto.txt | 7 -------
+ 1 file changed, 7 deletions(-)
+
+commit c2d4845ce39f88a0fb0d7e3b489ecd78fd61b2e3
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 19:28:23 2019 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 0d7f3c0f277f184243f47557e6281ff73fdc7f38
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 19:25:41 2019 +0200
+
+    tiedosto.txt:sta poistettu osa tekstistä ja korvattu uudella tekstillä
+
+ tiedosto.txt | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+commit 28f4a7e6b0440affd61dc2ae78ca45a19185b510
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 19:24:31 2019 +0200
+
+    tiedosto.txt:een lisätty tekstiä
+
+ tiedosto.txt | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
+
+commit b75d52710226ab4ef858d23f8064dc73898dddb8
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 18:38:40 2019 +0200
+
+    hakemisto stuff lisätty
+
+ stuff/foo | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 678e3802fb0fd4004d53f05b5ae83e97d63bd172
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 18:37:53 2019 +0200
+
+    toinen ja kolmas sisältöä muutettu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit df3b841779abe78caa1adb2f44b64835d758478f
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 18:36:57 2019 +0200
+
+    kolmas tiedosto lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 99797faf60fe5ebe897a980985edd156a52e86a5
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 18:33:34 2019 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 12e51a476da423ed50e8a2ad2a12bbe53f188fe3
+Author: Jaakko Paavola <jaakko.paavola@helsinki.fi>
+Date:   Tue Nov 5 18:30:20 2019 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
