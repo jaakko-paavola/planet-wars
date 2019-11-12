@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Sovellus on avaruuslentelypeli, jossa pelaaja voi tutkia avaruutta, vallata planeettoja sekä taistella muita avaruusaluksia vastaan.
+Sovellus on avaruuslentelypeli, jossa pelaaja voi vallata planeettoja sekä taistella muita avaruusaluksia vastaan.
 
 ## Käyttöliittymäluonnos
 
