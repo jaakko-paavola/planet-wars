@@ -6,12 +6,12 @@ Sovellus on avaruuslentelypeli, jossa pelaaja voi vallata planeettoja sekä tais
 
 ## Käyttöliittymäluonnos
 
-Varsinainen pelinäkymä olisi parhaimmillaan (eli jatkokehitysideat mukaan lukien) jotain tämän suuntaista:
+Pelinäkymä olisi parhaimmillaan (eli jatkokehitysideat mukaan lukien) jotain tämän suuntaista:
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/Pelinakyma.jpg">
 Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on aina itse), pieni karttanäkymä jossain yläkulmassa, sekä paneeli tai paneelit, joissa näkyy pelaajalle erinäisiä tietoja hänen pelisuorituksestaan.
 
 ## Perusversion tarjoama toiminnallisuus
-- Pelikenttä ja lentofysiikka.
+- Pelinäkymä, pelikenttä ja lentofysiikka.
 - Lentonopeuden mittari.
 - Yläkulman karttanäkymä.
 - Torpedon ampuminen, joka kuluttaa "energiaa".
