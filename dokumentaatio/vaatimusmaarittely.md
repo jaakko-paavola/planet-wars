@@ -16,7 +16,9 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 - Yläkulman karttanäkymä.
 - Torpedon ampuminen, joka kuluttaa energiaa.
 - Planeettojen kiertoradalle asettuminen, mikä avaa jonkinlaisen planeettanäkymän, jossa tietoa planeetasta.
-- Kiertoradalle asettumisen yhteydessä planeetan merkitseminen vallatuksi päänäkymään ja karttanäkymään.
+- Kiertoradalle asettumisen yhteydessä planeetan merkitseminen vallatuksi päänäkymään ja karttanäkymään, sekä pisteiden kertymien (pisteitä ei käyttöliittymäluonnoksessa kuvattuna).
+- Pisteiden kertyminen nostaa pelaajatasoa.
+- Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut.
 - Vain yksinpeli.
 
 ## Jatkokehitysideoita
@@ -27,4 +29,3 @@ Perusversion jälkeen peliä täydennetään ajan salliessa esim. seuraavilla to
 - Torpedolla osuminen pelaajaan kuluttaa tämän "elämäpisteitä".
 - Kun pelaajan elämäpisteet ehtyvät, pelaaja tuhoutuu, mistä "tappopisteen" saa viimeisenä tähän osunut pelaaja.
 - Aloitusvalikko, jossa pelin ja pelikentän asetuksia, kuten ihmispelaajien ja konepelaajien määrän voi asettaa sekä pelikartan generoida haluamillaan asetuksilla.
-- Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut.
