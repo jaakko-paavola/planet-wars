@@ -8,7 +8,7 @@ Sovellus on avaruuslentelypeli, jossa pelaaja voi vallata planeettoja sekä tais
 
 Pelinäkymä olisi parhaimmillaan (eli jatkokehitysideat mukaan lukien) jotain tämän suuntaista:
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/Pelinakyma.jpg">
-Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on aina itse), pieni karttanäkymä jossain yläkulmassa, sekä paneeli tai paneelit, joissa näkyy pelaajalle erinäisiä tietoja hänen pelisuorituksestaan.
+Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on aina itse), pieni karttanäkymä jossain yläkulmassa, sekä paneeli tai paneelit, joissa näkyy pelaajalle erinäistä numeerista tilannekuvaa.
 
 ## Perusversion tarjoama toiminnallisuus
 - Pelinäkymä, pelikenttä ja lentofysiikka.
