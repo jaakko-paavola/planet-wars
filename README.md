@@ -1,6 +1,6 @@
 # Helsingin yliopiston ohjelmistotekniikan kurssi
 ## Laskuharjoitukset
-[Laskuharjoitukset täällä](https://github.com/Jakoviz/ot-harjoitustyo/laskarit)
+[Laskuharjoitukset täällä](https://github.com/Jakoviz/ot-harjoitustyo/tree/master/laskarit)
 
 ## Harjoitustyö
 Avaruuslentelypeli, jossa tutkitaan avaruutta, vieraillaan planeetoilla ja taistellaan muita avaruusaluksia vastaan (joko toinen ihminen tai kone).
