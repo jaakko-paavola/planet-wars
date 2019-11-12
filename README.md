@@ -3,7 +3,7 @@
 [Laskuharjoitukset täällä](https://github.com/Jakoviz/ot-harjoitustyo/tree/master/laskarit)
 
 ## Harjoitustyö
-Avaruuslentelypeli, jossa tutkitaan avaruutta, vieraillaan planeetoilla ja taistellaan muita avaruusaluksia vastaan (joko toinen ihminen tai kone).
+Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluksia vastaan.
 
 ### Harjoitustyön dokumentaatio
 [Määrittelydokumentti](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
