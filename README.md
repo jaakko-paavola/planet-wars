@@ -7,4 +7,5 @@ Avaruuslentelypeli, jossa tutkitaan avaruutta, vieraillaan planeetoilla ja taist
 
 ### Harjoitustyön dokumentaatio
 [Määrittelydokumentti](https://github.com/Jakoviz/ot-harjoitustyo/dokumentointi/vaatimusmaarittely.md)
+
 [Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/dokumentointi/tyoaikakirjanpito.md)
