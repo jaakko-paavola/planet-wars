@@ -6,6 +6,6 @@
 Avaruuslentelypeli, jossa tutkitaan avaruutta, vieraillaan planeetoilla ja taistellaan muita avaruusaluksia vastaan (joko toinen ihminen tai kone).
 
 ### Harjoitustyön dokumentaatio
-[Määrittelydokumentti](https://github.com/Jakoviz/ot-harjoitustyo/dokumentointi/vaatimusmaarittely.md)
+[Määrittelydokumentti](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-[Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/dokumentointi/tyoaikakirjanpito.md)
+[Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
