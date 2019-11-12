@@ -12,9 +12,9 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 
 ## Perusversion tarjoama toiminnallisuus
 - Pelinäkymä, pelikenttä ja lentofysiikka.
-- Lentonopeuden mittari.
+- Lentonopeuden ja "energian" mittari.
 - Yläkulman karttanäkymä.
-- Torpedon ampuminen, joka kuluttaa "energiaa".
+- Torpedon ampuminen, joka kuluttaa energiaa.
 - Planeettojen kiertoradalle asettuminen, mikä avaa jonkinlaisen planeettanäkymän, jossa tietoa planeetasta.
 - Kiertoradalle asettumisen yhteydessä planeetan merkitseminen vallatuksi päänäkymään ja karttanäkymään.
 - Vain yksinpeli.
