@@ -1,8 +1,10 @@
-# Viikko1 harjoitus
-Tässä on *hieman* testitekstiä **markdownilla**
+# Helsingin yliopiston ohjelmistotekniikan kurssi
+## Laskuharjoitukset
+[Laskuharjoitukset täällä](https://github.com/Jakoviz/ot-harjoitustyo/laskarit)
 
-[komentorivi.txt](https://github.com/Jakoviz/ot-harjoitustyo/tree/master/laskarit/viikko1/komentorivi.txt)
+## Harjoitustyö
+Avaruuslentelypeli, jossa tutkitaan avaruutta, vieraillaan planeetoilla ja taistellaan muita avaruusaluksia vastaan (joko toinen ihminen tai kone).
 
-[gitlog.txt](https://github.com/Jakoviz/ot-harjoitustyo/tree/master/laskarit/viikko1/gitlog.txt)
-
-muutos
+### Harjoitustyön dokumentaatio
+[Määrittelydokumentti](https://github.com/Jakoviz/ot-harjoitustyo/dokumentointi/vaatimusmaarittely.md)
+[Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/dokumentointi/tyoaikakirjanpito.md)
