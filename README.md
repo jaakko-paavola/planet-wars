@@ -1,8 +1,6 @@
-# Helsingin yliopiston ohjelmistotekniikan kurssi
-## Laskuharjoitukset
-[Laskuharjoitukset täällä](https://github.com/Jakoviz/ot-harjoitustyo/tree/master/laskarit)
+# Helsingin yliopiston ohjelmistotekniikan kurssin harjoitustyö
 
-## Harjoitustyö
+## Planet Wars
 Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluksia vastaan.
 
 ### Harjoitustyön dokumentaatio
