@@ -8,6 +8,8 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 [Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
+[Arkkitehtuurikuvaus](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuurikuvaus.md)
+
 ### Komentorivitoiminnot
 
 #### Testaus
