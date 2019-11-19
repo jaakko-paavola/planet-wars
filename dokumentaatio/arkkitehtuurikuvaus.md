@@ -18,11 +18,6 @@ Pääohjelma on luokassa PlanetWarsApplication, joka luo graafiset elementit, pe
 ### Päätoiminnallisuudet
 
 
-#### käyttäjän kirjaantuminen
-
-
-#### uuden käyttäjän luominen
-
 #### Muut toiminnallisuudet
 
 ## Ohjelman rakenteeseen jääneet heikkoudet
