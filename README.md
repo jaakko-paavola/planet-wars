@@ -8,9 +8,9 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 [Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
-## Komentorivitoiminnot
+### Komentorivitoiminnot
 
-### Testaus
+#### Testaus
 
 Testit suoritetaan komennolla
 
@@ -26,7 +26,7 @@ mvn jacoco:report
 
 Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
 
-### Suoritettavan jarin generointi
+#### Suoritettavan jarin generointi
 
 Komento
 
@@ -34,14 +34,4 @@ Komento
 mvn package
 ```
 
-generoi hakemistoon _target_ suoritettavan jar-tiedoston _OtmTodoApp-1.0-SNAPSHOT.jar_
-
-### JavaDoc
-
-JavaDoc generoidaan komennolla
-
-```
-mvn javadoc:javadoc
-```
-
-JavaDocia voi tarkastella avaamalla selaimella tiedosto _target/site/apidocs/index.html_
+generoi hakemistoon _target_ suoritettavan jar-tiedoston _PlanetWars-1.0-SNAPSHOT.jar_
