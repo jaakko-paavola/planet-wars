@@ -23,11 +23,8 @@ import static org.junit.Assert.*;
  */
 public class ShipTest {
     private Ship player1Ship; 
-    public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
-    public static int width = (int) resolution.getWidth();
-    public static int height = (int) resolution.getHeight(); 
-    public static int WIDTH = width;
-    public static int HEIGHT = height;     
+    public static int WIDTH = 800;
+    public static int HEIGHT = 600;     
     
     public ShipTest() {
     }
