@@ -13,7 +13,7 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 ## Perusversion tarjoama toiminnallisuus
 - Pelinäkymä, pelikenttä ja lentofysiikka. [Tehty]
 - Pelikentän rajojen ulkopuolelle lentäminen päättää pelin. [Tehty]
-- Toimiva lentonopeuden mittari. [Tehty]
+- Toimiva lentonopeuden mittari. [Tehty osittain]
 - Yläkulman karttanäkymä. [Tehty]
 - Torpedon ampuminen. [Tehty]
 - Planeettojen kiertoradalle asettuminen, mikä avaa jonkinlaisen planeettanäkymän, jossa tietoa planeetasta (ei kuvattuna käyttöliittymäluonnoksessa).
