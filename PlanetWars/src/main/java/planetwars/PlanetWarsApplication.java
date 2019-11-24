@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.planetwars;
+package planetwars;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -23,27 +23,55 @@ import javafx.stage.*;
  */
 public class PlanetWarsApplication extends Application{
     
-    public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
-    public static int width = (int) resolution.getWidth();
-    public static int height = (int) resolution.getHeight(); 
-    public static int WIDTH = width;
-    public static int HEIGHT = height;
+	/**
+	 *
+	 */
+	public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
+
+	/**
+	 *
+	 */
+	public static int width = (int) resolution.getWidth();
+ 
+	/**
+	 *
+	 */
+	public static int height = (int) resolution.getHeight(); 
+
+	/**
+	 *
+	 */
+	public static int WIDTH = width;
+
+	/**
+	 *
+	 */
+	public static int HEIGHT = height;
     private Map<KeyCode, Boolean> keysPressed = new HashMap<>();  
     private Point2D movement = new Point2D(1, 0) {};
     private Ship player1Ship;
     List<Torpedo> torpedos;
     ArrayList<Planet> planets;
     
-    public static void main(String[] args) {
+	/**
+	 *
+	 * @param args
+	 */
+	public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
+	/**
+	 *
+	 * @param primaryStage
+	 * @throws Exception
+	 */
+	@Override
     public void start(Stage primaryStage) throws Exception {
         Pane pane = new Pane();
         pane.setPrefSize(WIDTH, HEIGHT);
         
-        player1Ship = new Ship(WIDTH/2, HEIGHT/2);
+        player1Ship = new Ship(WIDTH/5, HEIGHT/2);
         torpedos = new ArrayList<>();
         planets = new ArrayList<>();
         planets.add(new Planet(WIDTH/8, HEIGHT/4, 10));
