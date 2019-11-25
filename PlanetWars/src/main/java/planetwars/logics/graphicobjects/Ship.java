@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars;
+package planetwars.logics.graphicobjects;
 
 /**
  *
  * @author jaakkpaa
  */
 import javafx.scene.shape.Polygon;
+import static planetwars.ui.PlanetWarsApplication.screenHeight;
+import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
 public class Ship extends Shape {
 
