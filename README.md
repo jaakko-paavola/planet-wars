@@ -1,8 +1,6 @@
-# Helsingin yliopiston ohjelmistotekniikan kurssi
-## Laskuharjoitukset
-[Laskuharjoitukset täällä](https://github.com/Jakoviz/ot-harjoitustyo/tree/master/laskarit)
+# Helsingin yliopiston ohjelmistotekniikan kurssin harjoitustyö
 
-## Harjoitustyö
+## Planet Wars
 Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluksia vastaan.
 
 ### Harjoitustyön dokumentaatio
@@ -10,9 +8,11 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 [Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
-## Komentorivitoiminnot
+[Arkkitehtuurikuvaus](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuurikuvaus.md)
 
-### Testaus
+### Komentorivitoiminnot
+
+#### Testaus
 
 Testit suoritetaan komennolla
 
@@ -27,23 +27,3 @@ mvn jacoco:report
 ```
 
 Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
-
-### Suoritettavan jarin generointi
-
-Komento
-
-```
-mvn package
-```
-
-generoi hakemistoon _target_ suoritettavan jar-tiedoston _OtmTodoApp-1.0-SNAPSHOT.jar_
-
-### JavaDoc
-
-JavaDoc generoidaan komennolla
-
-```
-mvn javadoc:javadoc
-```
-
-JavaDocia voi tarkastella avaamalla selaimella tiedosto _target/site/apidocs/index.html_
