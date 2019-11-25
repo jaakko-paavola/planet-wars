@@ -10,6 +10,9 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 [Arkkitehtuurikuvaus](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuurikuvaus.md)
 
+### Peliohje
+Ohjaa avaruusalusta nuolinäppäimillä. Huomaa, että alaspäin-nuoli jarruttaa.
+
 ### Komentorivitoiminnot
 
 #### Testaus
@@ -27,3 +30,13 @@ mvn jacoco:report
 ```
 
 Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
+
+### Checkstyle
+
+Tiedostoon [checkstyle.xml](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/PlanetWars/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+
+```
+ mvn jxr:jxr checkstyle:checkstyle
+```
+
+Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
