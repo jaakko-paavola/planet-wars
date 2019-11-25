@@ -169,7 +169,7 @@ public class PlanetWarsApplication extends Application{
                             (int) player1Ship.getShape().getTranslateY());
                     torpedo.getShape().setRotate(player1Ship.getShape().getRotate());
                     torpedos.add(torpedo);
-                    torpedo.accelerateToOppositeDirectionInReferenceTo(player1Ship);
+                    torpedo.accelerateInReferenceTo(player1Ship);
                     torpedo.setMovement(torpedo.getMovement().normalize().multiply(2));
                     gameView.getChildren().add(torpedo.getShape());
                 }                

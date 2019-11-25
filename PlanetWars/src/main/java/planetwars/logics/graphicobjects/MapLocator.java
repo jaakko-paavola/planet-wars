@@ -27,6 +27,7 @@ public class MapLocator extends Shape {
 			(int) Math.round((1.0 * screenWidth / SPACE_WIDTH) * mapWidth), 
 			(int) Math.round((1.0 * screenHeight / SPACE_HEIGHT) * mapHeight)), Color.WHITE);
     } 	
+	@Override
     public void accelerateInReferenceTo(Shape reference) {
         double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
@@ -38,6 +39,7 @@ public class MapLocator extends Shape {
 
         this.setMovement(this.getMovement().add(changeX, changeY));
     }
+	@Override
     public void brakeInReferenceTo(Shape reference) {
         double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));

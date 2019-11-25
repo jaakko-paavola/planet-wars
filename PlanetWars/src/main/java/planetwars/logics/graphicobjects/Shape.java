@@ -68,6 +68,26 @@ public abstract class Shape {
 	public void turnRight() {
 		this.shape.setRotate(this.shape.getRotate() + 1);
 	}
+
+	public void accelerateInReferenceTo(Shape reference) {
+		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
+		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
+		
+		changeX *= 0.005;
+		changeY *= 0.005;
+		
+		this.setMovement(this.getMovement().add(changeX, changeY));
+	}
+	
+	public void brakeInReferenceTo(Shape reference) {
+		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
+		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
+		
+		changeX *= -0.001;
+		changeY *= -0.001;
+		
+		this.setMovement(this.getMovement().add(changeX, changeY));
+	}
 	
 	public void accelerateToOppositeDirectionInReferenceTo(Shape reference) {
 		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
