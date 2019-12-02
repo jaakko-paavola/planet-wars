@@ -5,16 +5,16 @@
  */
 package planetwars.logics.graphicobjects;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+
 /**
  *
  * @author jaakkpaa
  */
-import java.util.stream.Stream;
-import javafx.scene.shape.Polygon;
-
-public class Torpedo extends Shape {
-
-    public Torpedo(int x, int y) {
-        super(new Polygon(2, -2, 2, 2, -2, 2, -2, -2), x, y);
-    }
+public class BoundaryRectangle extends Shape {
+	public BoundaryRectangle(Rectangle rectangle, Color color) {
+		super(rectangle, color);
+	}
 }

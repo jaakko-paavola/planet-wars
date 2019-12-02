@@ -26,8 +26,9 @@ public abstract class Shape {
 	private Point2D movement;
 	private Point2D previous;
 	private int visits = 0;
+	private boolean alive = true;
 	
-	public Shape(Polygon polygon, int x, int y) {
+	public Shape(Polygon polygon, double x, double y) {
 		this.shape = polygon;
 		this.shape.setTranslateX(x);
 		this.shape.setTranslateY(y);
@@ -51,7 +52,7 @@ public abstract class Shape {
 		this.shape = rectangle;
 		this.shape.setTranslateX(rectangle.getX());
 		this.shape.setTranslateY(rectangle.getY());
-		this.shape.setStroke(Color.WHITE);
+		this.shape.setStroke(color);
 		
 		this.movement = new Point2D(0, 0);
 		this.previous = new Point2D(0, 0);
@@ -60,51 +61,55 @@ public abstract class Shape {
 	public javafx.scene.shape.Shape getShape() {
 		return shape;
 	}
+
+	public void setShape(javafx.scene.shape.Shape shape) {
+		this.shape = shape;
+	}
 	
 	public void turnLeft() {
-		this.shape.setRotate(this.shape.getRotate() - 1);
+		this.shape.setRotate(this.shape.getRotate() - 10);
 	}
 	
 	public void turnRight() {
-		this.shape.setRotate(this.shape.getRotate() + 1);
+		this.shape.setRotate(this.shape.getRotate() + 10);
 	}
 
-	public void accelerateInReferenceTo(Shape reference) {
+	public void accelerateInReferenceTo(Shape reference, int quantity) {
 		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
 		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 		
-		changeX *= 0.005;
-		changeY *= 0.005;
+		changeX *= 0.005 * quantity;
+		changeY *= 0.005 * quantity;
 		
 		this.setMovement(this.getMovement().add(changeX, changeY));
 	}
 	
-	public void brakeInReferenceTo(Shape reference) {
+	public void brakeInReferenceTo(Shape reference, int quantity) {
 		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
 		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 		
-		changeX *= -0.001;
-		changeY *= -0.001;
+		changeX *= -0.001 * quantity;
+		changeY *= -0.001 * quantity;
 		
 		this.setMovement(this.getMovement().add(changeX, changeY));
 	}
 	
-	public void accelerateToOppositeDirectionInReferenceTo(Shape reference) {
+	public void accelerateToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
 		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
 		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 		
-		changeX *= -0.005;
-		changeY *= -0.005;
+		changeX *= -0.005 * quantity;
+		changeY *= -0.005 * quantity;
 		
 		this.setMovement(this.getMovement().add(changeX, changeY));
 	}
 	
-	public void brakeToOppositeDirectionInReferenceTo(Shape reference) {
+	public void brakeToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
 		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
 		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 		
-		changeX *= 0.001;
-		changeY *= 0.001;
+		changeX *= 0.001 * quantity;
+		changeY *= 0.001 * quantity;
 		
 		this.setMovement(this.getMovement().add(changeX, changeY));
 	}
@@ -156,5 +161,18 @@ public abstract class Shape {
 		}
 		this.movement = movement;
 		visits++;
+	}
+	
+    public boolean collide(Shape counterparty) {
+        javafx.scene.shape.Shape collisionArea = javafx.scene.shape.Shape.intersect(this.shape, counterparty.getShape());
+        return collisionArea.getBoundsInLocal().getWidth() != -1;
+    }
+	
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 }

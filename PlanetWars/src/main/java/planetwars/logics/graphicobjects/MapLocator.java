@@ -28,25 +28,25 @@ public class MapLocator extends Shape {
 			(int) Math.round((1.0 * screenHeight / SPACE_HEIGHT) * mapHeight)), Color.WHITE);
     } 	
 	@Override
-    public void accelerateInReferenceTo(Shape reference) {
+    public void accelerateInReferenceTo(Shape reference, int quantity) {
         double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 
-        changeX *= 0.005 * (1.0 * PlanetWarsApplication.mapWidth /
+        changeX *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
 				PlanetWarsApplication.SPACE_WIDTH);
-        changeY *= 0.005 * (1.0 * PlanetWarsApplication.mapHeight /
+        changeY *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
 				PlanetWarsApplication.SPACE_HEIGHT);
 
         this.setMovement(this.getMovement().add(changeX, changeY));
     }
 	@Override
-    public void brakeInReferenceTo(Shape reference) {
+    public void brakeInReferenceTo(Shape reference, int quantity) {
         double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 
-        changeX *= -0.001 * (1.0 * PlanetWarsApplication.mapWidth /
+        changeX *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
 				PlanetWarsApplication.SPACE_WIDTH);
-        changeY *= -0.001 * (1.0 * PlanetWarsApplication.mapHeight /
+        changeY *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
 				PlanetWarsApplication.SPACE_HEIGHT);
 
         this.setMovement(this.getMovement().add(changeX, changeY));

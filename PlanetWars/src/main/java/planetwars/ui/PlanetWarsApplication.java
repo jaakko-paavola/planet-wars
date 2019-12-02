@@ -8,12 +8,14 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 import javafx.animation.AnimationTimer;
 import javafx.application.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.effect.Effect;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
@@ -26,11 +28,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.*;
+import planetwars.logics.graphicobjects.BoundaryRectangle;
 import planetwars.logics.graphicobjects.MapLocator;
 import planetwars.logics.graphicobjects.Planet;
 import planetwars.logics.graphicobjects.Ship;
@@ -56,6 +61,8 @@ public class PlanetWarsApplication extends Application{
 
 	private Text textCoordinates = new Text(10, 20, "Coordinates: ");
 	private Text textSpeed = new Text(10, 20, "Speed: ");
+	private int points = 0;
+	private Text textPoints = new Text(10, 20, "Points: " + points);
 
     private Ship player1Ship;
     private List<Torpedo> torpedos;
@@ -100,9 +107,11 @@ public class PlanetWarsApplication extends Application{
 		gameView.setPrefSize(screenWidth, screenHeight);
 		textCoordinates.setFill(Color.WHITE);
 		textSpeed.setFill(Color.WHITE);
+		textPoints.setFill(Color.WHITE);
 
 		gridPane.add(textCoordinates, 2, 1);
 		gridPane.add(textSpeed, 3, 1);
+		gridPane.add(textPoints, 4, 1);
 		gridPane.setAlignment(Pos.CENTER);
 
 		Pane mapView = new Pane();
@@ -118,15 +127,20 @@ public class PlanetWarsApplication extends Application{
         torpedos = new ArrayList<>();
 
         planets = new ArrayList<>();
-        planets.add(new Planet(planet1XCoord, planet1YCoord, 10, Color.GREEN, false));
-        planets.add(new Planet(planet2XCoord, planet2YCoord, 40, Color.RED, false));
-        planets.add(new Planet(planet3XCoord, planet3YCoord, 60, Color.BLUE, false));
-        planets.add(new Planet(planet4XCoord, planet4YCoord, 20, Color.YELLOW, false));
-
+        planets.add(new Planet(planet1XCoord, planet1YCoord, 10, Color.GREEN));
+        planets.add(new Planet(planet2XCoord, planet2YCoord, 40, Color.RED));
+        planets.add(new Planet(planet3XCoord, planet3YCoord, 60, Color.BLUE));
+        planets.add(new Planet(planet4XCoord, planet4YCoord, 20, Color.YELLOW));
+		
         for (Planet planet : planets) {
             gameView.getChildren().add(planet.getShape());
 			mapView.getChildren().add(planet.getMapViewPlanet().getShape());
         }
+		
+		Rectangle rectangle = new Rectangle(0, 0, SPACE_WIDTH, SPACE_HEIGHT);
+		BoundaryRectangle boundaryRectangle = new BoundaryRectangle(rectangle, Color.RED);
+		boundaryRectangle.getShape().setFill(Color.TRANSPARENT);
+		gameView.getChildren().add(boundaryRectangle.getShape());		
 
         Scene scene = new Scene(rootPane);
         scene.setOnKeyPressed(event -> {
@@ -138,6 +152,7 @@ public class PlanetWarsApplication extends Application{
         });
         
         new AnimationTimer() {
+			private long previousTorpedoFired;
             @Override
             public void handle(long timeNow) {
                 if(keysPressed.getOrDefault(KeyCode.LEFT, false)) {
@@ -149,35 +164,93 @@ public class PlanetWarsApplication extends Application{
                 }
 
 			   if(keysPressed.getOrDefault(KeyCode.DOWN, false)) {
-					mapLocator.brakeInReferenceTo(player1Ship);
+					mapLocator.brakeInReferenceTo(player1Ship, 1);
+					boundaryRectangle.brakeToOppositeDirectionInReferenceTo(player1Ship, 1);
+					
                     for (Planet planet : planets) {
-                        planet.brakeToOppositeDirectionInReferenceTo(player1Ship);
-                        planet.getMapViewPlanet().brakeToOppositeDirectionInReferenceTo(player1Ship);
+                        planet.brakeToOppositeDirectionInReferenceTo(player1Ship, 1);
+                        planet.getMapViewPlanet().brakeToOppositeDirectionInReferenceTo(player1Ship, 1);
                     }
                 } 
 			   
                 if(keysPressed.getOrDefault(KeyCode.UP, false)) {
-					mapLocator.accelerateInReferenceTo(player1Ship);
+					mapLocator.accelerateInReferenceTo(player1Ship, 100);
+					boundaryRectangle.accelerateToOppositeDirectionInReferenceTo(player1Ship, 100);
+					
                     for (Planet planet : planets) {
-                        planet.accelerateToOppositeDirectionInReferenceTo(player1Ship);
-                        planet.getMapViewPlanet().accelerateToOppositeDirectionInReferenceTo(player1Ship);
+                        planet.accelerateToOppositeDirectionInReferenceTo(player1Ship, 100);
+                        planet.getMapViewPlanet().accelerateToOppositeDirectionInReferenceTo(player1Ship, 100);
                     }
                 }
-                
-                if (keysPressed.getOrDefault(KeyCode.SPACE, false) && torpedos.size() < 3) {
+
+                if (keysPressed.getOrDefault(KeyCode.SPACE, false) && System.currentTimeMillis() - previousTorpedoFired > 1000) {
                     Torpedo torpedo = new Torpedo((int) player1Ship.getShape().getTranslateX(), 
                             (int) player1Ship.getShape().getTranslateY());
                     torpedo.getShape().setRotate(player1Ship.getShape().getRotate());
                     torpedos.add(torpedo);
-                    torpedo.accelerateInReferenceTo(player1Ship);
+                    torpedo.accelerateInReferenceTo(player1Ship, 1);
                     torpedo.setMovement(torpedo.getMovement().normalize().multiply(2));
                     gameView.getChildren().add(torpedo.getShape());
+					this.previousTorpedoFired = System.currentTimeMillis();
+					
+					mapLocator.brakeInReferenceTo(player1Ship, 100);
+					boundaryRectangle.brakeToOppositeDirectionInReferenceTo(player1Ship, 100);
+                    for (Planet planet : planets) {
+                        planet.brakeToOppositeDirectionInReferenceTo(player1Ship, 100);
+                        planet.getMapViewPlanet().brakeToOppositeDirectionInReferenceTo(player1Ship, 100);
+                    }
                 }                
-				
+                torpedos.forEach(torpedo -> torpedo.move());
+                torpedos.forEach(torpedo -> {
+                    planets.forEach(planet -> {
+                        if(torpedo.collide(planet)) {
+							if(planet.isAlive()) {
+								torpedo.setAlive(false); planet.setAlive(false);
+								gameView.getChildren().remove(planet.getShape());
+								mapView.getChildren().remove(planet.getMapViewPlanet().getShape());
+								planet.getShape().setOpacity(0.2);
+								planet.getMapViewPlanet().getShape().setOpacity(0.2);
+								gameView.getChildren().add(planet.getShape());
+								mapView.getChildren().add(planet.getMapViewPlanet().getShape());							
+								if(planet.isConquered())
+									points -= 800;
+								else
+									points += 800;
+							}
+                        }
+                    });
+                });				
+                torpedos.stream()
+                    .filter(torpedo -> !torpedo.isAlive())
+                    .forEach(torpedo -> gameView.getChildren().remove(torpedo.getShape()));
+                torpedos.removeAll(torpedos.stream()
+                    .filter(torpedo -> !torpedo.isAlive())
+                    .collect(Collectors.toList()));
+
+				planets.forEach(planet -> {
+					if(player1Ship.collide(planet)) {
+						if(planet.isAlive() && !planet.isConquered()) {
+							points += 1000;
+							planet.setConquered(true);
+							gameView.getChildren().remove(planet.getShape());
+							mapView.getChildren().remove(planet.getMapViewPlanet().getShape());
+							planet.getShape().setStroke(Color.GOLD);
+							planet.getShape().setStrokeWidth(5);
+							planet.getMapViewPlanet().getShape().setStroke(Color.GOLD);
+							planet.getMapViewPlanet().getShape().setStrokeWidth(1);
+							gameView.getChildren().add(planet.getShape());
+							mapView.getChildren().add(planet.getMapViewPlanet().getShape());
+							planet.setConquered(false);					
+						}
+					}
+				});
+
+				textPoints.setText("Points: " + points);
 				textSpeed.setText("Speed: " + mapLocator.getXSpeed(player1Ship) + "." + mapLocator.getYSpeed(player1Ship));
 				textCoordinates.setText("Coordinates: " + mapLocator.getXCoord() + "." + mapLocator.getYCoord());
 
 				mapLocator.move();
+				boundaryRectangle.move();
 
 				if (mapLocator.outOfGameArea()) {
 					Text textMessage = new Text(10, 20, "You flew out of the game area");
@@ -188,8 +261,6 @@ public class PlanetWarsApplication extends Application{
                 for (Planet planet : planets) {
                     planet.move();
                 }
- 
-                torpedos.forEach(torpedo -> torpedo.move());
             }
         }.start();
         
