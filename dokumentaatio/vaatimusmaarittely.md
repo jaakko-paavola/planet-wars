@@ -18,7 +18,7 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 - Torpedon ampuminen. [Tehty]
 - Planeettojen valtaaminen lentämällä niitä päin ja niiden merkintä vallatuksi päänäkymään ja karttanäkymään, sekä pisteiden kertyminen (ei kuvattuna käyttöliittymäluonnoksessa). [Tehty]
 - Planeettojen tuhoaminen ampumalla niitä torpedolla sekä niiden merkintä tuhotuksi päänäkymään ja karttanäkymään. [Tehty]
-- Pisteiden kertyminen nostaa pelaajatasoa tietyin välein. Pelaajataso vaikuttaa aluksen kiihtymisnopeuteen.
+- Pisteiden kertyminen planeettojen valtaamisesta ja tuhoamisesta. [Tehty]
 - Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut.
 - Kartan satunnaisgenerointi aina uuden pelin alussa ja kun edellisessä pelikentässä kaikki planeetat tuli pelaajan valtaamiksi.
 - Vain yksinpeli: pelaaja koittaa valloittaa tai tuhota kaikki planeetat sekuntikelloa vastaan.
