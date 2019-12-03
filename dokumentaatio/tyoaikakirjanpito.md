@@ -11,7 +11,7 @@
 | 25.11 | 2    | Checkcode-siivous ja dokumentaation päivitys|
 | 02.12 | 5    | Planeettojen valtaaminen ja tuhoaminen, pelikentän rajat näkyviin, pistelaskuri|
 | 03.12 | 5    | Refaktorointi UI:n paremmaksi erottamiseksi sovelluslogiikasta sekä yleiseksi järkeistämiseksi, testien lisääminen, nopeusmittarin parantelu|
-|-------|------| |
+|-----  | -----| |
 |       | 39   | |
 |       |      | |
 |       |      | |
