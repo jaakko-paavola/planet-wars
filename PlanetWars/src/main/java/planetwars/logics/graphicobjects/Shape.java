@@ -16,7 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import static planetwars.ui.PlanetWarsApplication.SPACE_WIDTH;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
@@ -66,12 +65,12 @@ public abstract class Shape {
 		this.shape = shape;
 	}
 	
-	public void turnLeft() {
-		this.shape.setRotate(this.shape.getRotate() - 10);
+	public void turnLeft(int quantity) {
+		this.shape.setRotate(this.shape.getRotate() - quantity);
 	}
 	
-	public void turnRight() {
-		this.shape.setRotate(this.shape.getRotate() + 10);
+	public void turnRight(int quantity) {
+		this.shape.setRotate(this.shape.getRotate() + quantity);
 	}
 
 	public void accelerateInReferenceTo(Shape reference, int quantity) {
@@ -112,21 +111,6 @@ public abstract class Shape {
 		changeY *= 0.001 * quantity;
 		
 		this.setMovement(this.getMovement().add(changeX, changeY));
-	}
-	
-	public boolean outOfGameArea() {
-		if (((this.getXCoord() <= (int) -Math.round(((1.0 * screenWidth / SPACE_WIDTH) * mapWidth) / 2)
-							|| this.getYCoord() <= (int) -Math.round(((
-							1.0 * screenWidth / PlanetWarsApplication.SPACE_HEIGHT)
-							* PlanetWarsApplication.mapHeight) / 2)))
-							||
-							(this.getXCoord() >= (int) mapWidth - Math.round(((1.0 * screenWidth / SPACE_WIDTH) * mapWidth) / 2)
-							|| this.getYCoord() >= (int) PlanetWarsApplication.mapHeight - Math.round(((
-							1.0 * screenWidth / PlanetWarsApplication.SPACE_HEIGHT)
-							* PlanetWarsApplication.mapHeight) / 2))) {
-			return true;
-		}
-		return false;
 	}
 	
 	public void move() {

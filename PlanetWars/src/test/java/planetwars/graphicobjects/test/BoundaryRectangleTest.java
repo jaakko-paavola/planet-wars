@@ -5,6 +5,7 @@
  */
 package planetwars.graphicobjects.test;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,11 +13,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logics.graphicobjects.MapLocator;
-import planetwars.logics.graphicobjects.Ship;
-import static planetwars.graphicobjects.test.ShipTest.HEIGHT;
-import static planetwars.graphicobjects.test.ShipTest.WIDTH;
+import planetwars.logics.graphicobjects.BoundaryRectangle;
 import planetwars.logics.graphicobjects.GameArena;
+import planetwars.logics.graphicobjects.Ship;
 import static planetwars.ui.PlanetWarsApplication.mapHeight;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
@@ -26,11 +25,11 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  *
  * @author jaakkpaa
  */
-public class MapLocatorTest {
-	private Ship ship;	
-	private MapLocator mapLocator;	
+public class BoundaryRectangleTest {
+	private Ship ship;
+	private BoundaryRectangle boundaryRectangle;
 	
-	public MapLocatorTest() {
+	public BoundaryRectangleTest() {
 	}
 	
 	@BeforeClass
@@ -44,7 +43,7 @@ public class MapLocatorTest {
 	@Before
 	public void setUp() {
 		ship = new Ship(Math.round(screenWidth/2), Math.round(screenHeight/2));
-		mapLocator = new MapLocator(ship);	
+//		boundaryRectangle = new BoundaryRectangle(rectangle, Color.CORAL);	
 	}
 	
 	@After
@@ -53,21 +52,15 @@ public class MapLocatorTest {
 
 	@Test
 	public void mapLocatorHasCorrectDimensions() {
-		assertEquals((int) Math.round(((Rectangle)(mapLocator.getShape())).getWidth()), 
+		assertEquals((int) Math.round(((Rectangle)(boundaryRectangle.getShape())).getWidth()), 
 				(int) Math.round((1.0*screenWidth/GameArena.SPACE_WIDTH)*mapWidth));
-		assertEquals((int) Math.round(((Rectangle)(mapLocator.getShape())).getHeight()), 
+		assertEquals((int) Math.round(((Rectangle)(boundaryRectangle.getShape())).getHeight()), 
 				(int) Math.round((1.0*screenHeight/GameArena.SPACE_HEIGHT)*mapHeight));
 	}
 
     @Test
     public void mapLocatorFixedToPlayersLocationCorrectly() {
-        assertEquals(mapLocator.getXCoord(), (ship.getXCoord()/GameArena.SPACE_WIDTH)*mapWidth);
-        assertEquals(mapLocator.getYCoord(), (ship.getYCoord()/GameArena.SPACE_HEIGHT)*mapHeight);
+        assertEquals(boundaryRectangle.getXCoord(), (ship.getXCoord()/GameArena.SPACE_WIDTH)*mapWidth);
+        assertEquals(boundaryRectangle.getYCoord(), (ship.getYCoord()/GameArena.SPACE_HEIGHT)*mapHeight);
     }
-
-	// TODO add test methods here.
-	// The methods must be annotated with annotation @Test. For example:
-	//
-	// @Test
-	// public void hello() {}
 }

@@ -9,8 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import planetwars.ui.PlanetWarsApplication;
-import static planetwars.ui.PlanetWarsApplication.planet2XCoord;
-import static planetwars.ui.PlanetWarsApplication.planet2YCoord;
 
 /**
  *
@@ -41,9 +39,9 @@ public class Planet extends Shape {
 
 	private void createMapViewPlanet (double x, double y, int size, Color color) {
 		mapViewPlanet = new Planet((int) Math.round(x * (1.0 * PlanetWarsApplication.mapWidth / 
-				PlanetWarsApplication.SPACE_WIDTH)), 
+				GameArena.SPACE_WIDTH)), 
 				(int) Math.round(y * (1.0 * PlanetWarsApplication.mapWidth /
-					PlanetWarsApplication.SPACE_WIDTH)), size / 10, color, true);
+					GameArena.SPACE_WIDTH)), size / 10, color, true);
 	}
 
 	public void setConquered(boolean conquered) {
