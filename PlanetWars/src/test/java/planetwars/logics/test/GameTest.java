@@ -3,26 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.graphicobjects.test;
+package planetwars.logics.test;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import planetwars.logics.Game;
+import planetwars.logics.graphicobjects.Ship;
 
 /**
  *
  * @author jaakkpaa
  */
-public class TorpedoTest {
+public class GameTest {
+	public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
+	public static int screenWidth = (int) resolution.getWidth();
+	public static int screenHeight = (int) resolution.getHeight(); 	
+	public static Game game;
 	
-	public TorpedoTest() {
+	public GameTest() {
 	}
 	
 	@BeforeClass
 	public static void setUpClass() {
+
 	}
 	
 	@AfterClass
@@ -31,10 +40,17 @@ public class TorpedoTest {
 	
 	@Before
 	public void setUp() {
+		game = new Game(screenWidth, screenHeight);
 	}
 	
 	@After
 	public void tearDown() {
+	}
+
+	@Test
+	public void creatingNewGamePlacesShipInRightCoordinates() {
+		assertEquals(screenWidth/2, game.getPlayer1Ship().getXCoord());
+		assertEquals(screenHeight/2, game.getPlayer1Ship().getYCoord());
 	}
 
 	// TODO add test methods here.

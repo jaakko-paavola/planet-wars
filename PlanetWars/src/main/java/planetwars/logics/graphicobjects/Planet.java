@@ -5,6 +5,7 @@
  */
 package planetwars.logics.graphicobjects;
 
+import planetwars.logics.GameArena;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -37,11 +38,11 @@ public class Planet extends Shape {
 		createMapViewPlanet(x, y, 50, Color.WHITE);
 	}
 
-	private void createMapViewPlanet (double x, double y, int size, Color color) {
+	private void createMapViewPlanet(double x, double y, int size, Color color) {
 		mapViewPlanet = new Planet((int) Math.round(x * (1.0 * PlanetWarsApplication.mapWidth / 
-				GameArena.SPACE_WIDTH)), 
+				GameArena.spaceWidth)), 
 				(int) Math.round(y * (1.0 * PlanetWarsApplication.mapWidth /
-					GameArena.SPACE_WIDTH)), size / 10, color, true);
+					GameArena.spaceWidth)), size / 10, color, true);
 	}
 
 	public void setConquered(boolean conquered) {

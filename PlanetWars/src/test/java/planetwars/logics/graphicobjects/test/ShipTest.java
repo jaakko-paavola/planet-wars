@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.graphicobjects.test; 
+package planetwars.logics.graphicobjects.test; 
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

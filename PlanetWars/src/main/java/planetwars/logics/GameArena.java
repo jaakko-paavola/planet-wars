@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.graphicobjects;
+package planetwars.logics;
 
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
+import planetwars.logics.graphicobjects.BoundaryRectangle;
+import planetwars.logics.graphicobjects.Planet;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
@@ -16,18 +18,18 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class GameArena {
-	public static int SPACE_WIDTH = 10000;
-	public static int SPACE_HEIGHT = 10000;	
+	public static int spaceWidth = 10000;
+	public static int spaceHeight = 10000;	
 	
-	public static int planet1XCoord = screenWidth/8;
-	public static int planet2XCoord = screenWidth/4;
-	public static int planet3XCoord = screenWidth/2;
-	public static int planet4XCoord = screenWidth/5;
+	public static int planet1XCoord = screenWidth / 8;
+	public static int planet2XCoord = screenWidth / 4;
+	public static int planet3XCoord = screenWidth / 2;
+	public static int planet4XCoord = screenWidth / 5;
 
-	public static int planet1YCoord = screenHeight/4;
-	public static int planet2YCoord = screenHeight/9;
-	public static int planet3YCoord = screenHeight/5;
-	public static int planet4YCoord = screenHeight/2;
+	public static int planet1YCoord = screenHeight / 4;
+	public static int planet2YCoord = screenHeight / 9;
+	public static int planet3YCoord = screenHeight / 5;
+	public static int planet4YCoord = screenHeight / 2;
 	
 	private ArrayList<Planet> planets;
 	private BoundaryRectangle boundaryRectangle;
@@ -46,8 +48,6 @@ public class GameArena {
 		return boundaryRectangle;
 	}
 	
-
-
 	public ArrayList<Planet> getPlanets() {
 		return planets;
 	}

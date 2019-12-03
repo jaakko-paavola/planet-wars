@@ -5,6 +5,7 @@
  */
 package planetwars.logics.graphicobjects;
 
+import planetwars.logics.GameArena;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -16,6 +17,6 @@ import planetwars.ui.PlanetWarsApplication;
  */
 public class BoundaryRectangle extends Shape {
 	public BoundaryRectangle(Color color) {
-		super(new Rectangle(0, 0, GameArena.SPACE_WIDTH, GameArena.SPACE_HEIGHT), color);
+		super(new Rectangle(0, 0, GameArena.spaceWidth, GameArena.spaceHeight), color);
 	}
 }

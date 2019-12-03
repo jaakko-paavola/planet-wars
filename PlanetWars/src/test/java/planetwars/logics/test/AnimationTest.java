@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.graphicobjects.test;
+package planetwars.logics.test;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author jaakkpaa
  */
-public class PlanetTest {
+public class AnimationTest {
 	
-	public PlanetTest() {
+	public AnimationTest() {
 	}
 	
 	@BeforeClass

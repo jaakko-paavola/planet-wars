@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.graphicobjects.test;
+package planetwars.logics.graphicobjects.test;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import planetwars.logics.graphicobjects.BoundaryRectangle;
-import planetwars.logics.graphicobjects.GameArena;
+import planetwars.logics.GameArena;
 import planetwars.logics.graphicobjects.Ship;
 import static planetwars.ui.PlanetWarsApplication.mapHeight;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
@@ -43,7 +43,7 @@ public class BoundaryRectangleTest {
 	@Before
 	public void setUp() {
 		ship = new Ship(Math.round(screenWidth/2), Math.round(screenHeight/2));
-//		boundaryRectangle = new BoundaryRectangle(rectangle, Color.CORAL);	
+		boundaryRectangle = new BoundaryRectangle(Color.RED);	
 	}
 	
 	@After
@@ -51,16 +51,14 @@ public class BoundaryRectangleTest {
 	}
 
 	@Test
-	public void mapLocatorHasCorrectDimensions() {
-		assertEquals((int) Math.round(((Rectangle)(boundaryRectangle.getShape())).getWidth()), 
-				(int) Math.round((1.0*screenWidth/GameArena.SPACE_WIDTH)*mapWidth));
-		assertEquals((int) Math.round(((Rectangle)(boundaryRectangle.getShape())).getHeight()), 
-				(int) Math.round((1.0*screenHeight/GameArena.SPACE_HEIGHT)*mapHeight));
+	public void boundaryRectangleHasCorrectDimensions() {
+		assertEquals(GameArena.spaceWidth, Math.round(((Rectangle)boundaryRectangle.getShape()).getWidth()));
+		assertEquals(GameArena.spaceHeight, Math.round(((Rectangle)boundaryRectangle.getShape()).getHeight()));
 	}
 
     @Test
-    public void mapLocatorFixedToPlayersLocationCorrectly() {
-        assertEquals(boundaryRectangle.getXCoord(), (ship.getXCoord()/GameArena.SPACE_WIDTH)*mapWidth);
-        assertEquals(boundaryRectangle.getYCoord(), (ship.getYCoord()/GameArena.SPACE_HEIGHT)*mapHeight);
+    public void boundaryRectangleInRightCoordinates() {
+        assertEquals(0, boundaryRectangle.getXCoord());
+        assertEquals(0, boundaryRectangle.getYCoord());
     }
 }

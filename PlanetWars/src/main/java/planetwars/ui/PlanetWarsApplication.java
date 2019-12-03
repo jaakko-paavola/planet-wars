@@ -35,10 +35,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.*;
-import planetwars.logics.graphicobjects.Animation;
+import planetwars.logics.Animation;
 import planetwars.logics.graphicobjects.BoundaryRectangle;
-import planetwars.logics.graphicobjects.Game;
-import planetwars.logics.graphicobjects.GameArena;
+import planetwars.logics.Game;
+import planetwars.logics.GameArena;
 import planetwars.logics.graphicobjects.MapLocator;
 import planetwars.logics.graphicobjects.Planet;
 import planetwars.logics.graphicobjects.Ship;
@@ -71,7 +71,7 @@ public class PlanetWarsApplication extends Application{
 	@Override
     public void start(Stage primaryStage) throws Exception {
 		AnchorPane rootPane = new AnchorPane();
-        rootPane.setPrefSize(GameArena.SPACE_WIDTH, GameArena.SPACE_HEIGHT);
+        rootPane.setPrefSize(GameArena.spaceWidth, GameArena.spaceHeight);
 		
 		gridPane = new GridPane();
 		gridPane.setHgap(20);

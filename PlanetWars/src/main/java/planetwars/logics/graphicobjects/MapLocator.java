@@ -5,6 +5,7 @@
  */
 package planetwars.logics.graphicobjects;
 
+import planetwars.logics.GameArena;
 import planetwars.ui.PlanetWarsApplication;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -20,10 +21,10 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  */
 public class MapLocator extends Shape {
     public MapLocator(Ship player1Ship) {
-	    super(new Rectangle((player1Ship.getXCoord() / GameArena.SPACE_WIDTH) * mapWidth, 
-			(player1Ship.getYCoord() / GameArena.SPACE_HEIGHT) * mapHeight, 
-			(int) Math.round((1.0 * screenWidth / GameArena.SPACE_WIDTH) * mapWidth), 
-			(int) Math.round((1.0 * screenHeight / GameArena.SPACE_HEIGHT) * mapHeight)), Color.WHITE);
+	    super(new Rectangle((player1Ship.getXCoord() / GameArena.spaceWidth) * mapWidth, 
+			(player1Ship.getYCoord() / GameArena.spaceHeight) * mapHeight, 
+			(int) Math.round((1.0 * screenWidth / GameArena.spaceWidth) * mapWidth), 
+			(int) Math.round((1.0 * screenHeight / GameArena.spaceHeight) * mapHeight)), Color.WHITE);
     } 	
 	@Override
     public void accelerateInReferenceTo(Shape reference, int quantity) {
@@ -31,9 +32,9 @@ public class MapLocator extends Shape {
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 
         changeX *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
-				GameArena.SPACE_WIDTH);
+				GameArena.spaceWidth);
         changeY *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
-				GameArena.SPACE_HEIGHT);
+				GameArena.spaceHeight);
 
         this.setMovement(this.getMovement().add(changeX, changeY));
     }
@@ -43,9 +44,9 @@ public class MapLocator extends Shape {
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 
         changeX *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
-				GameArena.SPACE_WIDTH);
+				GameArena.spaceWidth);
         changeY *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
-				GameArena.SPACE_HEIGHT);
+				GameArena.spaceHeight);
 
         this.setMovement(this.getMovement().add(changeX, changeY));
     }

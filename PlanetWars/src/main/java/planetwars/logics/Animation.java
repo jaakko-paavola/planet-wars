@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.graphicobjects;
+package planetwars.logics;
 
+import planetwars.logics.GameArena;
 import java.util.stream.Collectors;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import java.util.*;
+import planetwars.logics.Game;
+import planetwars.logics.graphicobjects.Planet;
+import planetwars.logics.graphicobjects.Torpedo;
 import planetwars.ui.PlanetWarsApplication;
 
 /**
@@ -29,31 +33,30 @@ public class Animation extends javafx.animation.AnimationTimer {
 
 	@Override
 	public void handle(long timeNow) {
-
-		if(PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.LEFT, false)) {
+		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.LEFT, false)) {
 			game.getPlayer1Ship().turnLeft(1);
 		}
-		if(PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.RIGHT, false)) {
+		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.RIGHT, false)) {
 			game.getPlayer1Ship().turnRight(1);
 		}
-		if(PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.DOWN, false)) {
+		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.DOWN, false)) {
 			brakeShip();
 		} 
-		if(PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.UP, false)) {
+		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.UP, false)) {
 			accelerateShip();
 		}
-		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.SPACE, false) && System.currentTimeMillis() - previousTorpedoFired > 1000) {
+		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.SPACE, false) 
+						&& System.currentTimeMillis() - previousTorpedoFired > 1000) {
 			fireTorpedo();
 		}                
-
 		handleTorpedosHittingPlanets();
-
 		handleShipHittingPlanets();
-
 		refreshGauges();
-
 		moveMovableGraphicObjects();
+		handleFlyingOutOfBounds();
+	}
 
+	private void handleFlyingOutOfBounds() {
 		if (!game.getPlayer1Ship().collide(gameArena.getBoundaryRectangle())) {
 			Text textMessage = new Text(10, 20, "You flew out of the game area");
 			textMessage.setFill(Color.RED);
@@ -72,16 +75,16 @@ public class Animation extends javafx.animation.AnimationTimer {
 	private void refreshGauges() {
 		PlanetWarsApplication.textPoints.setText("Points: " + game.getPoints());
 		PlanetWarsApplication.textSpeed.setText("Speed: " + Math.round(Math.sqrt(
-				Math.pow(gameArena.getBoundaryRectangle().getXSpeed(game.getPlayer1Ship()), 2)
-						+ Math.pow(gameArena.getBoundaryRectangle().getYSpeed(game.getPlayer1Ship()), 2))/1000));
+						Math.pow(gameArena.getBoundaryRectangle().getXSpeed(game.getPlayer1Ship()), 2)
+						+ Math.pow(gameArena.getBoundaryRectangle().getYSpeed(game.getPlayer1Ship()), 2)) / 1000));
 		PlanetWarsApplication.textCoordinates.setText("Coordinates: " + (-gameArena.getBoundaryRectangle().getXCoord() + game.player1StartingYCoord)
-				+ "." + (-gameArena.getBoundaryRectangle().getYCoord() + game.player1StartingYCoord));
+						+ "." + (-gameArena.getBoundaryRectangle().getYCoord() + game.player1StartingYCoord));
 	}
 
 	private void handleShipHittingPlanets() {
 		gameArena.getPlanets().forEach(planet -> {
-			if(game.getPlayer1Ship().collide(planet)) {
-				if(planet.isAlive() && !planet.isConquered()) {
+			if (game.getPlayer1Ship().collide(planet)) {
+				if (planet.isAlive() && !planet.isConquered()) {
 					game.setPoints(game.getPoints() + 1000);
 					planet.setConquered(true);
 					makePlanetLookConquered(planet);
@@ -105,15 +108,16 @@ public class Animation extends javafx.animation.AnimationTimer {
 	private void handleTorpedosHittingPlanets() {
 		game.getTorpedos().forEach(torpedo -> {
 			gameArena.getPlanets().forEach(planet -> {
-				if(torpedo.collide(planet)) {
-					if(planet.isAlive()) {
+				if (torpedo.collide(planet)) {
+					if (planet.isAlive()) {
 						torpedo.setAlive(false);
 						planet.setAlive(false);
 						makePlanetLookDestroyed(planet);
-						if(planet.isConquered())
+						if (planet.isConquered()) {
 							game.setPoints(game.getPoints() - 800);
-						else
+						} else {
 							game.setPoints(game.getPoints() + 800);
+						}
 					}
 				}
 			});
@@ -123,11 +127,11 @@ public class Animation extends javafx.animation.AnimationTimer {
 
 	private void removeTorpedoThatHitPlanet() {
 		game.getTorpedos().stream()
-				.filter(torpedo -> !torpedo.isAlive())
-				.forEach(torpedo -> PlanetWarsApplication.gameView.getChildren().remove(torpedo.getShape()));
+						.filter(torpedo -> !torpedo.isAlive())
+						.forEach(torpedo -> PlanetWarsApplication.gameView.getChildren().remove(torpedo.getShape()));
 		game.getTorpedos().removeAll(game.getTorpedos().stream()
-				.filter(torpedo -> !torpedo.isAlive())
-				.collect(Collectors.toList()));
+						.filter(torpedo -> !torpedo.isAlive())
+						.collect(Collectors.toList()));
 	}
 
 	private void makePlanetLookDestroyed(Planet planet) {
@@ -141,7 +145,7 @@ public class Animation extends javafx.animation.AnimationTimer {
 
 	private void fireTorpedo() {
 		Torpedo torpedo = new Torpedo((int) game.getPlayer1Ship().getShape().getTranslateX(),
-				(int) game.getPlayer1Ship().getShape().getTranslateY());
+						(int) game.getPlayer1Ship().getShape().getTranslateY());
 		torpedo.getShape().setRotate(game.getPlayer1Ship().getShape().getRotate());
 		game.getTorpedos().add(torpedo);
 		torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
