@@ -20,7 +20,9 @@ Sovelluksen luokkakaavio on seuraava:
 
 
 ### Päätoiminnallisuudet
+#### Käyttäjän kirjautuminen, pelin jatkaminen käyttäjän tasolta sekä tallennus
 
+<img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio.jpg" width="160">
 
 #### Muut toiminnallisuudet
 
