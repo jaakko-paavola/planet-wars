@@ -16,12 +16,12 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 - Toimiva lentonopeuden mittari. [Tehty osittain]
 - Yläkulman karttanäkymä. [Tehty]
 - Torpedon ampuminen. [Tehty]
-- Planeettojen kiertoradalle asettuminen, mikä avaa jonkinlaisen planeettanäkymän, jossa tietoa planeetasta (ei kuvattuna käyttöliittymäluonnoksessa).
-- Kiertoradalle asettumisen yhteydessä planeetan merkitseminen vallatuksi päänäkymään ja karttanäkymään, sekä pisteiden kertyminen (ei kuvattuna käyttöliittymäluonnoksessa).
-- Pisteiden kertyminen nostaa pelaajatasoa tietyin välein. Pelaajataso vaikuttaa aluksen kiihtymisnopeuteen.
+- Planeettojen valtaaminen lentämällä niitä päin ja niiden merkintä vallatuksi päänäkymään ja karttanäkymään, sekä pisteiden kertyminen (ei kuvattuna käyttöliittymäluonnoksessa). [Tehty]
+- Planeettojen tuhoaminen ampumalla niitä torpedolla sekä niiden merkintä tuhotuksi päänäkymään ja karttanäkymään. [Tehty]
+- Pisteiden kertyminen planeettojen valtaamisesta ja tuhoamisesta. [Tehty]
 - Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut.
 - Kartan satunnaisgenerointi aina uuden pelin alussa ja kun edellisessä pelikentässä kaikki planeetat tuli pelaajan valtaamiksi.
-- Vain yksinpeli: pelaaja koittaa valloittaa kaikki planeetat sekuntikelloa vastaan.
+- Vain yksinpeli: pelaaja koittaa valloittaa tai tuhota kaikki planeetat sekuntikelloa vastaan.
 
 ## Jatkokehitysideoita
 
