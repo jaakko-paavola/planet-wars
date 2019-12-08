@@ -13,15 +13,15 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 ## Perusversion tarjoama toiminnallisuus
 - Pelinäkymä, pelikenttä ja lentofysiikka. [Tehty]
 - Pelikentän rajojen ulkopuolelle lentäminen päättää pelin. [Tehty]
-- Toimiva lentonopeuden mittari. [Tehty osittain]
+- Toimiva lentonopeuden mittari. [Tehty]
 - Yläkulman karttanäkymä. [Tehty]
 - Torpedon ampuminen. [Tehty]
 - Planeettojen valtaaminen lentämällä niitä päin ja niiden merkintä vallatuksi päänäkymään ja karttanäkymään, sekä pisteiden kertyminen (ei kuvattuna käyttöliittymäluonnoksessa). [Tehty]
 - Planeettojen tuhoaminen ampumalla niitä torpedolla sekä niiden merkintä tuhotuksi päänäkymään ja karttanäkymään. [Tehty]
 - Pisteiden kertyminen planeettojen valtaamisesta ja tuhoamisesta. [Tehty]
-- Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut.
-- Kartan satunnaisgenerointi aina uuden pelin alussa ja kun edellisessä pelikentässä kaikki planeetat tuli pelaajan valtaamiksi.
-- Vain yksinpeli: pelaaja koittaa valloittaa tai tuhota kaikki planeetat sekuntikelloa vastaan.
+- Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut. [Tehty osittain]
+- Kentän satunnaisgenerointi uuden pelin alussa ja kun edellisessä pelikentässä kaikki planeetat tuli pelaajan valtaamiksi tai tuhoamiksi + kenttien vaikeustason kasvu. [Tehty]
+- Vain yksinpeli: pelaaja koittaa valloittaa tai tuhota kaikki planeetat sekuntikelloa vastaan. [Tehty]
 
 ## Jatkokehitysideoita
 
