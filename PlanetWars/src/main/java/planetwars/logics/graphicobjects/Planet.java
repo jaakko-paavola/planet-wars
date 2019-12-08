@@ -33,16 +33,11 @@ public class Planet extends Shape {
 		super(new Circle(x, y, size), color);
 	}
 
-	public Planet(Polygon polygon, double x, double y) {
-		super(polygon, x, y);	
-		createMapViewPlanet(x, y, 50, Color.WHITE);
-	}
-
 	private void createMapViewPlanet(double x, double y, int size, Color color) {
 		mapViewPlanet = new Planet((int) Math.round(x * (1.0 * PlanetWarsApplication.mapWidth / 
 				GameArena.spaceWidth)), 
-				(int) Math.round(y * (1.0 * PlanetWarsApplication.mapWidth /
-					GameArena.spaceWidth)), size / 10, color, true);
+				(int) Math.round(y * (1.0 * PlanetWarsApplication.mapHeight /
+					GameArena.spaceHeight)), size / 10, color, true);
 	}
 
 	public void setConquered(boolean conquered) {

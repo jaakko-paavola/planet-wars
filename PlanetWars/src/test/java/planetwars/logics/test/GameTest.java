@@ -14,7 +14,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import planetwars.logics.Game;
+import planetwars.logics.GameArena;
 import planetwars.logics.graphicobjects.Ship;
+import static planetwars.logics.graphicobjects.test.TorpedoTest.screenHeight;
+import static planetwars.logics.graphicobjects.test.TorpedoTest.screenWidth;
 
 /**
  *
@@ -24,6 +27,7 @@ public class GameTest {
 	public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int screenWidth = (int) resolution.getWidth();
 	public static int screenHeight = (int) resolution.getHeight(); 	
+	public static GameArena gameArena;
 	public static Game game;
 	
 	public GameTest() {
@@ -40,7 +44,8 @@ public class GameTest {
 	
 	@Before
 	public void setUp() {
-		game = new Game(screenWidth, screenHeight);
+		gameArena = new GameArena(1);
+		game = new Game(screenWidth, screenHeight, gameArena);
 	}
 	
 	@After

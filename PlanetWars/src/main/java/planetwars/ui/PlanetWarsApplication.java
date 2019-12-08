@@ -42,7 +42,6 @@ import javax.swing.plaf.RootPaneUI;
 import planetwars.database.Database;
 import planetwars.database.Player;
 import planetwars.database.PlayerDao;
-import planetwars.logics.Animation;
 import planetwars.logics.graphicobjects.BoundaryRectangle;
 import planetwars.logics.Game;
 import planetwars.logics.GameArena;
@@ -198,13 +197,5 @@ public class PlanetWarsApplication extends Application{
 		primaryStage.setFullScreen(true);
 		primaryStage.show();		
 		anim.start();
-	}
-
-	public static void startNewLevel (Player player) {
-		
-	}
-
-	public static void restartSameLevel(Player player) {
-
 	}
 }

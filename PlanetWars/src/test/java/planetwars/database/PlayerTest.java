@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.test;
+package planetwars.database;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,15 +11,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logics.GameArena;
 
 /**
  *
  * @author jaakkpaa
  */
-public class GameArenaTest {
+public class PlayerTest {
 	
-	public GameArenaTest() {
+	public PlayerTest() {
 	}
 	
 	@BeforeClass
@@ -39,9 +38,13 @@ public class GameArenaTest {
 	}
 
 	@Test
-	public void creatingGameArenaCreatesExpectedNumberOfPlanets() {
-		GameArena gameArena = new GameArena(4);
-		assertEquals(4, gameArena.getPlanets().size());
+	public void playerCreatedRight() {
+		Player player = new Player("aaa", "bbb");
+		Player player2 = new Player("aaa", "bbb", 400, 3);
+		assertEquals("aaa", player.getUsername());
+		assertEquals("bbb", player.getPassword());
+		assertEquals(400, player2.getPoints());
+		assertEquals(3, player2.getLevel());
 	}
 
 	// TODO add test methods here.

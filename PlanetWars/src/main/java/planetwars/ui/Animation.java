@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics;
+package planetwars.ui;
 
 import planetwars.logics.GameArena;
 import java.util.stream.Collectors;

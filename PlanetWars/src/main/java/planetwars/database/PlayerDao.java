@@ -50,13 +50,13 @@ public class PlayerDao implements Dao<Player, String> {
 				stmt.setInt(3, player.getPoints());
 				stmt.setInt(4, player.getLevel());
 				stmt.executeUpdate();
+			} else {
 				stmt = conn.prepareStatement(
-					"SELECT * FROM Player WHERE username = ?");
-				stmt.setString(1, player.getUsername());
-				result = stmt.executeQuery();
-			}
-			if(!result.next()) {
-				throw new Exception("Saving player failed.");
+						"UPDATE Player SET points = ?, level = ? WHERE username = ?");
+				stmt.setInt(1, player.getPoints());
+				stmt.setInt(2, player.getLevel());
+				stmt.setString(3, player.getUsername());
+				stmt.executeUpdate();
 			}
         }
     }

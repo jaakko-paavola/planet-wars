@@ -5,12 +5,17 @@
  */
 package planetwars.logics.graphicobjects.test;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import planetwars.logics.GameArena;
+import planetwars.logics.graphicobjects.Planet;
+import planetwars.ui.PlanetWarsApplication;
 
 /**
  *
@@ -35,6 +40,20 @@ public class PlanetTest {
 	
 	@After
 	public void tearDown() {
+	}
+
+	@Test
+	public void creatingPlanetCreatesPlanetAndMapViewPlanet() {
+		Planet testPlanet = new Planet(30, 40, 50, Color.CORAL);
+		assertEquals(30, testPlanet.getXCoord());
+		assertEquals(40, testPlanet.getYCoord());
+		assertEquals(50, Math.round(((Circle)testPlanet.getShape()).getRadius()));
+		assertEquals((int) Math.round(testPlanet.getXCoord() * (1.0 * PlanetWarsApplication.mapWidth
+				/ GameArena.spaceWidth)), testPlanet.getMapViewPlanet().getXCoord());
+		assertEquals((int) Math.round(testPlanet.getYCoord() * (1.0 * PlanetWarsApplication.mapHeight
+				/ GameArena.spaceHeight)), testPlanet.getMapViewPlanet().getYCoord());
+		assertEquals(Math.round(((Circle) testPlanet.getShape()).getRadius() / 10), 
+				Math.round(((Circle) testPlanet.getMapViewPlanet().getShape()).getRadius()));
 	}
 
 	// TODO add test methods here.
