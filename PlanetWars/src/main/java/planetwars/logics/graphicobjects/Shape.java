@@ -42,6 +42,8 @@ public abstract class Shape {
 		this.shape.setTranslateX(circle.getCenterX());
 		this.shape.setTranslateY(circle.getCenterY());
 		this.shape.setFill(color);
+		this.shape.setStroke(color);
+		this.shape.setStrokeWidth(1);
 		
 		this.movement = new Point2D(0, 0);
 		this.previous = new Point2D(0, 0);

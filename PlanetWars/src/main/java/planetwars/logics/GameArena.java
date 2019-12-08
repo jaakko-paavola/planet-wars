@@ -7,6 +7,7 @@ package planetwars.logics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javafx.scene.paint.Color;
 import planetwars.logics.graphicobjects.BoundaryRectangle;
 import planetwars.logics.graphicobjects.Planet;
@@ -21,25 +22,21 @@ public class GameArena {
 	public static int spaceWidth = 10000;
 	public static int spaceHeight = 10000;	
 	
-	public static int planet1XCoord = screenWidth / 8;
-	public static int planet2XCoord = screenWidth / 4;
-	public static int planet3XCoord = screenWidth / 2;
-	public static int planet4XCoord = screenWidth / 5;
-
-	public static int planet1YCoord = screenHeight / 4;
-	public static int planet2YCoord = screenHeight / 9;
-	public static int planet3YCoord = screenHeight / 5;
-	public static int planet4YCoord = screenHeight / 2;
-	
 	private ArrayList<Planet> planets;
 	private BoundaryRectangle boundaryRectangle;
 
-	public GameArena() {
+	public GameArena(int level) {
 		planets = new ArrayList<>();
-		planets.add(new Planet(planet1XCoord, planet1YCoord, 10, Color.GREEN));
-		planets.add(new Planet(planet2XCoord, planet2YCoord, 40, Color.RED));
-		planets.add(new Planet(planet3XCoord, planet3YCoord, 60, Color.BLUE));
-		planets.add(new Planet(planet4XCoord, planet4YCoord, 20, Color.YELLOW));
+		
+		for (int i = 0; i < level; i++) {
+			planets.add(new Planet(new Random().nextInt(spaceWidth/2 - 100) + 50, 
+					new Random().nextInt(spaceHeight/2 - 100) + 50, 
+					new Random().nextInt(90) + 10, 
+					Color.rgb(new Random().nextInt(200) + 56,
+							new Random().nextInt(200) + 56,
+							new Random().nextInt(200) + 56)));	
+		}
+		
 		boundaryRectangle = new BoundaryRectangle(Color.RED);
 		boundaryRectangle.getShape().setFill(Color.TRANSPARENT);
 	}
@@ -51,10 +48,4 @@ public class GameArena {
 	public ArrayList<Planet> getPlanets() {
 		return planets;
 	}
-	// These are here temporarily for testing planets until map creation will be
-	// moved to its own class.
-
-
-
-
 }
