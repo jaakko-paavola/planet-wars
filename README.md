@@ -15,6 +15,7 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 ### Releaset
 [Viikko 5](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.2)
+
 [Viikko 6](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.8)
 
 ### Peliohje
