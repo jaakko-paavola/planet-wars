@@ -11,9 +11,10 @@
 | 25.11 | 2    | Checkcode-siivous ja dokumentaation päivitys|
 | 02.12 | 5    | Planeettojen valtaaminen ja tuhoaminen, pelikentän rajat näkyviin, pistelaskuri|
 | 03.12 | 5    | Refaktorointi UI:n paremmaksi erottamiseksi sovelluslogiikasta sekä yleiseksi järkeistämiseksi, testien lisääminen, nopeusmittarin parantelu|
+| 07.12 | 8    | Tietokannan käyttö, tunnuksen luonti, sisään kirjautuminen, pelikentän satunnaisluonti| 
+| 08.12 | 8    | Pelikentän uudelleen luonti a) tason uusintaa tai b) seuraavaa tasoa varten|
+| 09.12 | 4    | Refaktorointia, pelikokemuksen parantelua, bugien korjaamista, javadocien kirjoittamista, testien ja checkstyle-päivitystä| 
 |-----  | -----| |
-|       | 39   | |
+|       | 59   | |
 |       |      | |
-|       |      | |
-|       |      | |
-|       |      | | 
+
