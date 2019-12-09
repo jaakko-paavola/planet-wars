@@ -28,4 +28,3 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 Perusversion jälkeen peliä täydennetään ajan salliessa esim. seuraavilla toiminnallisuuksilla
 - "Tyhmät" konepelaajat, jotka esim. lentävät sattumanvaraisesti ja osuessaan pelaajaan päättävät pelin; konepelaajan tuhoaminen torpedolla tuo pisteitä.
 - Tuki kahdelle ihmispelaajalle, jolloin pelimoodi olisi erilainen, esim.: torpedolla osuminen ihmispelaajaan kuluttaa tämän "elämäpisteitä"; kun pelaajan elämäpisteet ehtyvät, pelaaja tuhoutuu, mistä "tappopisteen" saa viimeisenä tähän osunut pelaaja; välitön "uudelleensyntyminen" sattumanvaraiseen sijaintiin pelikentällä.
-- Aloitusvalikko, jossa pelin ja pelikentän asetuksia, kuten ihmispelaajien ja konepelaajien määrän voi asettaa sekä pelikartan generoida haluamillaan asetuksilla.
