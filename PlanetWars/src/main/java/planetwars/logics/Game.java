@@ -15,7 +15,9 @@ import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
 /**
- *
+ * The class handles all information regarding the current game: the player's ship,
+ * the torpedos, the map locator, the points, the time at the beginning and the time
+ * left, and planets left.
  * @author jaakkpaa
  */
 public class Game {
@@ -23,7 +25,34 @@ public class Game {
 	private List<Torpedo> torpedos;	
 	private MapLocator mapLocator;	
 	private int points;
-	public static int timePerLevel = 60; 
+	public static int timePerLevel = 60;
+	private double timeLeft;
+
+	public void setPreviousTorpedoFired(long previousTorpedoFired) {
+		this.previousTorpedoFired = previousTorpedoFired;
+	}
+
+	public long getPreviousTorpedoFired() {
+		return previousTorpedoFired;
+	}
+	private long previousTorpedoFired;
+
+	public void setTimeLeft(double timeLeft) {
+		this.timeLeft = timeLeft;
+	}
+
+	public double getTimeLeft() {
+		return timeLeft;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+	private long startTime = 0;
 	private int planetsLeft;
 
 	public static int player1StartingXCoord;
@@ -46,6 +75,7 @@ public class Game {
 		this.player1Ship = player1Ship;
         this.torpedos = new ArrayList<>();
 		this.points = points;
+		this.timeLeft = timePerLevel;
 	}
 
 	public void setPlanetsLeft(int planetsLeft) {

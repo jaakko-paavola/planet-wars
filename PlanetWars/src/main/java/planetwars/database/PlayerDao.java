@@ -12,7 +12,7 @@ import java.sql.SQLException;
 //import sun.security.util.Password;
 
 /**
- *
+ * The class provides database access functionality for the Player class. 
  * @author jaakkpaa
  */
 public class PlayerDao implements Dao<Player, String> {
@@ -22,10 +22,11 @@ public class PlayerDao implements Dao<Player, String> {
 		this.database = database;
 	}
 		
+	@Override
     public Player findOne(String username) throws SQLException, Exception {
         try (Connection conn = database.getConnection()) {
 			PreparedStatement stmt = conn.prepareStatement(
-				"Select * FROM Player WHERE username = ?");
+							"Select * FROM Player WHERE username = ?");
 			stmt.setString(1, username);
 			ResultSet result = stmt.executeQuery();
 			if (!result.next()) {
@@ -36,10 +37,11 @@ public class PlayerDao implements Dao<Player, String> {
 		}
     }
 
+	@Override
     public void saveOrUpdate(Player player) throws SQLException, Exception {
         try (Connection conn = database.getConnection()) {
 			PreparedStatement stmt = conn.prepareStatement(
-				"SELECT * FROM Player WHERE username = ?");
+							"SELECT * FROM Player WHERE username = ?");
 			stmt.setString(1, player.getUsername());
 			ResultSet result = stmt.executeQuery();
 			if (!result.next()) {
@@ -66,11 +68,11 @@ public class PlayerDao implements Dao<Player, String> {
 		Connection conn = database.getConnection();
 		try {
 			PreparedStatement stmt = conn.prepareStatement(
-					"SELECT * FROM Player");
+							"SELECT * FROM Player");
 			ResultSet executeQuery = stmt.executeQuery();
 		} catch (Exception e) {
 			PreparedStatement stmt = conn.prepareStatement(
-					"CREATE TABLE Player (username varchar, password varchar, "
+							"CREATE TABLE Player (username varchar, password varchar, "
 							+ "points integer, level integer)");
 			stmt.executeUpdate();
 		}

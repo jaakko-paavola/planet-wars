@@ -6,7 +6,8 @@
 package planetwars.logics.graphicobjects;
 
 /**
- *
+ * The class provides features and functionality to all graphical objects in the
+ * game.
  * @author jaakkpaa
  */
 import planetwars.ui.PlanetWarsApplication;

@@ -52,7 +52,7 @@ import planetwars.logics.graphicobjects.Torpedo;
 import planetwars.logics.graphicobjects.Shape;
 
 /**
- *
+ * The main class of Planet Wars, providing the graphical user interface.
  * @author jaakkpaa
  */
 public class PlanetWarsApplication extends Application{

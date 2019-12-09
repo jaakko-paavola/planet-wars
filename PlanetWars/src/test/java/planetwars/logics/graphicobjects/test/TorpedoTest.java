@@ -43,7 +43,7 @@ public class TorpedoTest {
 	@Before
 	public void setUp() {
 		gameArena = new GameArena(1);
-		game = new Game(screenWidth, screenHeight, gameArena);
+		game = new Game(screenWidth, screenHeight, gameArena, 0);
 	}
 	
 	@After

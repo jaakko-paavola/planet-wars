@@ -15,7 +15,9 @@ import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
 /**
- *
+ * The class handles the current game arena with its planets and boundaries and
+ * creates a random game arena with the number of planets equal to the level
+ * the player is on.
  * @author jaakkpaa
  */
 public class GameArena {
@@ -29,12 +31,12 @@ public class GameArena {
 		planets = new ArrayList<>();
 		
 		for (int i = 0; i < level; i++) {
-			planets.add(new Planet(new Random().nextInt(spaceWidth/2 - 100) + 50, 
-					new Random().nextInt(spaceHeight/2 - 100) + 50, 
-					new Random().nextInt(80) + 20, 
-					Color.rgb(new Random().nextInt(200) + 56,
-							new Random().nextInt(200) + 56,
-							new Random().nextInt(200) + 56)));	
+			planets.add(new Planet(new Random().nextInt(spaceWidth / 2 - 100) + 50, 
+							new Random().nextInt(spaceHeight / 2 - 100) + 50, 
+							new Random().nextInt(80) + 20, 
+							Color.rgb(new Random().nextInt(200) + 56,
+									new Random().nextInt(200) + 56,
+									new Random().nextInt(200) + 56)));	
 		}
 		
 		boundaryRectangle = new BoundaryRectangle(Color.RED);

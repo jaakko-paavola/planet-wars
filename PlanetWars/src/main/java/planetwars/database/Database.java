@@ -3,6 +3,11 @@ package planetwars.database;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * The class provides database connection functionality.
+ * @author jaakkpaa
+ */
+
 public class Database {
 
     private String address;

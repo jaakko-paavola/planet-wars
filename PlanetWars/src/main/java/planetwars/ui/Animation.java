@@ -22,15 +22,14 @@ import planetwars.database.Player;
 import planetwars.database.PlayerDao;
 
 /**
- * The class animates the 
+ * The class animates movement and checks for eventualities, and in case they 
+ * happen, handles the eventualities accordingly, such as torpedo hitting a planet
+ * or the player's ship flying out of bounds.
+ * 
  * @author jaakkpaa
  */
 
 public class Animation extends javafx.animation.AnimationTimer {
-	private long previousTorpedoFired;
-	private long startTime = 0;
-	int player1ShipAcceleration = 3;
-
 	private GameArena gameArena;
 	private Game game;
 	private Player player;
@@ -43,10 +42,10 @@ public class Animation extends javafx.animation.AnimationTimer {
 
 	@Override
 	public void handle(long timeNow) {
-		startTime = startTime == 0 ? timeNow : startTime;
-		double timeLeft = round(Game.timePerLevel - (timeNow / 1000000000.0 - startTime / 1000000000.0), 1);
+		game.setStartTime(game.getStartTime() == 0 ? timeNow : game.getStartTime());
+		game.setTimeLeft(round(Game.timePerLevel - (timeNow / 1000000000.0 - game.getStartTime() / 1000000000.0), 1));
 		try {
-			handleRunningOutOfTime(timeLeft);
+			handleRunningOutOfTime(game.getTimeLeft());
 		} catch (Exception ex) {
 			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -64,14 +63,14 @@ public class Animation extends javafx.animation.AnimationTimer {
 			accelerateShip();
 		}
 		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.SPACE, false) 
-						&& System.currentTimeMillis() - previousTorpedoFired > 200) {
+						&& System.currentTimeMillis() - game.getPreviousTorpedoFired() > 200) {
 			fireTorpedo();
 		}                
 		handleTorpedosHittingPlanets();
 		handleTorpedosHittingBoundary();
 		removeTorpedosHittingPlanetsOrBoundary();
 		handleShipHittingPlanets();
-		refreshGauges(timeLeft, timeNow, startTime);
+		refreshGauges(game.getTimeLeft(), timeNow, game.getStartTime());
 		moveMovableGraphicObjects();
 		try {
 			handleFlyingOutOfBounds();
@@ -79,7 +78,7 @@ public class Animation extends javafx.animation.AnimationTimer {
 			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		try {
-			handleNoPlanetsLeft(timeLeft);
+			handleNoPlanetsLeft(game.getTimeLeft());
 		} catch (Exception ex) {
 			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -212,33 +211,33 @@ public class Animation extends javafx.animation.AnimationTimer {
 						(int) game.getPlayer1Ship().getShape().getTranslateY());
 		torpedo.getShape().setRotate(game.getPlayer1Ship().getShape().getRotate());
 		game.getTorpedos().add(torpedo);
-		torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
+		torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
 		torpedo.setMovement(torpedo.getMovement().normalize().multiply(9));
 		PlanetWarsApplication.gameView.getChildren().add(torpedo.getShape());
-		this.previousTorpedoFired = System.currentTimeMillis();
+		game.setPreviousTorpedoFired(System.currentTimeMillis());
 		brakeShip();
 	}
 
 	private void accelerateShip() {
-		game.getMapLocator().accelerateInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
-		gameArena.getBoundaryRectangle().accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
+		game.getMapLocator().accelerateInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
+		gameArena.getBoundaryRectangle().accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
 		
 		for (Planet planet : gameArena.getPlanets()) {
-			planet.accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
-			planet.getMapViewPlanet().accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
+			planet.accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
+			planet.getMapViewPlanet().accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
 		}
 		for (Torpedo torpedo : game.getTorpedos()) {
-			torpedo.accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
+			torpedo.accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
 		}
 	}
 
 	private void brakeShip() {
-		game.getMapLocator().brakeInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
-		gameArena.getBoundaryRectangle().brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
+		game.getMapLocator().brakeInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
+		gameArena.getBoundaryRectangle().brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
 		
 		for (Planet planet : gameArena.getPlanets()) {
-			planet.brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
-			planet.getMapViewPlanet().brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player1ShipAcceleration);
+			planet.brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
+			planet.getMapViewPlanet().brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
 		}
 	}
 }

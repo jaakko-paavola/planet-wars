@@ -6,14 +6,15 @@
 package planetwars.database;
 
 /**
- *
+ * The class handles all information regarding the player: username, password,
+ * rank, points and level.
  * @author jaakkpaa
  */
 public class Player {
 	private String username;
 	private String password;
-	private ranks rank;
-	private enum ranks {
+	private Rank rank;
+	private enum Rank {
 		Airman,
 		Cadet,
 		Ensign,
@@ -23,7 +24,12 @@ public class Player {
 		Colonel
 	}
 
-	public ranks getRank() {
+	private int player1ShipAcceleration = 3;
+
+	public int getPlayer1ShipAcceleration() {
+		return player1ShipAcceleration;
+	}
+	public Rank getRank() {
 		return rank;
 	}
 	private int points;
@@ -32,7 +38,7 @@ public class Player {
 	public Player(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.rank = ranks.Cadet;
+		this.rank = Rank.Cadet;
 		this.points = 0;
 		this.level = 1;
 	}
@@ -43,13 +49,13 @@ public class Player {
 		this.points = points;
 		this.level = level;
 		if (points > 36000) {
-			this.rank = ranks.Colonel;
+			this.rank = Rank.Colonel;
 		} else if (points > 30000) {
-			this.rank = ranks.Major;
+			this.rank = Rank.Major;
 		} else if (points > 24000) {
-			this.rank = ranks.Captain;
+			this.rank = Rank.Captain;
 		} else if (points > 18000) {
-			this.rank = ranks.Lieutenant;
+			this.rank = Rank.Lieutenant;
 		} else if (points > 12000) {
 			this.rank = rank.Ensign;
 		} else if (points > 6000) {
