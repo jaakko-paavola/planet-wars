@@ -19,11 +19,13 @@ import planetwars.logics.graphicobjects.Planet;
 import planetwars.logics.graphicobjects.Torpedo;
 import planetwars.ui.PlanetWarsApplication;
 import planetwars.database.Player;
+import planetwars.database.PlayerDao;
 
 /**
- *
+ * The class animates the 
  * @author jaakkpaa
  */
+
 public class Animation extends javafx.animation.AnimationTimer {
 	private long previousTorpedoFired;
 	private long startTime = 0;
@@ -45,7 +47,7 @@ public class Animation extends javafx.animation.AnimationTimer {
 		double timeLeft = round(Game.timePerLevel - (timeNow / 1000000000.0 - startTime / 1000000000.0), 1);
 		try {
 			handleRunningOutOfTime(timeLeft);
-		} catch (InterruptedException ex) {
+		} catch (Exception ex) {
 			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		
@@ -62,26 +64,32 @@ public class Animation extends javafx.animation.AnimationTimer {
 			accelerateShip();
 		}
 		if (PlanetWarsApplication.keysPressed.getOrDefault(KeyCode.SPACE, false) 
-						&& System.currentTimeMillis() - previousTorpedoFired > 500) {
+						&& System.currentTimeMillis() - previousTorpedoFired > 200) {
 			fireTorpedo();
 		}                
 		handleTorpedosHittingPlanets();
+		handleTorpedosHittingBoundary();
+		removeTorpedosHittingPlanetsOrBoundary();
 		handleShipHittingPlanets();
 		refreshGauges(timeLeft, timeNow, startTime);
 		moveMovableGraphicObjects();
 		try {
 			handleFlyingOutOfBounds();
-		} catch (InterruptedException ex) {
+		} catch (Exception ex) {
 			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		handleNoPlanetsLeft();
+		try {
+			handleNoPlanetsLeft(timeLeft);
+		} catch (Exception ex) {
+			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
-	private void handleNoPlanetsLeft() throws NumberFormatException {
+	private void handleNoPlanetsLeft(double timeLeft) throws NumberFormatException, Exception {
 		if (game.getPlanetsLeft() == 0) {
-			PlanetWarsApplication.textMessage.setText(("Mission accomplished: all planets conquered or destroyed."));			
-			player.setPoints(player.getPoints());
 			player.setLevel(player.getLevel() + 1);
+			player.setPoints((int) (game.getPoints() + Math.round(timeLeft * 10) * 3));
+			PlanetWarsApplication.playerDao.saveOrUpdate(player);
 			try {
 				newGame();
 			} catch (InterruptedException ex) {
@@ -90,23 +98,29 @@ public class Animation extends javafx.animation.AnimationTimer {
 		}
 	}
 
-	private void handleRunningOutOfTime(double timeLeft) throws InterruptedException {
+	private void handleRunningOutOfTime(double timeLeft) throws InterruptedException, Exception {
 		if (timeLeft == 0.0) {
-			PlanetWarsApplication.textMessage.setText(("Mission failed: you ran out of time."));
 			newGame();
 		}
 	}
 	
-	private void handleFlyingOutOfBounds() throws InterruptedException {
+	private void handleFlyingOutOfBounds() throws InterruptedException, Exception {
 		if (!game.getPlayer1Ship().collide(gameArena.getBoundaryRectangle())) {
-			PlanetWarsApplication.textMessage.setText("Mission failed: you drifted into the outer space.");
 			newGame();
 		}
 	}
 
-	private void newGame() throws InterruptedException {
+	private void handleTorpedosHittingBoundary() {
+		game.getTorpedos().forEach(torpedo -> {
+			if (!torpedo.collide(gameArena.getBoundaryRectangle())) {
+				torpedo.setAlive(false);
+			}
+		});
+	}
+
+	private void newGame() throws InterruptedException, Exception {
 		this.stop();
-		PlanetWarsApplication.startOrRestartLevel(player);
+		PlanetWarsApplication.startOrRestartLevel(player.getUsername());
 	}
 
 	private static double round(double value, int precision) {
@@ -123,9 +137,9 @@ public class Animation extends javafx.animation.AnimationTimer {
 
 	private void refreshGauges(double timeLeft, long timeNow, long startTime) {
 		PlanetWarsApplication.textPoints.setText("Points: " + game.getPoints());
-		PlanetWarsApplication.textSpeed.setText("Speed: " + Math.round(Math.sqrt(
+		PlanetWarsApplication.textSpeed.setText("Speed: " + round(Math.sqrt(
 						Math.pow(gameArena.getBoundaryRectangle().getXSpeed(game.getPlayer1Ship()), 2)
-						+ Math.pow(gameArena.getBoundaryRectangle().getYSpeed(game.getPlayer1Ship()), 2)) / 1000));
+						+ Math.pow(gameArena.getBoundaryRectangle().getYSpeed(game.getPlayer1Ship()), 2)) / 1000, 1));
 		PlanetWarsApplication.textCoordinates.setText("Coordinates: " + (-gameArena.getBoundaryRectangle().getXCoord() + game.player1StartingYCoord)
 						+ "." + (-gameArena.getBoundaryRectangle().getYCoord() + game.player1StartingYCoord));
 		PlanetWarsApplication.textTimer.setText("Time left: " + timeLeft);
@@ -150,8 +164,7 @@ public class Animation extends javafx.animation.AnimationTimer {
 		PlanetWarsApplication.mapView.getChildren().remove(planet.getMapViewPlanet().getShape());
 		planet.getShape().setStroke(Color.GOLD);
 		planet.getShape().setStrokeWidth(5);
-		planet.getMapViewPlanet().getShape().setStroke(Color.GOLD);
-		planet.getMapViewPlanet().getShape().setStrokeWidth(1);
+		planet.getMapViewPlanet().getShape().setFill(Color.GOLD);
 		PlanetWarsApplication.gameView.getChildren().add(planet.getShape());
 		PlanetWarsApplication.mapView.getChildren().add(planet.getMapViewPlanet().getShape());
 	}
@@ -160,24 +173,23 @@ public class Animation extends javafx.animation.AnimationTimer {
 		game.getTorpedos().forEach(torpedo -> {
 			gameArena.getPlanets().forEach(planet -> {
 				if (torpedo.collide(planet)) {
+					torpedo.setAlive(false);
 					if (planet.isAlive()) {
-						torpedo.setAlive(false);
 						planet.setAlive(false);
 						makePlanetLookDestroyed(planet);
 						if (planet.isConquered()) {
-							game.setPoints(game.getPoints() - 800);
+							game.setPoints(game.getPoints() - 500);
 						} else {
-							game.setPoints(game.getPoints() + 800);
+							game.setPoints(game.getPoints() + 500);
 						}
 						game.setPlanetsLeft(game.getPlanetsLeft() - 1);
 					}
 				}
 			});
 		});
-		removeTorpedoThatHitPlanet();
 	}
 
-	private void removeTorpedoThatHitPlanet() {
+	private void removeTorpedosHittingPlanetsOrBoundary() {
 		game.getTorpedos().stream()
 						.filter(torpedo -> !torpedo.isAlive())
 						.forEach(torpedo -> PlanetWarsApplication.gameView.getChildren().remove(torpedo.getShape()));

@@ -78,6 +78,7 @@ public class PlanetWarsApplication extends Application{
 	public static Game game;
 	public static AnchorPane rootPane = new AnchorPane();
 	public static Stage primaryStage;
+	public static PlayerDao playerDao;
 
 	public static void main(String[] args) {
         launch(args);
@@ -95,7 +96,8 @@ public class PlanetWarsApplication extends Application{
 		Button buttonSignUp = new Button("Sign up");
 		
 		Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
-		PlayerDao playerDao = new PlayerDao(database);
+		playerDao = new PlayerDao(database);
+		playerDao.createTable();
 
 		paneSignIn.add(textUsername, 1, 1);
 		paneSignIn.add(textFieldUsername, 2, 1);
@@ -113,8 +115,7 @@ public class PlanetWarsApplication extends Application{
 		buttonSignUp.setOnAction((event) -> {
 			try {
 				playerDao.saveOrUpdate(new Player(textFieldUsername.getText(), textFieldPassword.getText()));
-				Player player = playerDao.findOne(textFieldUsername.getText());
-				startOrRestartLevel(player);
+				startOrRestartLevel(textFieldUsername.getText());
 			} catch (Exception e) {
 				primaryStage.setTitle(e.getMessage());
 				return;
@@ -127,7 +128,7 @@ public class PlanetWarsApplication extends Application{
 					primaryStage.setTitle("Wrong password");
 					return;
 				}
-				startOrRestartLevel(player);
+				startOrRestartLevel(textFieldUsername.getText());
 			} catch (Exception e) {
 				primaryStage.setTitle(e.getMessage());
 				return;
@@ -135,7 +136,14 @@ public class PlanetWarsApplication extends Application{
 		});	
     }
 
-	public static void startOrRestartLevel(Player player) {
+	/**
+	 * The method resets and sets up the graphic elements and creates a new game
+	 * on the level the player is in.
+	 * @param player Player object containing e.g. the player's name, points and
+	 * level.
+	 */
+
+	public static void startOrRestartLevel(String username) throws Exception {
 		primaryStage.close();
 		gridPane = new GridPane();
 		gridPane.setHgap(20);
@@ -149,8 +157,14 @@ public class PlanetWarsApplication extends Application{
 		gridPane.add(textPoints, 6, 1);
 		gridPane.add(textTimer, 7, 1);
 		gridPane.setAlignment(Pos.CENTER);
+		
+		Player player = playerDao.findOne(username);
 
 		textMessage.setFill(Color.RED);
+		textMessage.setText("Radio: \"" + player.getRank() + 
+				", your mission is to conquer or destroy the " + 
+				(player.getLevel() == 1 ? "planet" : player.getLevel() + " planets")
+				+ " in this solar system.\"");
 		textPlayerName.setText("Pilot: " + player.getUsername());
 		textPlayerName.setFill(Color.WHITE);
 		textLevel.setText("Level: " + Integer.toString(player.getLevel()));
@@ -158,6 +172,7 @@ public class PlanetWarsApplication extends Application{
 		textCoordinates.setFill(Color.WHITE);
 		textSpeed.setFill(Color.WHITE);
 		textPoints.setFill(Color.WHITE);
+		textPoints.setText("Points: " + player.getPoints());
 		textTimer.setFill(Color.WHITE);
 		
 		rootPane = new AnchorPane();
@@ -170,7 +185,7 @@ public class PlanetWarsApplication extends Application{
 		mapView.setStyle("-fx-background-color: black; -fx-border-color: green");
 		
 		gameArena = new GameArena(player.getLevel());
-		game = new Game(screenWidth, screenHeight, gameArena);
+		game = new Game(screenWidth, screenHeight, gameArena, player.getPoints());
 		anim = new Animation(gameArena, game, player);
 		
 		gameView.getChildren().add(game.getPlayer1Ship().getShape());

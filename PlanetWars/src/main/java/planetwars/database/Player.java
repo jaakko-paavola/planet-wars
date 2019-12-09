@@ -12,12 +12,27 @@ package planetwars.database;
 public class Player {
 	private String username;
 	private String password;
+	private ranks rank;
+	private enum ranks {
+		Airman,
+		Cadet,
+		Ensign,
+		Lieutenant,
+		Captain,
+		Major,
+		Colonel
+	}
+
+	public ranks getRank() {
+		return rank;
+	}
 	private int points;
 	private int level;
 
 	public Player(String username, String password) {
 		this.username = username;
 		this.password = password;
+		this.rank = ranks.Cadet;
 		this.points = 0;
 		this.level = 1;
 	}
@@ -27,7 +42,23 @@ public class Player {
 		this.password = password;
 		this.points = points;
 		this.level = level;
+		if (points > 36000) {
+			this.rank = ranks.Colonel;
+		} else if (points > 30000) {
+			this.rank = ranks.Major;
+		} else if (points > 24000) {
+			this.rank = ranks.Captain;
+		} else if (points > 18000) {
+			this.rank = ranks.Lieutenant;
+		} else if (points > 12000) {
+			this.rank = rank.Ensign;
+		} else if (points > 6000) {
+			this.rank = rank.Cadet;
+		} else {
+			this.rank = rank.Airman;
+		}
 	}
+
 	public void setLevel(int level) {
 		this.level = level;
 	}

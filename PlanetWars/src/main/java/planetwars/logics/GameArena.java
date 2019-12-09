@@ -31,7 +31,7 @@ public class GameArena {
 		for (int i = 0; i < level; i++) {
 			planets.add(new Planet(new Random().nextInt(spaceWidth/2 - 100) + 50, 
 					new Random().nextInt(spaceHeight/2 - 100) + 50, 
-					new Random().nextInt(90) + 10, 
+					new Random().nextInt(80) + 20, 
 					Color.rgb(new Random().nextInt(200) + 56,
 							new Random().nextInt(200) + 56,
 							new Random().nextInt(200) + 56)));	

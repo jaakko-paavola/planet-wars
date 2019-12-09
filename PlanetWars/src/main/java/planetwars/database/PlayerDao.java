@@ -60,4 +60,20 @@ public class PlayerDao implements Dao<Player, String> {
 			}
         }
     }
+
+	@Override
+	public void createTable() throws SQLException, Exception {
+		Connection conn = database.getConnection();
+		try {
+			PreparedStatement stmt = conn.prepareStatement(
+					"SELECT * FROM Player");
+			ResultSet executeQuery = stmt.executeQuery();
+		} catch (Exception e) {
+			PreparedStatement stmt = conn.prepareStatement(
+					"CREATE TABLE Player (username varchar, password varchar, "
+							+ "points integer, level integer)");
+			stmt.executeUpdate();
+		}
+		conn.close();
+	}
 }

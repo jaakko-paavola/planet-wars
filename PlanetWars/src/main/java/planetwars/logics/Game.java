@@ -37,7 +37,7 @@ public class Game {
 		return points;
 	}
 
-	public Game(int screenWidth, int screenHeight, GameArena gameArena) {
+	public Game(int screenWidth, int screenHeight, GameArena gameArena, int points) {
 		this.planetsLeft = gameArena.getPlanets().size();
 		player1StartingXCoord = screenWidth / 2; 
 		player1StartingYCoord = screenHeight / 2; 
@@ -45,7 +45,7 @@ public class Game {
 		this.mapLocator = new MapLocator(player1Ship);
 		this.player1Ship = player1Ship;
         this.torpedos = new ArrayList<>();
-		this.points = 0;
+		this.points = points;
 	}
 
 	public void setPlanetsLeft(int planetsLeft) {
