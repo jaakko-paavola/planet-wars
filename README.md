@@ -5,7 +5,7 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 ### Harjoitustyön dokumentaatio
 
-[Käyttöohje](https://github.com/mluuJakovizkkai/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+[Käyttöohje](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
 [Määrittelydokumentti](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
