@@ -8,6 +8,7 @@ package planetwars.database;
 /**
  * The class handles all information regarding the player: username, password,
  * rank, points and level.
+ * 
  * @author jaakkpaa
  */
 public class Player {
@@ -35,14 +36,26 @@ public class Player {
 	private int points;
 	private int level;
 
+	/**
+	 * Sets up a fresh player starting from zero.
+	 * @param username Player's username.
+	 * @param password Player's password.
+	 */
 	public Player(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.rank = Rank.Cadet;
+		this.rank = Rank.Airman;
 		this.points = 0;
 		this.level = 1;
 	}
 
+	/**
+	 * Creates a new, updated player profile with updated points, level and rank.
+	 * @param username Player's username.
+	 * @param password Player's password.
+	 * @param points Player's new points.
+	 * @param level Player's new level.
+	 */
 	public Player(String username, String password, int points, int level) {
 		this.username = username;
 		this.password = password;

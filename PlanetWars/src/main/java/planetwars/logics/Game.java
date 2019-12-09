@@ -27,6 +27,16 @@ public class Game {
 	private int points;
 	public static int timePerLevel = 60;
 	private double timeLeft;
+	private int player1StartingXCoord;
+	private int player1StartingYCoord;
+
+	public int getPlayer1StartingXCoord() {
+		return player1StartingXCoord;
+	}
+
+	public int getPlayer1StartingYCoord() {
+		return player1StartingYCoord;
+	}
 
 	public void setPreviousTorpedoFired(long previousTorpedoFired) {
 		this.previousTorpedoFired = previousTorpedoFired;
@@ -55,9 +65,6 @@ public class Game {
 	private long startTime = 0;
 	private int planetsLeft;
 
-	public static int player1StartingXCoord;
-	public static int player1StartingYCoord;	
-
 	public void setPoints(int points) {
 		this.points = points;
 	}
@@ -66,10 +73,17 @@ public class Game {
 		return points;
 	}
 
+	/**
+	 * Sets the settings for the current game.
+	 * @param screenWidth The width of the screen in pixels.
+	 * @param screenHeight The height of the screen in pixels.
+	 * @param gameArena The game arena created for the game.
+	 * @param points The points in the current game.
+	 */
 	public Game(int screenWidth, int screenHeight, GameArena gameArena, int points) {
 		this.planetsLeft = gameArena.getPlanets().size();
-		player1StartingXCoord = screenWidth / 2; 
-		player1StartingYCoord = screenHeight / 2; 
+		this.player1StartingXCoord = screenWidth / 2; 
+		this.player1StartingYCoord = screenHeight / 2; 
 		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
 		this.mapLocator = new MapLocator(player1Ship);
 		this.player1Ship = player1Ship;

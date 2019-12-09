@@ -13,6 +13,10 @@ import javafx.scene.shape.Polygon;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
+/**
+ * Ship is a concrete manifestation of Shape. It represents the player's space ship.
+ * @author jaakkpaa
+ */
 public class Ship extends Shape {
 
     public Ship(int x, int y) {

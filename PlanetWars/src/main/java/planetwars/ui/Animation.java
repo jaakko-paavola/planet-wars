@@ -83,7 +83,15 @@ public class Animation extends javafx.animation.AnimationTimer {
 			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
+/**
+ * When the game arena has no more planets left to be conquered or destroyed, the game ends,
+ * the player's level is increased by one, and he is granted points based on the time left
+ * in the timer. Finally, the player's new situation is saved in the database and a new game
+ * with a new game arena is started.
+ * @param timeLeft
+ * @throws NumberFormatException
+ * @throws Exception 
+ */
 	private void handleNoPlanetsLeft(double timeLeft) throws NumberFormatException, Exception {
 		if (game.getPlanetsLeft() == 0) {
 			player.setLevel(player.getLevel() + 1);
@@ -139,8 +147,8 @@ public class Animation extends javafx.animation.AnimationTimer {
 		PlanetWarsApplication.textSpeed.setText("Speed: " + round(Math.sqrt(
 						Math.pow(gameArena.getBoundaryRectangle().getXSpeed(game.getPlayer1Ship()), 2)
 						+ Math.pow(gameArena.getBoundaryRectangle().getYSpeed(game.getPlayer1Ship()), 2)) / 1000, 1));
-		PlanetWarsApplication.textCoordinates.setText("Coordinates: " + (-gameArena.getBoundaryRectangle().getXCoord() + game.player1StartingYCoord)
-						+ "." + (-gameArena.getBoundaryRectangle().getYCoord() + game.player1StartingYCoord));
+		PlanetWarsApplication.textCoordinates.setText("Coordinates: " + (-gameArena.getBoundaryRectangle().getXCoord() + game.getPlayer1StartingXCoord())
+						+ "." + (-gameArena.getBoundaryRectangle().getYCoord() + game.getPlayer1StartingYCoord()));
 		PlanetWarsApplication.textTimer.setText("Time left: " + timeLeft);
 	}
 

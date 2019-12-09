@@ -80,6 +80,10 @@ public class PlanetWarsApplication extends Application{
 	public static Stage primaryStage;
 	public static PlayerDao playerDao;
 
+	/**
+	 * Only to launch the graphical user interface.
+	 * @param args 
+	 */
 	public static void main(String[] args) {
         launch(args);
     }
@@ -139,10 +143,9 @@ public class PlanetWarsApplication extends Application{
 	/**
 	 * The method resets and sets up the graphic elements and creates a new game
 	 * on the level the player is in.
-	 * @param player Player object containing e.g. the player's name, points and
-	 * level.
+	 * @param username A string containing the player's username, which can be
+	 * used as a key to fetch the player's information from the database.
 	 */
-
 	public static void startOrRestartLevel(String username) throws Exception {
 		primaryStage.close();
 		gridPane = new GridPane();

@@ -18,10 +18,22 @@ import java.sql.SQLException;
 public class PlayerDao implements Dao<Player, String> {
 	private Database database;
 			
+	/**
+	 * Sets up a PlayerDao object with regards to the given database.
+	 * @param database 
+	 */
 	public PlayerDao(Database database) {
 		this.database = database;
 	}
 		
+	/**
+	 * Finds the user with the username from database. If does not find, throws
+	 * and exception.
+	 * @param username The username to be looked for.
+	 * @return A player object with the data from the database for given username.
+	 * @throws SQLException
+	 * @throws Exception 
+	 */
 	@Override
     public Player findOne(String username) throws SQLException, Exception {
         try (Connection conn = database.getConnection()) {
@@ -37,6 +49,13 @@ public class PlayerDao implements Dao<Player, String> {
 		}
     }
 
+	/**
+	 * Saves player's information into the database as a new record or updates
+	 * an existing record in the database.
+	 * @param player The Player object with the player's information.
+	 * @throws SQLException
+	 * @throws Exception 
+	 */
 	@Override
     public void saveOrUpdate(Player player) throws SQLException, Exception {
         try (Connection conn = database.getConnection()) {
@@ -63,6 +82,11 @@ public class PlayerDao implements Dao<Player, String> {
         }
     }
 
+	/**
+	 * Checks if Player table exists and creates it if it does not.
+	 * @throws SQLException
+	 * @throws Exception 
+	 */
 	@Override
 	public void createTable() throws SQLException, Exception {
 		Connection conn = database.getConnection();

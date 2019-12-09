@@ -27,6 +27,12 @@ public class GameArena {
 	private ArrayList<Planet> planets;
 	private BoundaryRectangle boundaryRectangle;
 
+	/**
+	 * Creates a new game arena with the number of planets decided by the player's
+	 * level. The planets are placed in random locations in the game arena having
+	 * random sizes and colors.
+	 * @param level The player's level.
+	 */
 	public GameArena(int level) {
 		planets = new ArrayList<>();
 		
