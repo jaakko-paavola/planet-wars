@@ -4,6 +4,9 @@
 Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluksia vastaan.
 
 ### Harjoitustyön dokumentaatio
+
+[Käyttöohje](https://github.com/mluuJakovizkkai/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 [Määrittelydokumentti](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
@@ -12,9 +15,10 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 ### Releaset
 [Viikko 5](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.2)
+[Viikko 6](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.8)
 
 ### Peliohje
-Ohjaa avaruusalusta nuolinäppäimillä. Huomaa, että alaspäin-nuoli jarruttaa.
+Ohjaa avaruusalusta nuolinäppäimillä. Huomaa, että alaspäin-nuoli jarruttaa ja space ampuu torpedon.
 
 ### Komentorivitoiminnot
 
