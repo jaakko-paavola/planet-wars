@@ -15,7 +15,7 @@ public class Player {
 	private String username;
 	private String password;
 	private Rank rank;
-	private enum Rank {
+	public enum Rank {
 		Airman,
 		Cadet,
 		Ensign,

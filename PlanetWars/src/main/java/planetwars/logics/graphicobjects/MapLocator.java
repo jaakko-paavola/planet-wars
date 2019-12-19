@@ -20,11 +20,15 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class MapLocator extends Shape {
-    public MapLocator(Ship player1Ship) {
-	    super(new Rectangle((player1Ship.getXCoord() / GameArena.spaceWidth) * mapWidth, 
-			(player1Ship.getYCoord() / GameArena.spaceHeight) * mapHeight, 
-			(int) Math.round((1.0 * screenWidth / GameArena.spaceWidth) * mapWidth), 
-			(int) Math.round((1.0 * screenHeight / GameArena.spaceHeight) * mapHeight)), Color.WHITE);
+	private GameArena gameArena;
+	
+    public MapLocator(Ship player1Ship, GameArena gameArena) {
+	    super(new Rectangle((player1Ship.getXCoord() / gameArena.getSpaceWidth()) * mapWidth, 
+			(player1Ship.getYCoord() / gameArena.getSpaceHeight()) * mapHeight, 
+			(int) Math.round((1.0 * screenWidth / gameArena.getSpaceWidth()) * mapWidth), 
+			(int) Math.round((1.0 * screenHeight / gameArena.getSpaceHeight()) * mapHeight))
+			, Color.WHITE);
+		this.gameArena = gameArena;
     } 	
 	@Override
     public void accelerateInReferenceTo(Shape reference, int quantity) {
@@ -32,9 +36,9 @@ public class MapLocator extends Shape {
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 
         changeX *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
-				GameArena.spaceWidth);
+				gameArena.getSpaceWidth());
         changeY *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
-				GameArena.spaceHeight);
+				gameArena.getSpaceHeight());
 
         this.setMovement(this.getMovement().add(changeX, changeY));
     }
@@ -44,9 +48,9 @@ public class MapLocator extends Shape {
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 
         changeX *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
-				GameArena.spaceWidth);
+				gameArena.getSpaceWidth());
         changeY *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
-				GameArena.spaceHeight);
+				gameArena.getSpaceHeight());
 
         this.setMovement(this.getMovement().add(changeX, changeY));
     }

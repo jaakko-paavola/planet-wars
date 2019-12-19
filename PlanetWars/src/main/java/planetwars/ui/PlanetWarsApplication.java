@@ -45,6 +45,7 @@ import planetwars.database.PlayerDao;
 import planetwars.logics.graphicobjects.BoundaryRectangle;
 import planetwars.logics.Game;
 import planetwars.logics.GameArena;
+import planetwars.logics.LogicInterface;
 import planetwars.logics.graphicobjects.MapLocator;
 import planetwars.logics.graphicobjects.Planet;
 import planetwars.logics.graphicobjects.Ship;
@@ -62,23 +63,22 @@ public class PlanetWarsApplication extends Application{
 	public static int screenHeight = (int) resolution.getHeight(); 
 	public static int mapWidth = 300;
 	public static int mapHeight = 300;
-	public static Pane gameView;
-	public static Pane mapView;
-	public static GridPane gridPane;
-    public static Map<KeyCode, Boolean> keysPressed = new HashMap<>();  
-	public static Text textMessage = new Text(10, 20, "");
-	public static Text textCoordinates = new Text(10, 20, "Coordinates: 0.0");
-	public static Text textSpeed = new Text(10, 20, "Speed: 0.0");
-	public static Text textPoints = new Text(10, 20, "Points: 0");
-	public static Text textTimer = new Text(10, 20, "Time left: 0");
-	public static Text textPlayerName = new Text(10, 20, "Pilot name: ");
-	public static Text textLevel = new Text(10, 20, "Pilot rank: ");
-	public static Animation anim;
-	public static GameArena gameArena;
-	public static Game game;
-	public static AnchorPane rootPane = new AnchorPane();
-	public static Stage primaryStage;
-	public static PlayerDao playerDao;
+
+	private Stage primaryStage;
+
+	private LoginScene loginScene;
+	private GameScene gameScene;
+	private Animation animation;
+
+	private LogicInterface logicInterface;
+
+	public LoginScene getLoginScene() {
+		return loginScene;
+	}
+	
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
 
 	/**
 	 * Only to launch the graphical user interface.
@@ -91,53 +91,12 @@ public class PlanetWarsApplication extends Application{
 	@Override
     public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		GridPane paneSignIn = new GridPane();
-		Text textUsername = new Text("Username");	
-		TextField textFieldUsername = new TextField();	
-		Text textPassword = new Text("Password");	
-		TextField textFieldPassword = new TextField();	
-		Button buttonSignIn = new Button("Sign in");
-		Button buttonSignUp = new Button("Sign up");
-		
-		Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
-		playerDao = new PlayerDao(database);
-		playerDao.createTable();
-
-		paneSignIn.add(textUsername, 1, 1);
-		paneSignIn.add(textFieldUsername, 2, 1);
-		paneSignIn.add(textPassword, 1, 2);
-		paneSignIn.add(textFieldPassword, 2, 2);
-		paneSignIn.add(buttonSignIn, 1, 3);
-		paneSignIn.add(buttonSignUp, 3, 3);
-		
-		Scene sceneLogIn = new Scene(paneSignIn);
-		primaryStage.setScene(sceneLogIn);
+		this.logicInterface = new LogicInterface(this);
+		loginScene = new LoginScene(this, logicInterface);
+		primaryStage.setScene(loginScene.createAndReturnScene());
 		primaryStage.show();
-
-		rootPane.setPrefSize(GameArena.spaceWidth, GameArena.spaceHeight);
-		
-		buttonSignUp.setOnAction((event) -> {
-			try {
-				playerDao.saveOrUpdate(new Player(textFieldUsername.getText(), textFieldPassword.getText()));
-				startOrRestartLevel(textFieldUsername.getText());
-			} catch (Exception e) {
-				primaryStage.setTitle(e.getMessage());
-				return;
-			}
-		});
-		buttonSignIn.setOnAction((event) -> {
-			try {
-				Player player = playerDao.findOne(textFieldUsername.getText());
-				if (!player.getPassword().equals(textFieldPassword.getText())) {
-					primaryStage.setTitle("Wrong password");
-					return;
-				}
-				startOrRestartLevel(textFieldUsername.getText());
-			} catch (Exception e) {
-				primaryStage.setTitle(e.getMessage());
-				return;
-			}
-		});	
+//		logicInterface.signIn("abc", "abc");
+//		initializeGameScene();
     }
 
 	/**
@@ -146,74 +105,26 @@ public class PlanetWarsApplication extends Application{
 	 * @param username A string containing the player's username, which can be
 	 * used as a key to fetch the player's information from the database.
 	 */
-	public static void startOrRestartLevel(String username) throws Exception {
-		primaryStage.close();
-		gridPane = new GridPane();
-		gridPane.setHgap(20);
-		gridPane.setStyle("-fx-background-color: black; -fx-border-color: red");
-		gridPane.setMinWidth(screenWidth);
-		gridPane.add(textMessage, 1, 1);	
-		gridPane.add(textPlayerName, 2, 1);
-		gridPane.add(textLevel, 3, 1);
-		gridPane.add(textCoordinates, 4, 1);
-		gridPane.add(textSpeed, 5, 1);
-		gridPane.add(textPoints, 6, 1);
-		gridPane.add(textTimer, 7, 1);
-		gridPane.setAlignment(Pos.CENTER);
+	public void initializeGameScene() throws Exception {
+		logicInterface.createNewGame(screenWidth, screenHeight);
+		gameScene = new GameScene(logicInterface);
+		this.animation = new Animation(gameScene.getKeysPressed(), logicInterface, gameScene, this);
 		
-		Player player = playerDao.findOne(username);
-
-		textMessage.setFill(Color.RED);
-		textMessage.setText("Radio: \"" + player.getRank() + 
-				", your mission is to conquer or destroy the " + 
-				(player.getLevel() == 1 ? "planet" : player.getLevel() + " planets")
-				+ " in this solar system.\"");
-		textPlayerName.setText("Pilot: " + player.getUsername());
-		textPlayerName.setFill(Color.WHITE);
-		textLevel.setText("Level: " + Integer.toString(player.getLevel()));
-		textLevel.setFill(Color.WHITE);
-		textCoordinates.setFill(Color.WHITE);
-		textSpeed.setFill(Color.WHITE);
-		textPoints.setFill(Color.WHITE);
-		textPoints.setText("Points: " + player.getPoints());
-		textTimer.setFill(Color.WHITE);
-		
-		rootPane = new AnchorPane();
-		gameView = new Pane();
-		gameView.setPrefSize(screenWidth, screenHeight);
-		gameView.setStyle("-fx-background-color: black");
-		
-		mapView = new Pane();
-		mapView.setPrefSize(mapWidth, mapHeight);
-		mapView.setStyle("-fx-background-color: black; -fx-border-color: green");
-		
-		gameArena = new GameArena(player.getLevel());
-		game = new Game(screenWidth, screenHeight, gameArena, player.getPoints());
-		anim = new Animation(gameArena, game, player);
-		
-		gameView.getChildren().add(game.getPlayer1Ship().getShape());
-		mapView.getChildren().add(game.getMapLocator().getShape());
-		for (Planet planet : gameArena.getPlanets()) {
-			gameView.getChildren().add(planet.getShape());
-			mapView.getChildren().add(planet.getMapViewPlanet().getShape());
+		gameScene.getGameView().getChildren().add(logicInterface.getPlayer1Ship()
+				.getShape());
+		gameScene.getMapView().getChildren().add(logicInterface.getMapLocator().getShape());
+		for (Planet planet : logicInterface.getGameArena().getPlanets()) {
+			gameScene.getGameView().getChildren().add(planet.getShape());
+			gameScene.getMapView().getChildren().add(planet.getMapViewPlanet().getShape());
 		}
-		gameView.getChildren().add(gameArena.getBoundaryRectangle().getShape());
+		gameScene.getGameView().getChildren().add(logicInterface.getGameArena()
+				.getBoundaryRectangle().getShape());
 
-		rootPane.getChildren().addAll(gameView, gridPane, mapView);
-
-		Scene scene = new Scene(rootPane);
-		scene.setOnKeyPressed(event2 -> {
-			keysPressed.put(event2.getCode(), Boolean.TRUE);
-		});
-
-		scene.setOnKeyReleased(event2 -> {
-			keysPressed.put(event2.getCode(), Boolean.FALSE);
-		});
-		anim.start();
+//		primaryStage.close();
+		animation.start();
+		primaryStage.setScene(gameScene.createAndReturnScene());
 		primaryStage.setTitle("Planet Wars");
-		primaryStage.setScene(scene);
 		primaryStage.setFullScreen(true);
-		primaryStage.show();		
-		anim.start();
+//		primaryStage.show();		
 	}
 }

@@ -16,7 +16,7 @@ import planetwars.ui.PlanetWarsApplication;
  * @author jaakkpaa
  */
 public class BoundaryRectangle extends Shape {
-	public BoundaryRectangle(Color color) {
-		super(new Rectangle(0, 0, GameArena.spaceWidth, GameArena.spaceHeight), color);
+	public BoundaryRectangle(Color color, int spaceWidth, int spaceHeight) {
+		super(new Rectangle(0, 0, spaceWidth, spaceHeight), color);
 	}
 }

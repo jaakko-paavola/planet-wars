@@ -21,8 +21,16 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class GameArena {
-	public static int spaceWidth = 10000;
-	public static int spaceHeight = 10000;	
+	public int spaceWidth = 10000;
+	public int spaceHeight = 10000;	
+
+	public int getSpaceWidth() {
+		return spaceWidth;
+	}
+
+	public int getSpaceHeight() {
+		return spaceHeight;
+	}
 	
 	private ArrayList<Planet> planets;
 	private BoundaryRectangle boundaryRectangle;
@@ -42,10 +50,10 @@ public class GameArena {
 							new Random().nextInt(80) + 20, 
 							Color.rgb(new Random().nextInt(200) + 56,
 									new Random().nextInt(200) + 56,
-									new Random().nextInt(200) + 56)));	
+									new Random().nextInt(200) + 56), spaceWidth, spaceHeight));	
 		}
 		
-		boundaryRectangle = new BoundaryRectangle(Color.RED);
+		boundaryRectangle = new BoundaryRectangle(Color.RED, spaceWidth, spaceHeight);
 		boundaryRectangle.getShape().setFill(Color.TRANSPARENT);
 	}
 

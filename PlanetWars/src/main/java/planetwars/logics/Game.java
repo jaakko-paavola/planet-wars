@@ -8,6 +8,7 @@ package planetwars.logics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import planetwars.database.PlayerDao;
 import planetwars.logics.graphicobjects.MapLocator;
 import planetwars.logics.graphicobjects.Ship;
 import planetwars.logics.graphicobjects.Torpedo;
@@ -25,10 +26,15 @@ public class Game {
 	private List<Torpedo> torpedos;	
 	private MapLocator mapLocator;	
 	private int points;
-	public static int timePerLevel = 60;
+	private int timePerLevel = 60;
+
+	public int getTimePerLevel() {
+		return timePerLevel;
+	}
 	private double timeLeft;
 	private int player1StartingXCoord;
 	private int player1StartingYCoord;
+	private GameArena gameArena;
 
 	public int getPlayer1StartingXCoord() {
 		return player1StartingXCoord;
@@ -81,12 +87,12 @@ public class Game {
 	 * @param points The points in the current game.
 	 */
 	public Game(int screenWidth, int screenHeight, GameArena gameArena, int points) {
+		this.gameArena = gameArena;
 		this.planetsLeft = gameArena.getPlanets().size();
-		this.player1StartingXCoord = screenWidth / 2; 
-		this.player1StartingYCoord = screenHeight / 2; 
+		this.player1StartingXCoord = screenWidth / 3; 
+		this.player1StartingYCoord = screenHeight / 3; 
 		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
-		this.mapLocator = new MapLocator(player1Ship);
-		this.player1Ship = player1Ship;
+		this.mapLocator = new MapLocator(player1Ship, gameArena);
         this.torpedos = new ArrayList<>();
 		this.points = points;
 		this.timeLeft = timePerLevel;

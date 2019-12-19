@@ -24,20 +24,20 @@ public class Planet extends Shape {
 		return mapViewPlanet;
 	}
 	
-    public Planet(int x, int y, int size, Color color) {
+    public Planet(int x, int y, int size, Color color, int spaceWidth, int spaceHeight) {
 		super(new Circle(x, y, size), color);
-		createMapViewPlanet(x, y, size, color);
+		createMapViewPlanet(x, y, size, color, spaceWidth, spaceHeight);
 	}
 	
     public Planet(int x, int y, int size, Color color, boolean mapViewPlanet) {
 		super(new Circle(x, y, size), color);
 	}
 
-	private void createMapViewPlanet(double x, double y, int size, Color color) {
+	private void createMapViewPlanet(double x, double y, int size, Color color, int spaceWidth, int spaceHeight) {
 		mapViewPlanet = new Planet((int) Math.round(x * (1.0 * PlanetWarsApplication.mapWidth / 
-				GameArena.spaceWidth)), 
+				spaceWidth)), 
 				(int) Math.round(y * (1.0 * PlanetWarsApplication.mapHeight /
-					GameArena.spaceHeight)), size / 10, color, true);
+					spaceHeight)), size / 10, color, true);
 	}
 
 	public void setConquered(boolean conquered) {
