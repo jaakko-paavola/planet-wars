@@ -5,7 +5,7 @@
  */
 package planetwars.ui;
 
-import planetwars.logics.GameArena;
+import planetwars.logic.GameArena;
 import java.util.stream.Collectors;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -14,13 +14,14 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.stage.Stage;
-import planetwars.logics.Game;
-import planetwars.logics.graphicobjects.Planet;
-import planetwars.logics.graphicobjects.Torpedo;
+import planetwars.logic.Game;
+import planetwars.logic.graphicobjects.Planet;
+import planetwars.logic.graphicobjects.Torpedo;
 import planetwars.ui.PlanetWarsApplication;
 import planetwars.database.Player;
 import planetwars.database.PlayerDao;
-import planetwars.logics.LogicInterface;
+import planetwars.logic.GameEngine;
+import planetwars.logic.LogicInterface;
 
 /**
  * The class animates movement and checks for eventualities, and in case they 
@@ -35,13 +36,15 @@ public class Animation extends javafx.animation.AnimationTimer {
 	private LogicInterface logicInterface;
 	private GameScene gameScene;
 	private PlanetWarsApplication gui;
+	private GameEngine gameEngine;
 
 	public Animation(Map<KeyCode, Boolean> keysPressed, LogicInterface logicInterface, 
-			GameScene gameScene, PlanetWarsApplication gui) {
+			GameScene gameScene, PlanetWarsApplication gui, GameEngine gameEngine) {
 		this.keysPressed = keysPressed;
 		this.logicInterface = logicInterface;
 		this.gameScene = gameScene;
 		this.gui = gui;
+		this.gameEngine = gameEngine;
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class Animation extends javafx.animation.AnimationTimer {
 			makePlanetLookConquered(conqueredPlanet);
 		}
 		
-		refreshGauges(logicInterface.getTimeLeft(), timeNow, logicInterface.getStartTime());
+		refreshGauges(gameEngine.getTimeLeft(), timeNow, gameEngine.getStartTime());
 		
 		logicInterface.moveMovableGraphicObjects();
 		
@@ -111,12 +114,12 @@ public class Animation extends javafx.animation.AnimationTimer {
 	}
 
 	private void refreshGauges(double timeLeft, long timeNow, long startTime) {
-		gameScene.setTextPoints("Points: " + logicInterface.getPoints());
+		gameScene.setTextPoints("Points: " + gameEngine.getPoints());
 		gameScene.setTextSpeed("Speed: " + logicInterface.round(Math.sqrt(
-						Math.pow(logicInterface.getBoundaryRectangle().getXSpeed(logicInterface.getPlayer1Ship()), 2)
-						+ Math.pow(logicInterface.getBoundaryRectangle().getYSpeed(logicInterface.getPlayer1Ship()), 2)) / 1000, 1));
-		gameScene.setTextCoordinates("Coordinates: " + (-logicInterface.getBoundaryRectangle().getXCoord() + logicInterface.getPlayer1StartingXCoord())
-						+ "." + (-logicInterface.getBoundaryRectangle().getYCoord() + logicInterface.getPlayer1StartingYCoord()));
+						Math.pow(gameEngine.getBoundaryRectangle().getXSpeed(gameEngine.getPlayer1Ship()), 2)
+						+ Math.pow(gameEngine.getBoundaryRectangle().getYSpeed(gameEngine.getPlayer1Ship()), 2)) / 1000, 1));
+		gameScene.setTextCoordinates("Coordinates: " + (-gameEngine.getBoundaryRectangle().getXCoord() + gameEngine.getPlayer1StartingXCoord())
+						+ "." + (-gameEngine.getBoundaryRectangle().getYCoord() + gameEngine.getPlayer1StartingYCoord()));
 		gameScene.setTextTimer("Time left: " + timeLeft);
 	}
 

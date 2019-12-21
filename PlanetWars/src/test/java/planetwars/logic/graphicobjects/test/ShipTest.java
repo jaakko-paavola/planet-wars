@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.graphicobjects.test; 
+package planetwars.logic.graphicobjects.test; 
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import planetwars.logics.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.Ship;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

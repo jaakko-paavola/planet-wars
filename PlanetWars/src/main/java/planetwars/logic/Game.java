@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics;
+package planetwars.logic;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import planetwars.database.PlayerDao;
-import planetwars.logics.graphicobjects.MapLocator;
-import planetwars.logics.graphicobjects.Ship;
-import planetwars.logics.graphicobjects.Torpedo;
+import planetwars.logic.graphicobjects.MapLocator;
+import planetwars.logic.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.Torpedo;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
@@ -89,8 +89,8 @@ public class Game {
 	public Game(int screenWidth, int screenHeight, GameArena gameArena, int points) {
 		this.gameArena = gameArena;
 		this.planetsLeft = gameArena.getPlanets().size();
-		this.player1StartingXCoord = screenWidth / 3; 
-		this.player1StartingYCoord = screenHeight / 3; 
+		this.player1StartingXCoord = screenWidth / 2; 
+		this.player1StartingYCoord = screenHeight / 2; 
 		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
 		this.mapLocator = new MapLocator(player1Ship, gameArena);
         this.torpedos = new ArrayList<>();

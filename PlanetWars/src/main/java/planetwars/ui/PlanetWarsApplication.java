@@ -42,15 +42,16 @@ import javax.swing.plaf.RootPaneUI;
 import planetwars.database.Database;
 import planetwars.database.Player;
 import planetwars.database.PlayerDao;
-import planetwars.logics.graphicobjects.BoundaryRectangle;
-import planetwars.logics.Game;
-import planetwars.logics.GameArena;
-import planetwars.logics.LogicInterface;
-import planetwars.logics.graphicobjects.MapLocator;
-import planetwars.logics.graphicobjects.Planet;
-import planetwars.logics.graphicobjects.Ship;
-import planetwars.logics.graphicobjects.Torpedo;
-import planetwars.logics.graphicobjects.Shape;
+import planetwars.logic.graphicobjects.BoundaryRectangle;
+import planetwars.logic.Game;
+import planetwars.logic.GameArena;
+import planetwars.logic.LogicInterface;
+import planetwars.logic.GameEngine;
+import planetwars.logic.graphicobjects.MapLocator;
+import planetwars.logic.graphicobjects.Planet;
+import planetwars.logic.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.Torpedo;
+import planetwars.logic.graphicobjects.Shape;
 
 /**
  * The main class of Planet Wars, providing the graphical user interface.
@@ -69,6 +70,7 @@ public class PlanetWarsApplication extends Application{
 	private LoginScene loginScene;
 	private GameScene gameScene;
 	private Animation animation;
+	private GameEngine gameEngine;
 
 	private LogicInterface logicInterface;
 
@@ -91,8 +93,8 @@ public class PlanetWarsApplication extends Application{
 	@Override
     public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		this.logicInterface = new LogicInterface(this);
-		loginScene = new LoginScene(this, logicInterface);
+		this.gameEngine = new GameEngine(this);
+		this.loginScene = new LoginScene(this, gameEngine);
 		primaryStage.setScene(loginScene.createAndReturnScene());
 		primaryStage.show();
 //		logicInterface.signIn("abc", "abc");
@@ -106,18 +108,20 @@ public class PlanetWarsApplication extends Application{
 	 * used as a key to fetch the player's information from the database.
 	 */
 	public void initializeGameScene() throws Exception {
-		logicInterface.createNewGame(screenWidth, screenHeight);
-		gameScene = new GameScene(logicInterface);
-		this.animation = new Animation(gameScene.getKeysPressed(), logicInterface, gameScene, this);
+		gameEngine.newGame(screenWidth, screenHeight);
+		this.logicInterface = new LogicInterface(gameEngine);
+		gameScene = new GameScene(gameEngine);
+		this.animation = new Animation(gameScene.getKeysPressed(), logicInterface, 
+				gameScene, this, gameEngine);
 		
-		gameScene.getGameView().getChildren().add(logicInterface.getPlayer1Ship()
+		gameScene.getGameView().getChildren().add(gameEngine.getPlayer1Ship()
 				.getShape());
-		gameScene.getMapView().getChildren().add(logicInterface.getMapLocator().getShape());
-		for (Planet planet : logicInterface.getGameArena().getPlanets()) {
+		gameScene.getMapView().getChildren().add(gameEngine.getMapLocator().getShape());
+		for (Planet planet : gameEngine.getGameArena().getPlanets()) {
 			gameScene.getGameView().getChildren().add(planet.getShape());
 			gameScene.getMapView().getChildren().add(planet.getMapViewPlanet().getShape());
 		}
-		gameScene.getGameView().getChildren().add(logicInterface.getGameArena()
+		gameScene.getGameView().getChildren().add(gameEngine.getGameArena()
 				.getBoundaryRectangle().getShape());
 
 //		primaryStage.close();

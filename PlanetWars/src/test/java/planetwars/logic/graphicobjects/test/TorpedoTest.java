@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.graphicobjects.test;
+package planetwars.logic.graphicobjects.test;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -13,10 +13,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logics.Game;
-import planetwars.logics.GameArena;
-import planetwars.logics.graphicobjects.Shape;
-import planetwars.logics.graphicobjects.Torpedo;
+import planetwars.logic.Game;
+import planetwars.logic.GameArena;
+import planetwars.logic.graphicobjects.Shape;
+import planetwars.logic.graphicobjects.Torpedo;
 
 /**
  *

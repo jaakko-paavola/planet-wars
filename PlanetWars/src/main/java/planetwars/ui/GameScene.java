@@ -17,7 +17,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import planetwars.database.Player;
-import planetwars.logics.*;
+import planetwars.logic.GameEngine;
+import planetwars.logic.LogicInterface;
 import static planetwars.ui.PlanetWarsApplication.mapHeight;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
@@ -69,34 +70,34 @@ public class GameScene {
 		this.textLevel.setText(textLevel);
 	}
 
-	private planetwars.logics.LogicInterface logicInterface;
+	private GameEngine gameEngine;
 	private Pane gameView;
 	private Pane mapView;
 	private GridPane gridPane;
 
-	public GameScene(planetwars.logics.LogicInterface logicInterface) {
-		this.logicInterface = logicInterface;
+	public GameScene(GameEngine gameEngine) {
 		gameView = new Pane();
 		mapView = new Pane();
 		gridPane = new GridPane();
 		this.keysPressed = new HashMap<KeyCode, Boolean>(); 
+		this.gameEngine = gameEngine;
 	}
 
 	public Scene createAndReturnScene() {
 		textMessage.setFill(Color.RED);
-		textMessage.setText("Radio: \"" + logicInterface.getPlayerRank()
+		textMessage.setText("Radio: \"" + gameEngine.getPlayerRank()
 				+ ", your mission is to conquer or destroy the "
-				+ (logicInterface.getPlayerLevel() == 1 ? "planet" : 
-						logicInterface.getPlayerLevel() + " planets")
+				+ (gameEngine.getPlayerLevel() == 1 ? "planet" : 
+						gameEngine.getPlayerLevel() + " planets")
 				+ " in this solar system.\"");
-		textPlayerName.setText("Pilot: " + logicInterface.getPlayerUsername());
+		textPlayerName.setText("Pilot: " + gameEngine.getPlayerUsername());
 		textPlayerName.setFill(Color.WHITE);
-		textLevel.setText("Level: " + Integer.toString(logicInterface.getPlayerLevel()));
+		textLevel.setText("Level: " + Integer.toString(gameEngine.getPlayerLevel()));
 		textLevel.setFill(Color.WHITE);
 		textCoordinates.setFill(Color.WHITE);
 		textSpeed.setFill(Color.WHITE);
 		textPoints.setFill(Color.WHITE);
-		textPoints.setText("Points: " + logicInterface.getPlayerPoints());
+		textPoints.setText("Points: " + gameEngine.getPlayerPoints());
 		textTimer.setFill(Color.WHITE);
 
 		gridPane.setHgap(20);
@@ -115,8 +116,8 @@ public class GameScene {
 		mapView.setPrefSize(mapWidth, mapHeight);
 		mapView.setStyle("-fx-background-color: black; -fx-border-color: green");
 		AnchorPane rootPane = new AnchorPane();
-		rootPane.setPrefSize(logicInterface.getGameArena().getSpaceWidth(), 
-				logicInterface.getGameArena().getSpaceHeight());
+		rootPane.setPrefSize(gameEngine.getGameArena().getSpaceWidth(), 
+				gameEngine.getGameArena().getSpaceHeight());
 		rootPane.getChildren().addAll(gameView, gridPane, mapView);
 		Scene gameScene = new Scene(rootPane);
 		

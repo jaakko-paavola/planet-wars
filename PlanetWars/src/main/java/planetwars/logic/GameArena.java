@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics;
+package planetwars.logic;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javafx.scene.paint.Color;
-import planetwars.logics.graphicobjects.BoundaryRectangle;
-import planetwars.logics.graphicobjects.Planet;
+import planetwars.logic.graphicobjects.BoundaryRectangle;
+import planetwars.logic.graphicobjects.Planet;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
@@ -21,8 +21,8 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class GameArena {
-	public int spaceWidth = 10000;
-	public int spaceHeight = 10000;	
+	private int spaceWidth = 10000;
+	private int spaceHeight = 10000;	
 
 	public int getSpaceWidth() {
 		return spaceWidth;

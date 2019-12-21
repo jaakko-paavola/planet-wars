@@ -19,8 +19,9 @@ import javafx.scene.text.Text;
 import planetwars.database.Database;
 import planetwars.database.PlayerDao;
 import planetwars.database.Player;
-import planetwars.logics.LogicInterface;
-import planetwars.logics.Game;
+import planetwars.logic.LogicInterface;
+import planetwars.logic.Game;
+import planetwars.logic.GameEngine;
 
 /**
  *
@@ -29,12 +30,12 @@ import planetwars.logics.Game;
 public class LoginScene {
 	
 	private PlanetWarsApplication application;
-	private LogicInterface logicInterface;
+	private GameEngine playerHandler;
 	
 	public LoginScene(PlanetWarsApplication application, 
-			LogicInterface logicInterface) {
+			GameEngine playerHandler) throws Exception {
 		this.application = application;
-		this.logicInterface = logicInterface;
+		this.playerHandler = playerHandler;
 	}
 	
 	public Scene createAndReturnScene() throws Exception {
@@ -52,10 +53,10 @@ public class LoginScene {
 		paneSignIn.add(textFieldPassword, 2, 2);
 		paneSignIn.add(buttonSignIn, 1, 3);
 		paneSignIn.add(buttonSignUp, 3, 3);
-		
+
 		buttonSignUp.setOnAction(click -> {
  			try {
-				logicInterface.signUp(textFieldUsername.getText(), 
+				playerHandler.signUp(textFieldUsername.getText(), 
 						textFieldPassword.getText());
 			} catch (Exception ex) {
 				application.getPrimaryStage().setTitle(ex.getMessage());
@@ -69,18 +70,17 @@ public class LoginScene {
 		
 		buttonSignIn.setOnAction((click) -> {
  			try {
-				logicInterface.signIn(textFieldUsername.getText(), 
+				playerHandler.signIn(textFieldUsername.getText(), 
 						textFieldPassword.getText());
+				try {
+					application.initializeGameScene();
+				} catch (Exception ex) {
+					Logger.getLogger(LoginScene.class.getName()).log(Level.SEVERE, null, ex);
+				}
 			} catch (Exception ex) {
 				application.getPrimaryStage().setTitle(ex.getMessage());
 			}
-			try {
-				application.initializeGameScene();
-			} catch (Exception ex) {
-				Logger.getLogger(LoginScene.class.getName()).log(Level.SEVERE, null, ex);
-			}
 		});	
-		
 		return new Scene(paneSignIn);
 	}
 }

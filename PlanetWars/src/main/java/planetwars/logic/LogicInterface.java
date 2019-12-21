@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics;
+package planetwars.logic;
 
+import planetwars.logic.graphicobjects.Planet;
+import planetwars.logic.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.MapLocator;
+import planetwars.logic.graphicobjects.Torpedo;
 import javafx.scene.shape.Shape;
 import planetwars.database.Database;
 import planetwars.database.Player;
 import planetwars.database.PlayerDao;
-import planetwars.logics.graphicobjects.*;
 import planetwars.ui.Animation;
 import planetwars.ui.PlanetWarsApplication;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import planetwars.logics.graphicobjects.BoundaryRectangle;
+import planetwars.logic.graphicobjects.BoundaryRectangle;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,96 +31,25 @@ import java.util.stream.Stream;
  * @author jaakkpaa
  */
 public class LogicInterface {
-	private PlayerDao playerDao;
-	private PlanetWarsApplication gui;
 	private Game game;
 	private GameArena gameArena;
-	private Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
+	private GameEngine gameEngine;
 	private Map<KeyCode, Boolean> keysPressed = new HashMap<>();
 	private Player player;
 
-	public LogicInterface(PlanetWarsApplication gui) throws Exception {
-		playerDao = new PlayerDao(database);
-		playerDao.createTable();
-		this.gui = gui;
+	public LogicInterface(GameEngine gameEngine) throws Exception {
+		this.gameEngine = gameEngine;	
+		this.game = gameEngine.getGame();
+		this.gameArena = gameEngine.getGameArena();
+		this.player = gameEngine.getPlayer();
 	}
 
-	public void signUp(String textFieldUsername, String textFieldPassword) throws Exception {
-		playerDao.saveOrUpdate(new Player(textFieldUsername, textFieldPassword));
-		signIn(textFieldUsername, textFieldPassword);
-	}
-
-	public void signIn(String textFieldUsername, String textFieldPassword) throws Exception {
-		this.player = playerDao.findOne(textFieldUsername);
-		if (!player.getPassword().equals(textFieldPassword)) {
-			gui.getPrimaryStage().setTitle("Wrong password");
-		}
-	}
-
-	public Player getPlayer(String userName) throws Exception {
-		return playerDao.findOne(userName);
-	}
-
-	public void saveGame(Player player) throws Exception {
-		playerDao.saveOrUpdate(player);
-	}
-
-	public void createNewGame(int screenWidth, int screenHeight) {
-		this.player = new Player(player.getUsername(), player.getPassword(), player.getPoints(), player.getLevel());
-		this.gameArena = new GameArena(player.getLevel());
-		this.game = new Game(screenWidth, screenHeight, gameArena, player.getPoints());
-	}
-
-	public MapLocator getMapLocator() {
-		return game.getMapLocator();
-	}
-
-	public GameArena getGameArena() {
-		return gameArena;
-	}
-
-	public Player.Rank getPlayerRank() {
-		return player.getRank();
-	}
-
-	public int getPlayerLevel() {
-		return player.getLevel();
-	}
-
-	public String getPlayerUsername() {
-		return player.getUsername();
-	}
-
-	public int getPlayerPoints() {
-		return player.getPoints();
-	}
-
-	public long getStartTime() {
-		return game.getStartTime();
-	}
-
-	public double getTimeLeft() {
-		return game.getTimeLeft();
-	}
-
-	public Ship getPlayer1Ship() {
-		return game.getPlayer1Ship();
-	}
-
-	public BoundaryRectangle getBoundaryRectangle (){
-		return gameArena.getBoundaryRectangle();
-	} 
-
-	public long getPoints() {
-		return game.getPoints();
-	}
-	
 	public void handleArrowKeyPresses(Map<KeyCode, Boolean> keysPressed) {
 		if (keysPressed.getOrDefault(KeyCode.LEFT, false)) {
-			getPlayer1Ship().turnLeft(1);
+			gameEngine.getPlayer1Ship().turnLeft(1);
 		}
 		if (keysPressed.getOrDefault(KeyCode.RIGHT, false)) {
-			getPlayer1Ship().turnRight(1);
+			gameEngine.getPlayer1Ship().turnRight(1);
 		}
 		if (keysPressed.getOrDefault(KeyCode.DOWN, false)) {
 			brakeShip();
@@ -180,7 +112,7 @@ public class LogicInterface {
 	
 	public void handleTorpedosHittingBoundary() {
 		game.getTorpedos().forEach(torpedo -> {
-			if (!torpedo.collide(getBoundaryRectangle())) {
+			if (!torpedo.collide(gameEngine.getBoundaryRectangle())) {
 				torpedo.setAlive(false);
 			}
 		});
@@ -221,13 +153,7 @@ public class LogicInterface {
 		gameArena.getPlanets().forEach(planet -> planet.move());
 	}
 
-	public int getPlayer1StartingXCoord() {
-		return game.getPlayer1StartingXCoord();
-	}
 
-	public int getPlayer1StartingYCoord() {
-		return game.getPlayer1StartingYCoord();
-	}
 
 	public ArrayList<Planet> handleShipHittingPlanets() {
 		ArrayList<Planet> conqueredPlanets = new ArrayList<Planet>();
@@ -276,8 +202,8 @@ public class LogicInterface {
 	}
 	
 	public void handleLevelTimerRefresh(long timeNow) {
-		game.setStartTime(getStartTime() == 0 ? timeNow
-				: getStartTime());
+		game.setStartTime(gameEngine.getStartTime() == 0 ? timeNow
+				: gameEngine.getStartTime());
 		game.setTimeLeft(round(game.getTimePerLevel()
 				- (timeNow / 1000000000.0 - game.getStartTime() / 1000000000.0), 1));
 	}

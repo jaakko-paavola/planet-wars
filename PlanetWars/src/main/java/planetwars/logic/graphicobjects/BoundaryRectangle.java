@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.graphicobjects;
+package planetwars.logic.graphicobjects;
 
-import planetwars.logics.GameArena;
+import planetwars.logic.GameArena;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.graphicobjects.test;
+package planetwars.logic.graphicobjects.test;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -13,9 +13,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logics.graphicobjects.BoundaryRectangle;
-import planetwars.logics.GameArena;
-import planetwars.logics.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.BoundaryRectangle;
+import planetwars.logic.GameArena;
+import planetwars.logic.graphicobjects.Ship;
 import static planetwars.ui.PlanetWarsApplication.mapHeight;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
@@ -28,6 +28,7 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
 public class BoundaryRectangleTest {
 	private Ship ship;
 	private BoundaryRectangle boundaryRectangle;
+	private GameArena gameArena;
 	
 	public BoundaryRectangleTest() {
 	}
@@ -43,7 +44,8 @@ public class BoundaryRectangleTest {
 	@Before
 	public void setUp() {
 		ship = new Ship(Math.round(screenWidth/2), Math.round(screenHeight/2));
-		boundaryRectangle = new BoundaryRectangle(Color.RED);	
+		gameArena = new GameArena(1);
+		boundaryRectangle = new BoundaryRectangle(Color.RED, gameArena.getSpaceWidth(), gameArena.getSpaceHeight());	
 	}
 	
 	@After
@@ -52,8 +54,8 @@ public class BoundaryRectangleTest {
 
 	@Test
 	public void boundaryRectangleHasCorrectDimensions() {
-		assertEquals(GameArena.spaceWidth, Math.round(((Rectangle)boundaryRectangle.getShape()).getWidth()));
-		assertEquals(GameArena.spaceHeight, Math.round(((Rectangle)boundaryRectangle.getShape()).getHeight()));
+		assertEquals(gameArena.getSpaceWidth(), Math.round(((Rectangle)boundaryRectangle.getShape()).getWidth()));
+		assertEquals(gameArena.getSpaceHeight(), Math.round(((Rectangle)boundaryRectangle.getShape()).getHeight()));
 	}
 
     @Test

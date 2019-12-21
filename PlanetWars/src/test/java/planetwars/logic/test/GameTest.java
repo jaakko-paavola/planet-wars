@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.logics.test;
+package planetwars.logic.test;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -13,11 +13,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logics.Game;
-import planetwars.logics.GameArena;
-import planetwars.logics.graphicobjects.Ship;
-import static planetwars.logics.graphicobjects.test.TorpedoTest.screenHeight;
-import static planetwars.logics.graphicobjects.test.TorpedoTest.screenWidth;
+import planetwars.logic.Game;
+import planetwars.logic.GameArena;
+import planetwars.logic.graphicobjects.Ship;
+import static planetwars.logic.graphicobjects.test.TorpedoTest.screenHeight;
+import static planetwars.logic.graphicobjects.test.TorpedoTest.screenWidth;
 
 /**
  *
@@ -53,11 +53,15 @@ public class GameTest {
 	}
 
 	@Test
-	public void creatingNewGamePlacesShipInRightCoordinates() {
+	public void creatingNewGamePlacesShipInTheMiddleOfTheScreen() {
 		assertEquals(screenWidth/2, game.getPlayer1Ship().getXCoord());
 		assertEquals(screenHeight/2, game.getPlayer1Ship().getYCoord());
 	}
 
+	@Test
+	public void withGameArenaOfLevel1NewGameWith1PlanetLeftIsCreated() {
+		assertEquals(1, game.getPlanetsLeft());
+	}
 	// TODO add test methods here.
 	// The methods must be annotated with annotation @Test. For example:
 	//
