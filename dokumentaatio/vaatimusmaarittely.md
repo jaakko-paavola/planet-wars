@@ -2,7 +2,7 @@
 
 ## Sovelluksen tarkoitus
 
-Sovellus on avaruuslentelypeli, jossa pelaaja voi vallata planeettoja sekä taistella muita avaruusaluksia vastaan.
+Sovellus on avaruuslentelypeli, jossa pelaaja valtaa ja tuhoaa planeettoja sekuntikelloa vastaan.
 
 ## Käyttöliittymäluonnos
 
@@ -16,15 +16,13 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 - Toimiva lentonopeuden mittari. [Tehty]
 - Yläkulman karttanäkymä. [Tehty]
 - Torpedon ampuminen. [Tehty]
-- Planeettojen valtaaminen lentämällä niitä päin ja niiden merkintä vallatuksi päänäkymään ja karttanäkymään, sekä pisteiden kertyminen (ei kuvattuna käyttöliittymäluonnoksessa). [Tehty]
+- Planeettojen valtaaminen lentämällä niitä päin ja niiden merkintä vallatuksi päänäkymään ja karttanäkymään. [Tehty]
 - Planeettojen tuhoaminen ampumalla niitä torpedolla sekä niiden merkintä tuhotuksi päänäkymään ja karttanäkymään. [Tehty]
-- Pisteiden kertyminen planeettojen valtaamisesta ja tuhoamisesta. [Tehty]
+- Pisteiden kertyminen planeettojen valtaamisesta ja tuhoamisesta (pisteitä ei kuvattuna käyttöliittymäluonnoksessa). [Tehty]
 - Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut. [Tehty]
-- Kentän satunnaisgenerointi uuden pelin alussa ja kun edellisessä pelikentässä kaikki planeetat tuli pelaajan valtaamiksi tai tuhoamiksi + kenttien vaikeustason kasvu. [Tehty]
+- Kentän satunnaisgenerointi: a) kun pelikentän kaikki planeetat tulivat pelaajan valtaamiksi tai tuhoamiksi, jolloin generoidaan uusi kenttä vaikeammalla vaikeustasolla; b) kun pelaaja epäonnistuu pelikentässä (lentää yli kentän rajojen tai aika loppuu). [Tehty]
 - Vain yksinpeli: pelaaja koittaa valloittaa tai tuhota kaikki planeetat sekuntikelloa vastaan. [Tehty]
 
 ## Jatkokehitysideoita
 
-Perusversion jälkeen peliä täydennetään ajan salliessa esim. seuraavilla toiminnallisuuksilla
-- "Tyhmät" konepelaajat, jotka esim. lentävät sattumanvaraisesti ja osuessaan pelaajaan päättävät pelin; konepelaajan tuhoaminen torpedolla tuo pisteitä.
-- Tuki kahdelle ihmispelaajalle, jolloin pelimoodi olisi erilainen, esim.: torpedolla osuminen ihmispelaajaan kuluttaa tämän "elämäpisteitä"; kun pelaajan elämäpisteet ehtyvät, pelaaja tuhoutuu, mistä "tappopisteen" saa viimeisenä tähän osunut pelaaja; välitön "uudelleensyntyminen" sattumanvaraiseen sijaintiin pelikentällä.
+- "Tyhmät" konepelaajat, jotka esim. lentävät ja ampuvat sattumanvaraisesti ja osuessaan pelaajaan päättävät pelin; konepelaajan tuhoaminen torpedolla tuo lisäpisteitä.
