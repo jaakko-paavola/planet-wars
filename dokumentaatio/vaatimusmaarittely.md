@@ -19,10 +19,15 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 - Planeettojen valtaaminen lentämällä niitä päin ja niiden merkintä vallatuksi päänäkymään ja karttanäkymään. [Tehty]
 - Planeettojen tuhoaminen ampumalla niitä torpedolla sekä niiden merkintä tuhotuksi päänäkymään ja karttanäkymään. [Tehty]
 - Pisteiden kertyminen planeettojen valtaamisesta ja tuhoamisesta (pisteitä ei kuvattuna käyttöliittymäluonnoksessa). [Tehty]
+- Läpäistystä kentästä kertyy pisteitä sitä enemmän, mitä enemmän sekuntikellossa oli aikaa jäljellä. [Tehty]
+- Lentäminen ulos pelialueelta päättää pelin. [Tehty]
+- Ajan loppuminen päättää pelin. [Tehty]
+- Kaikkien planeettojen valtaaminen tai tuhoaminen päättää pelin. [Tehty]
+- Kentän satunnaisgenerointi: a) kun pelikentän kaikki planeetat tulivat pelaajan valtaamiksi tai tuhoamiksi, jolloin generoidaan uusi kenttä yhtä askelta vaikeammalla vaikeustasolla; b) kun pelaaja epäonnistuu pelikentässä (eli lentää yli kentän rajojen tai aika loppuu), jolloin generoidaan uusi kenttä samalla vaikeustasolla. [Tehty]
+- Pelaaja kohoaa arvoasteikolla (rank) ylöspäin saavuttamiensa pisteiden perusteella. [Tehty]
 - Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut. [Tehty]
-- Kentän satunnaisgenerointi: a) kun pelikentän kaikki planeetat tulivat pelaajan valtaamiksi tai tuhoamiksi, jolloin generoidaan uusi kenttä vaikeammalla vaikeustasolla; b) kun pelaaja epäonnistuu pelikentässä (lentää yli kentän rajojen tai aika loppuu). [Tehty]
-- Vain yksinpeli: pelaaja koittaa valloittaa tai tuhota kaikki planeetat sekuntikelloa vastaan. [Tehty]
 
 ## Jatkokehitysideoita
 
 - "Tyhmät" konepelaajat, jotka esim. lentävät ja ampuvat sattumanvaraisesti ja osuessaan pelaajaan päättävät pelin; konepelaajan tuhoaminen torpedolla tuo lisäpisteitä.
+- Arvoasteikko vaikuttaa pelaajan aluksen nopeuteen sekä torpedon ampumisnopeuteen.
