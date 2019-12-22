@@ -3,7 +3,7 @@
 ## Rakenne
 Ohjelman rakenne noudattaa kolmitasoista kerrosarkkitehtuuria, jossa käyttöliittymä, sovelluslogiikka ja pysyväistalletus on eriytetty toisistaan.
 
-Sovelluksen luokkakaavio on seuraava:
+Sovelluksen luokka/-pakkauskaavio on seuraava:
 
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/class_diagram.jpg" width="160">
 
