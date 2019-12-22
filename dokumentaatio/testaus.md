@@ -1,17 +1,17 @@
 # Testausdokumentti
 
-Ohjelmaa on testattu sekä automatisoiduin yksikkö- ja integraatiotestein JUnitilla sekä manuaalisesti tapahtunein järjestelmätason testein.
+Ohjelmaa on testattu sekä automatisoiduin yksikkö- ja integraatiotestein JUnitilla sekä manuaalisesti tehdyin järjestelmätason testein.
 
 ## Yksikkö- ja integraatiotestaus
 
 
 ### Sovelluslogiikka
 
-Automatisoitujen testien ytimen moudostavat sovelluslogiikkaa, eli pakkauksen [planetwars.logic] luokkia testaavat integraatiotestiluokat [LogicLayerTest] ja [GameEngineTest].
+Integraatiotestien ytimen muodostavat sovelluslogiikkaa, eli pakkauksen planetwars.logic luokkia testaavat integraatiotestiluokat LogicLayerTest ja GameEngineTest.
 
-Integraatiotestit käyttävät datan pysyväistallennukseen DAO-rajapintojen keskusmuistitoteutusta [PlayerDaoTest]).
+Integraatiotestit käyttävät datan pysyväistallennukseen DAO-rajapintojen keskusmuistitoteutusta PlayerDaoTest).
 
-Yksikkötestausta suoritettiin mm. graafisten objektien testaamisessa sekä testiluokissa [GameArenaTest] ja [GamePlayTest].
+Yksikkötestausta suoritettiin mm. graafisten objektien testaamisessa sekä testiluokissa GameArenaTest ja GamePlayTest.
 
 ### DAO-luokat
 
@@ -30,13 +30,11 @@ Sovelluksen järjestelmätestaus on suoritettu manuaalisesti.
 
 ### Asennus ja konfigurointi
 
-Sovellus on haettu ja sitä on testattu [käyttöohjeen] kuvaamalla tavalla Linux-ympäristössä.
-
 Sovellusta on testattu sekä tilanteissa, joissa käyttäjät tallettavat tiedosto (planetwars.db) on ollut olemassa ja joissa sitä ei ole ollut jolloin ohjelma on luonut ne itse.
 
 ### Toiminnallisuudet
 
-Kaikki [määrittelydokumentin] ja käyttöohjeen listaamat toiminnallisuudet on käyty läpi.
+Kaikki määrittelydokumentin ja käyttöohjeen listaamat toiminnallisuudet on käyty läpi.
 
 ## Sovellukseen jääneet laatuongelmat
 
