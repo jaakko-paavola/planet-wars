@@ -89,6 +89,12 @@ public class PlanetWarsApplication extends Application{
         launch(args);
     }
 
+	/**
+	 * The starting point of the application.
+	 * @param primaryStage The stage where the stages created are displayed one-
+	 * by-one.
+	 * @throws Exception 
+	 */
 	@Override
     public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;

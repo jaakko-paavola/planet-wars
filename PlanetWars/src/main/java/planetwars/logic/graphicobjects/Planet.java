@@ -33,6 +33,15 @@ public class Planet extends Shape {
 		super(new Circle(x, y, size), color);
 	}
 
+	/**
+	 * Creates a planet symbol in the map view.
+	 * @param x
+	 * @param y
+	 * @param size
+	 * @param color
+	 * @param spaceWidth
+	 * @param spaceHeight 
+	 */
 	private void createMapViewPlanet(double x, double y, int size, Color color, int spaceWidth, int spaceHeight) {
 		mapViewPlanet = new Planet((int) Math.round(x * (1.0 * PlanetWarsApplication.mapWidth / 
 				spaceWidth)), 

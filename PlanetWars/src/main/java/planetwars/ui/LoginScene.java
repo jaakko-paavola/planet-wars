@@ -32,12 +32,24 @@ public class LoginScene {
 	private PlanetWarsApplication application;
 	private GameEngine gameEngine;
 	
+	/**
+	 * The class creates the login scene, i.e. the little window at the start
+	 * of the application for logging in or signing up a new user.
+	 * @param application The main application.
+	 * @param gameEngine The application logic interface.
+	 * @throws Exception 
+	 */
 	public LoginScene(PlanetWarsApplication application, 
-			GameEngine gameEngine) throws Exception {
+					GameEngine gameEngine) throws Exception {
 		this.application = application;
 		this.gameEngine = gameEngine;
 	}
 	
+	/**
+	 * Creates the login scene and returns it to the main application.
+	 * @return The login scene.
+	 * @throws Exception 
+	 */
 	public Scene createAndReturnScene() throws Exception {
 		GridPane paneSignIn = new GridPane();
 		Text textUsername = new Text("Username");	
@@ -46,7 +58,6 @@ public class LoginScene {
 		TextField textFieldPassword = new TextField();	
 		Button buttonSignIn = new Button("Sign in");
 		Button buttonSignUp = new Button("Sign up");
-
 		paneSignIn.add(textUsername, 1, 1);
 		paneSignIn.add(textFieldUsername, 2, 1);
 		paneSignIn.add(textPassword, 1, 2);
@@ -59,7 +70,7 @@ public class LoginScene {
 		buttonSignUp.setOnAction(click -> {
  			try {
 				gameEngine.signUp(textFieldUsername.getText(), 
-						textFieldPassword.getText());
+								textFieldPassword.getText());
 			} catch (Exception ex) {
 				application.getPrimaryStage().setTitle(ex.getMessage());
 				return;
@@ -74,7 +85,7 @@ public class LoginScene {
 		buttonSignIn.setOnAction((click) -> {
  			try {
 				gameEngine.signIn(textFieldUsername.getText(), 
-						textFieldPassword.getText());
+								textFieldPassword.getText());
 				try {
 					application.initializeGameScene();
 				} catch (Exception ex) {

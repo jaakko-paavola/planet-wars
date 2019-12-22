@@ -55,10 +55,4 @@ public class PlanetTest {
 		assertEquals(Math.round(((Circle) testPlanet.getShape()).getRadius() / 10), 
 				Math.round(((Circle) testPlanet.getMapViewPlanet().getShape()).getRadius()));
 	}
-
-	// TODO add test methods here.
-	// The methods must be annotated with annotation @Test. For example:
-	//
-	// @Test
-	// public void hello() {}
 }

@@ -31,6 +31,7 @@ public class GamePlay {
 	private double timeLeft;
 	private long startTime = 0;
 	private int planetsLeft;
+	private long previousTorpedoFired;
 	
 	/**
 	 * Sets the settings for the current game.
@@ -66,7 +67,6 @@ public class GamePlay {
 	public long getPreviousTorpedoFired() {
 		return previousTorpedoFired;
 	}
-	private long previousTorpedoFired;
 
 	public void setTimeLeft(double timeLeft) {
 		this.timeLeft = timeLeft;

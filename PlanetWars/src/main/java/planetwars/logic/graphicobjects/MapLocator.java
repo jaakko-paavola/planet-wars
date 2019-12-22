@@ -31,6 +31,15 @@ public class MapLocator extends Shape {
 			, Color.WHITE);
 		this.gameArena = gameArena;
     } 	
+	
+	/**
+	 * Sets the movement for the map locator rectangle appropriately in relation 
+	 * to the reference, the players ship.
+	 * @param reference The player's ship.
+	 * @param playerAccelerationFactor
+	 * @param accelerationFactor
+	 * @param frameRateForSpeedoMeter 
+	 */
 	@Override
     public void accelerateInReferenceTo(Shape reference, int playerAccelerationFactor, double accelerationFactor, int frameRateForSpeedoMeter) {
         double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));

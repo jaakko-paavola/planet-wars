@@ -32,8 +32,8 @@ public class GameArena implements GameArenaInterface {
 	
 	private int spaceWidth = 10000;
 	private int spaceHeight = 10000;	
-	private final static int player1StartingXCoord = screenWidth / 2;
-	private final static int player1StartingYCoord = screenHeight / 2;
+	private int player1StartingXCoord = screenWidth / 2;
+	private int player1StartingYCoord = screenHeight / 2;
 	
 	/**
 	 * Creates a new game arena with the number of planets decided by the
@@ -50,9 +50,9 @@ public class GameArena implements GameArenaInterface {
 
 		for (int i = 0; i < level; i++) {
 			planets.add(new Planet(new Random().nextInt(spaceWidth / 2 - 100) + 50,
-					new Random().nextInt(spaceHeight / 2 - 100) + 50,
-					new Random().nextInt(80) + 20,
-					Color.rgb(new Random().nextInt(200) + 56,
+							new Random().nextInt(spaceHeight / 2 - 100) + 50,
+							new Random().nextInt(80) + 20,
+							Color.rgb(new Random().nextInt(200) + 56,
 							new Random().nextInt(200) + 56,
 							new Random().nextInt(200) + 56), spaceWidth, spaceHeight));
 		}
@@ -82,11 +82,11 @@ public class GameArena implements GameArenaInterface {
 		return planets;
 	}
 	
-	public static int getPlayerStartingXCoord() {
+	public int getPlayerStartingXCoord() {
 		return player1StartingXCoord;
 	}
 
-	public static int getPlayerStartingYCoord() {
+	public int getPlayerStartingYCoord() {
 		return player1StartingYCoord;
 	}
 	

@@ -16,7 +16,9 @@ import planetwars.logic.graphicobjects.Ship;
 import planetwars.ui.PlanetWarsApplication;
 
 /**
- *
+ * The class functions as an interface of the application logic. It controls the
+ * communication to the database and communicates information related to the game
+ * play, the game areana and the player.
  * @author jaakkpaa
  */
 public class GameEngine implements GameEngineInterface {
@@ -39,18 +41,39 @@ public class GameEngine implements GameEngineInterface {
 		this.gui = gui;
 	}
 	
+	/**
+	 * Makes sure the database has the needed table.
+	 */
 	public void initializeDatabase() {
 		playerDao.createTableIfNotExist();
 	}
 
+	/**
+	 * Communicates the given player from the database.
+	 * @param userName The key to find the player.
+	 * @return The player founds.
+	 * @throws Exception 
+	 */
 	public Player getPlayerFromDb(String userName) throws Exception {
 		return playerDao.findOne(userName);
 	}	
 
+	/**
+	 * Saves the current player's situation to the database.
+	 * @param player
+	 * @throws Exception 
+	 */
 	public void saveGame(Player player) throws Exception {
 		playerDao.saveOrUpdate(player);
 	}	
 	
+	/**
+	 * Checks if there's already a player with the given username and if not,
+	 * creates the username and signs the player in.
+	 * @param textFieldUsername The username.
+	 * @param textFieldPassword The password.
+	 * @throws Exception 
+	 */
 	public void signUp(String textFieldUsername, String textFieldPassword) throws Exception {
 		Player findOne;
 		try {
@@ -63,6 +86,13 @@ public class GameEngine implements GameEngineInterface {
 		throw new Exception("Username already taken.");
 	}
 
+	/**
+	 * Check if can find a user with the given username and if so, if the password
+	 * given matches the one in the database.
+	 * @param textFieldUsername The username.
+	 * @param textFieldPassword The password.
+	 * @throws Exception 
+	 */
 	public void signIn(String textFieldUsername, String textFieldPassword) throws Exception {
 		this.player = playerDao.findOne(textFieldUsername);
 		if (!player.getPassword().equals(textFieldPassword)) {
@@ -70,6 +100,11 @@ public class GameEngine implements GameEngineInterface {
 		}
 	}
 
+	/**
+	 * Starts a new game for the player in an appropriate level.
+	 * @param screenWidth
+	 * @param screenHeight 
+	 */
 	public void newGame(int screenWidth, int screenHeight) {
 		this.player = new Player(player.getUsername(), player.getPassword(),
 				player.getPoints(), player.getLevel());

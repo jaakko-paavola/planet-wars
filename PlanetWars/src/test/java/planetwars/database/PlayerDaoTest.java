@@ -15,7 +15,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * For testing the PlayerDao class.
  * @author jaakkpaa
  */
 public class PlayerDaoTest {

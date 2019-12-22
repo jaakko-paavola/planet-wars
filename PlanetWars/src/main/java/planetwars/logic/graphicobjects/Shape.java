@@ -20,6 +20,11 @@ import javafx.scene.shape.Rectangle;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
+/**
+ * All the graphic objects in the game inherit Shape, which contains the basic
+ * qualities and functions of all graphic objects.
+ * @author jaakkpaa
+ */
 public abstract class Shape {
 	
 	private javafx.scene.shape.Shape shape;
@@ -68,15 +73,31 @@ public abstract class Shape {
 		this.shape = shape;
 	}
 	
+	/**
+	 * Turn the object to the left.
+	 * @param playerRotationFactor 
+	 */
 	public void turnLeft(int playerRotationFactor) {
 		this.shape.setRotate(this.shape.getRotate() - playerRotationFactor);
 	}
 	
+	/**
+	 * Turn the object to the right.
+	 * @param playerRotationFactor 
+	 */
 	public void turnRight(int playerRotationFactor) {
 		this.shape.setRotate(this.shape.getRotate() + playerRotationFactor);
 	}
 
-	public void accelerateInReferenceTo(Shape reference, int playerAccelerationFactor, double accelerationFactor, int frameRateForSpeedoMeter) {
+	/**
+	 * Sets the object into movement in reference to the player's ship.
+	 * @param reference The player's ship.
+	 * @param playerAccelerationFactor
+	 * @param accelerationFactor
+	 * @param frameRateForSpeedoMeter 
+	 */
+	public void accelerateInReferenceTo(Shape reference, int playerAccelerationFactor, 
+					double accelerationFactor, int frameRateForSpeedoMeter) {
 		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
 		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 		
@@ -86,36 +107,9 @@ public abstract class Shape {
 		this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
 	}
 	
-//	public void brakeInReferenceTo(Shape reference, int playerBrakingFactor, double brakingFactor, int frameRateForSpeedoMeter) {
-//		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-//		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-//		
-//		changeX *= -brakingFactor * playerBrakingFactor;
-//		changeY *= -brakingFactor * playerBrakingFactor;
-//		
-//		this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
-//	}
-	
-//	public void accelerateToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
-//		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-//		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-//		
-//		changeX *= -accelerationFactor * quantity;
-//		changeY *= -accelerationFactor * quantity;
-//		
-//		this.setMovement(this.getMovement().add(changeX, changeY));
-//	}
-	
-//	public void brakeToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
-//		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-//		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-//		
-//		changeX *= brakingFactor * quantity;
-//		changeY *= brakingFactor * quantity;
-//		
-//		this.setMovement(this.getMovement().add(changeX, changeY));
-//	}
-	
+	/**
+	 * Move the object.
+	 */
 	public void move() {
 		this.shape.setTranslateX(this.shape.getTranslateX() + this.getMovement().getX());
 		this.shape.setTranslateY(this.shape.getTranslateY() + this.getMovement().getY());
@@ -141,6 +135,11 @@ public abstract class Shape {
 		return movement;
 	}
 	
+	/**
+	 * Set the objects movement and enable the functioning of the speed-o-meter.
+	 * @param movement
+	 * @param frameRateForSpeedoMeter 
+	 */
 	public void setMovement(Point2D movement, int frameRateForSpeedoMeter) {
 		if (visits == frameRateForSpeedoMeter) {
 			this.previous = this.movement;
@@ -150,6 +149,11 @@ public abstract class Shape {
 		visits++;
 	}
 	
+	/**
+	 * Check if the given object is overlapping with the one given as a parameter.
+	 * @param counterparty
+	 * @return 
+	 */
     public boolean collide(Shape counterparty) {
         javafx.scene.shape.Shape collisionArea = javafx.scene.shape.Shape.intersect(this.shape, counterparty.getShape());
         return collisionArea.getBoundsInLocal().getWidth() != -1;

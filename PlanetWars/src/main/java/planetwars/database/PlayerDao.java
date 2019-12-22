@@ -85,6 +85,9 @@ public class PlayerDao implements Dao<Player, String> {
         }
     }
 	
+	/**
+	 * Creates the Player table in the database if it does not yet exist.
+	 */
 	@Override
 	public void createTableIfNotExist() {
 		try (Connection conn = database.getConnection()) {
@@ -107,34 +110,21 @@ public class PlayerDao implements Dao<Player, String> {
 		}
 	}
 
+	/**
+	 * Deletes a player instance that has the given username from the database.
+	 * Used only with cleaining up after testing.
+	 * @param username The username to be used as the key to determine the record
+	 * to be deleted.
+	 * @throws SQLException
+	 * @throws Exception 
+	 */
 	@Override
 	public void delete(String username) throws SQLException, Exception {
 		try (Connection conn = database.getConnection()) {
 			PreparedStatement stmt = conn.prepareStatement(
-					"Delete FROM Player WHERE username = ?");
+							"Delete FROM Player WHERE username = ?");
 			stmt.setString(1, username);
 			stmt.executeUpdate();
 		}		
 	}
-
-	/**
-	 * Checks if Player table exists and creates it if it does not.
-	 * @throws SQLException
-	 * @throws Exception 
-	 */
-//	@Override
-//	public void createTable() throws SQLException, Exception {
-//		Connection conn = database.getConnection();
-//		try {
-//			PreparedStatement stmt = conn.prepareStatement(
-//							"SELECT * FROM Player");
-//			ResultSet executeQuery = stmt.executeQuery();
-//		} catch (Exception e) {
-//			PreparedStatement stmt = conn.prepareStatement(
-//							"CREATE TABLE Player (username varchar, password varchar, "
-//							+ "points integer, level integer)");
-//			stmt.executeUpdate();
-//		}
-//		conn.close();
-//	}
 }
