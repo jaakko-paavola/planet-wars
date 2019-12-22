@@ -11,7 +11,7 @@ Ohjelma olettaa, että sqlite-tietokanta toimii käyttäjän ympäristössä. Oh
 Ohjelma käynnistetään komennolla 
 
 ```
-java -jar PlanetWars-0.8.jar
+java -jar PlanetWars-1.0.jar
 ```
 
 ## Kirjautuminen
@@ -20,14 +20,16 @@ Sovellus käynnistyy kirjautumisnäkymään:
 
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/Screenshot%20from%202019-12-10%2001-12-58.png" width="400">
 
-Kirjautuminen onnistuu kirjoittamalla olemassaoleva käyttäjätunnus syötekenttään ja painamalla _sign in_.
+Kirjautuminen onnistuu kirjoittamalla olemassaoleva käyttäjätunnus ja oikea salasana syötekenttään ja painamalla _sign in_.
 
 Jos kirjautuminen onnistuu, avautuu seuraavaksi pelinäkymä.
 
 ## Uuden käyttäjän luominen
 
-Uusi käyttäjä luodaan syöttämällä tiedot syötekenttiin ja painamalla _sign up_
+Uusi käyttäjä luodaan syöttämällä käyttäjänimi ja salasana syötekenttiin ja painamalla _sign up_
 
 Jos käyttäjän luominen onnistuu, avautuu seuraavaksi pelinäkymä.
 
 ## Pelaaminen
+
+Alusta ohjataan nuolinäppäimillä ja välilyönnillä ammutaan torpedo. Pelissä on tarkoitus lentää päin tai ampua jokaista pelikentän planeettaa ennen kuin oikeassa yläkulmassa juoksevasta sekuntikellosta loppuu aika. Jos pelaaja onnistuu läpäisemään kentän, hän etenee seuraavalle, astetta vaikeammalle tasolle.
