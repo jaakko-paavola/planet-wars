@@ -29,7 +29,9 @@ Sovellus käyttää tietokantatiedostoa planetwars.db oikean pelidatan tallentam
 
 ### Päätoiminnallisuudet
 #### Käyttäjän kirjautuminen
+Kun kirjautumisnäkymässä on syötetty käyttäjätunnus ja salasana ja klikataan painiketta signIn, etenee sovelluksen kontrolli seuraavasti:
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio%20signin.jpg" width="160">
 
 #### Uuden käyttäjän luominen
+Kun kirjautumisnäkymässä on syötetty käyttäjätunnus, joka ei ole jo käytössä sekä salasana ja klikataan painiketta signUp, etenee sovelluksen kontrolli seuraavasti:
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio%20signup.jpg" width="160">
