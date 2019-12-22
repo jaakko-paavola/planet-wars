@@ -28,10 +28,8 @@ Database-luokka luo yhteyden tietokantaan ja PlayerDao-luokka hoitaa pelaajan ti
 Sovellus käyttää tietokantatiedostoa planetwars.db oikean pelidatan tallentamiseen sekä tietokantatiedostoa planetwarsTest.db testeissä tehtävien tiedokantaoperaatioiden datan tallentamiseen.
 
 ### Päätoiminnallisuudet
-#### Käyttäjän kirjautuminen, pelin jatkaminen käyttäjän tasolta sekä tallennus
+#### Käyttäjän kirjautuminen
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio%20signin.jpg" width="160">
 
 #### Uuden käyttäjän luominen
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio%20signup.jpg" width="160">
-
-## Ohjelman rakenteeseen jääneet heikkoudet
