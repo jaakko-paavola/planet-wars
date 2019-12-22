@@ -18,6 +18,8 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 [Viikko 6](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.8)
 
+[Loppupalautus](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/1.0)
+
 ### Peliohje
 Ohjaa avaruusalusta nuolinäppäimillä. Huomaa, että alaspäin-nuoli jarruttaa ja space ampuu torpedon.
 

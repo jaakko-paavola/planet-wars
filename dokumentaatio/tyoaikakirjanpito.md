@@ -13,8 +13,12 @@
 | 03.12 | 5    | Refaktorointi UI:n paremmaksi erottamiseksi sovelluslogiikasta sekä yleiseksi järkeistämiseksi, testien lisääminen, nopeusmittarin parantelu|
 | 07.12 | 8    | Tietokannan käyttö, tunnuksen luonti, sisään kirjautuminen, pelikentän satunnaisluonti| 
 | 08.12 | 8    | Pelikentän uudelleen luonti a) tason uusintaa tai b) seuraavaa tasoa varten|
-| 09.12 | 4    | Refaktorointia, pelikokemuksen parantelua, bugien korjaamista, javadocien kirjoittamista, testien ja checkstyle-päivitystä| 
+| 09.12 | 4    | Refaktorointia, pelikokemuksen parantelua, bugien korjaamista, javadocien kirjoittamista, testien ja checkstyle-päivitystä|
+| 18.12 | 3    | Rakenteen refaktorointia|
+| 19.12 | 4    | Rakenteen refaktorointia|
+| 21.12 | 4    | Rakenteen refaktorointia|
+| 22.12 | 12   | Refaktorointia, testien tekemistä, JavaDoc-kommentointia, yleistä parantelua|
 |-----  | -----| |
-|       | 59   | |
+|       | 82   | |
 |       |      | |
 
