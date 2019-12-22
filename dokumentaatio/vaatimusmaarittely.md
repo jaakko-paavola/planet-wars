@@ -24,10 +24,11 @@ Oleelliset osat pelinäkymää ovat päänäkymä (jonka keskellä pelaaja on ai
 - Ajan loppuminen päättää pelin. [Tehty]
 - Kaikkien planeettojen valtaaminen tai tuhoaminen päättää pelin. [Tehty]
 - Kentän satunnaisgenerointi: a) kun pelikentän kaikki planeetat tulivat pelaajan valtaamiksi tai tuhoamiksi, jolloin generoidaan uusi kenttä yhtä askelta vaikeammalla vaikeustasolla; b) kun pelaaja epäonnistuu pelikentässä (eli lentää yli kentän rajojen tai aika loppuu), jolloin generoidaan uusi kenttä samalla vaikeustasolla. [Tehty]
-- Pelaaja kohoaa arvoasteikolla (rank) ylöspäin saavuttamiensa pisteiden perusteella. [Tehty]
+- Pelaaja kohoaa arvoasteikolla (sotilasarvo/rank) ylöspäin saavuttamiensa pisteiden perusteella. [Tehty]
 - Kirjautuminen käyttäjätunnuksella ja salasanalla, jotta pelaaja voi seuraavalla pelikerralla jatkaa peliä sillä pelaajatasolla, jonka hän on aiemmin pelatessaan saavuttanut. [Tehty]
 
 ## Jatkokehitysideoita
 
 - "Tyhmät" konepelaajat, jotka esim. lentävät ja ampuvat sattumanvaraisesti ja osuessaan pelaajaan päättävät pelin; konepelaajan tuhoaminen torpedolla tuo lisäpisteitä.
-- Arvoasteikko vaikuttaa pelaajan aluksen nopeuteen sekä torpedon ampumisnopeuteen.
+- Pelaajan saavuttama sotilasarvo vaikuttaa pelaajan aluksen nopeuteen sekä torpedon ampumisnopeuteen.
+- Pelikenttä, jossa on pelikentän keskellä suuri aurinko/tähti, jota päin lentäminen päättää pelin. Planeetat voisivat hitaasti kiertää tähteään ympäri.
