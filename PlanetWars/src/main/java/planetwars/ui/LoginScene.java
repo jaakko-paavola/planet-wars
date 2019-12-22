@@ -20,7 +20,7 @@ import planetwars.database.Database;
 import planetwars.database.PlayerDao;
 import planetwars.logic.Player;
 import planetwars.logic.LogicLayer;
-import planetwars.logic.Game;
+import planetwars.logic.GamePlay;
 import planetwars.logic.GameEngine;
 
 /**

@@ -5,6 +5,8 @@
  */
 package planetwars.logic;
 
+import java.util.List;
+import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Shape;
 import planetwars.logic.graphicobjects.Ship;
 
@@ -14,9 +16,9 @@ import planetwars.logic.graphicobjects.Ship;
  */
 public interface GameEngineInterface {
 
-	Game getGame();
-
 	GameArenaInterface getGameArena();
+	
+	GamePlay getGame();
 
 	Player getPlayer();
 
@@ -25,5 +27,9 @@ public interface GameEngineInterface {
 	public Shape getBoundaryRectangle();
 
 	public long getStartTime();
+
+	public int getFrameRateForSpeedoMeter();
+
+	public List<Planet> getPlanets();
 	
 }

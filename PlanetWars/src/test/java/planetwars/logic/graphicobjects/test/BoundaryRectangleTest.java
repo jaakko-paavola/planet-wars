@@ -26,7 +26,6 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class BoundaryRectangleTest {
-	private Ship ship;
 	private BoundaryRectangle boundaryRectangle;
 	private GameArena gameArena;
 	
@@ -43,7 +42,6 @@ public class BoundaryRectangleTest {
 	
 	@Before
 	public void setUp() {
-		ship = new Ship(Math.round(screenWidth/2), Math.round(screenHeight/2));
 		gameArena = new GameArena(1);
 		boundaryRectangle = new BoundaryRectangle(Color.RED, gameArena.getSpaceWidth(), gameArena.getSpaceHeight());	
 	}

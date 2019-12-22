@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.stage.Stage;
-import planetwars.logic.Game;
+import planetwars.logic.GamePlay;
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Torpedo;
 import planetwars.ui.PlanetWarsApplication;
@@ -32,16 +32,17 @@ import planetwars.logic.LogicLayer;
  */
 
 public class Animation extends javafx.animation.AnimationTimer {
-	private Map<KeyCode, Boolean> keysPressed;
-	private LogicLayer logicInterface;
+	private LogicLayer logicLayer;
 	private GameScene gameScene;
 	private PlanetWarsApplication gui;
 	private GameEngine gameEngine;
+	
+	private Map<KeyCode, Boolean> keysPressed;
 
 	public Animation(Map<KeyCode, Boolean> keysPressed, LogicLayer logicInterface, 
 			GameScene gameScene, PlanetWarsApplication gui, GameEngine gameEngine) {
 		this.keysPressed = keysPressed;
-		this.logicInterface = logicInterface;
+		this.logicLayer = logicInterface;
 		this.gameScene = gameScene;
 		this.gui = gui;
 		this.gameEngine = gameEngine;
@@ -49,47 +50,47 @@ public class Animation extends javafx.animation.AnimationTimer {
 
 	@Override
 	public void handle(long timeNow) {
-		logicInterface.handleLevelTimerRefresh(timeNow);
-		if (logicInterface.handleRunningOutOfTime()) {
+		logicLayer.handleLevelTimerRefresh(timeNow);
+		if (logicLayer.handleRunningOutOfTime()) {
 			try {
 				newGame();
 			} catch (Exception ex) {
 				Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		logicInterface.handleArrowKeyPresses(keysPressed);
-		Torpedo torpedo = logicInterface.handleFiringTorpedoBySpaceKeyPress(keysPressed);                
+		logicLayer.handleArrowKeyPresses(keysPressed);
+		Torpedo torpedo = logicLayer.handleFiringTorpedoBySpaceKeyPress(keysPressed);                
 		if (torpedo != null) {
 			gameScene.getGameView().getChildren().add(torpedo.getShape());
 		}
-		ArrayList<Planet> destroyedPlanets = logicInterface.handleTorpedosHittingPlanets();
+		ArrayList<Planet> destroyedPlanets = logicLayer.handleTorpedosHittingPlanets();
 		for (Planet destroyedPlanet : destroyedPlanets) {
 			makePlanetLookDestroyed(destroyedPlanet);
 		}
-		logicInterface.handleTorpedosHittingBoundary();
-		List<Torpedo> torpedosToBeRemoved = logicInterface.removeTorpedosHittingPlanetsOrBoundary();
+		logicLayer.handleTorpedosHittingBoundary();
+		List<Torpedo> torpedosToBeRemoved = logicLayer.removeTorpedosHittingPlanetsOrBoundary();
 		if (torpedosToBeRemoved.size() > 0) {
 			torpedosToBeRemoved.forEach(torpedoToBeRemoved -> gameScene.getGameView()
 					.getChildren().remove(torpedoToBeRemoved.getShape()));
 		}
-		ArrayList<Planet> conqueredPlanets = logicInterface.handleShipHittingPlanets();
+		ArrayList<Planet> conqueredPlanets = logicLayer.handleShipHittingPlanets();
 		for (Planet conqueredPlanet : conqueredPlanets) {
 			makePlanetLookConquered(conqueredPlanet);
 		}
 		
 		refreshGauges(gameEngine.getTimeLeft(), timeNow, gameEngine.getStartTime());
 		
-		logicInterface.moveMovableGraphicObjects();
+		logicLayer.moveMovableGraphicObjects();
 		
 		try {
-			if (logicInterface.hasFlownOutOfBounds()) {
+			if (logicLayer.hasFlownOutOfBounds()) {
 				newGame();
 			}
 		} catch (Exception ex) {
 			Logger.getLogger(Animation.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		
-		if(logicInterface.handleNoPlanetsLeft()) {
+		if(logicLayer.handleNoPlanetsLeft()) {
 			try {
 				newGame();
 			} catch (Exception ex) {
@@ -115,11 +116,9 @@ public class Animation extends javafx.animation.AnimationTimer {
 
 	private void refreshGauges(double timeLeft, long timeNow, long startTime) {
 		gameScene.setTextPoints("Points: " + gameEngine.getPoints());
-		gameScene.setTextSpeed("Speed: " + logicInterface.round(Math.sqrt(
+		gameScene.setTextSpeed("Speed: " + logicLayer.round(Math.sqrt(
 						Math.pow(gameEngine.getBoundaryRectangle().getXSpeed(gameEngine.getPlayerShip()), 2)
 						+ Math.pow(gameEngine.getBoundaryRectangle().getYSpeed(gameEngine.getPlayerShip()), 2)) / 1000, 1));
-//		gameScene.setTextCoordinates("Coordinates: " + (-gameEngine.getBoundaryRectangle().getXCoord() + gameEngine.getPlayer1StartingXCoord())
-//						+ "." + (-gameEngine.getBoundaryRectangle().getYCoord() + gameEngine.getPlayer1StartingYCoord()));
 		gameScene.setTextTimer("Time left: " + timeLeft);
 	}
 

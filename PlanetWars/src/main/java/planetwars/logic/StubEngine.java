@@ -5,8 +5,10 @@
  */
 package planetwars.logic;
 
+import java.util.List;
 import planetwars.database.Database;
 import planetwars.database.PlayerDao;
+import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Shape;
 import planetwars.logic.graphicobjects.Ship;
 import planetwars.ui.PlanetWarsApplication;
@@ -18,31 +20,31 @@ import planetwars.ui.PlanetWarsApplication;
 public class StubEngine implements GameEngineInterface {
 
 	private Player player;
-	private Game game;
+	private GamePlay game;
 	private StubGameArena gameArena;
 	
 	public StubEngine() {
 		this.player = new Player("mockUser", "mockPassword", 1000, 3);
 		this.gameArena = new StubGameArena(player.getLevel());
-		this.game = new Game(800, 600, gameArena, player.getPoints());
+		this.game = new GamePlay(800, 600, gameArena, player.getPoints());
 	}
 
 	public Player getPlayer() {
 		return player;
 	}
 
-	public Game getGame() {
+	public GamePlay getGame() {
 		return game;
 	}
 
 	@Override
-	public StubGameArena getGameArena() {
-		return gameArena;
+	public List<Planet> getPlanets() {
+		return gameArena.getPlanets();
 	}
 
 	@Override
 	public Ship getPlayerShip() {
-		return gameArena.getPlayer1Ship();
+		return gameArena.getPlayerShip();
 	}
 
 	@Override
@@ -53,5 +55,15 @@ public class StubEngine implements GameEngineInterface {
 	@Override
 	public long getStartTime() {
 		return game.getStartTime();
+	}
+
+	@Override
+	public int getFrameRateForSpeedoMeter() {
+		return 10000;
+	}
+
+	@Override
+	public GameArenaInterface getGameArena() {
+		return gameArena;
 	}
 }

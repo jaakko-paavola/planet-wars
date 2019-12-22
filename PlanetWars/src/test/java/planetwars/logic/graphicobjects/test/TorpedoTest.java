@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logic.Game;
+import planetwars.logic.GamePlay;
 import planetwars.logic.GameArena;
 import planetwars.logic.graphicobjects.Shape;
 import planetwars.logic.graphicobjects.Torpedo;
@@ -23,8 +23,9 @@ import planetwars.logic.graphicobjects.Torpedo;
  * @author jaakkpaa
  */
 public class TorpedoTest {
-	Game game;
+	GamePlay game;
 	GameArena gameArena;
+	
 	public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int screenWidth = (int) resolution.getWidth();
 	public static int screenHeight = (int) resolution.getHeight(); 
@@ -43,7 +44,7 @@ public class TorpedoTest {
 	@Before
 	public void setUp() {
 		gameArena = new GameArena(1);
-		game = new Game(screenWidth, screenHeight, gameArena, 0);
+		game = new GamePlay(screenWidth, screenHeight, gameArena, 0);
 	}
 	
 	@After
@@ -52,10 +53,10 @@ public class TorpedoTest {
 
 	@Test
 	public void creatingTorpedoMakes() {
-		Torpedo torpedo = new Torpedo((int) gameArena.getPlayer1Ship().getShape().getTranslateX(),
-				(int) gameArena.getPlayer1Ship().getShape().getTranslateY());
-		assertEquals(gameArena.getPlayer1Ship().getXCoord(), torpedo.getXCoord());
-		assertEquals(gameArena.getPlayer1Ship().getYCoord(), torpedo.getYCoord());
+		Torpedo torpedo = new Torpedo((int) gameArena.getPlayerShip().getShape().getTranslateX(),
+				(int) gameArena.getPlayerShip().getShape().getTranslateY());
+		assertEquals(gameArena.getPlayerShip().getXCoord(), torpedo.getXCoord());
+		assertEquals(gameArena.getPlayerShip().getYCoord(), torpedo.getYCoord());
 		
 	}
 

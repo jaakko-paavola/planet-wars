@@ -36,7 +36,7 @@ public class PlayerDaoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
+		database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwarsTest.db");
 		playerDao = new PlayerDao(database);
 	}
 	

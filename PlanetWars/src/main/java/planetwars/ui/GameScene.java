@@ -116,8 +116,8 @@ public class GameScene {
 		mapView.setPrefSize(mapWidth, mapHeight);
 		mapView.setStyle("-fx-background-color: black; -fx-border-color: green");
 		AnchorPane rootPane = new AnchorPane();
-		rootPane.setPrefSize(gameEngine.getGameArena().getSpaceWidth(), 
-				gameEngine.getGameArena().getSpaceHeight());
+		rootPane.setPrefSize(gameEngine.getSpaceWidth(), 
+				gameEngine.getSpaceHeight());
 		rootPane.getChildren().addAll(gameView, gridPane, mapView);
 		Scene gameScene = new Scene(rootPane);
 		

@@ -5,10 +5,13 @@
  */
 package planetwars.logic;
 
+import java.util.List;
+import javafx.scene.shape.Shape;
 import planetwars.database.Database;
 import planetwars.database.PlayerDao;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
 import planetwars.logic.graphicobjects.MapLocator;
+import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Ship;
 import planetwars.ui.PlanetWarsApplication;
 
@@ -21,8 +24,14 @@ public class GameEngine implements GameEngineInterface {
 	private PlanetWarsApplication gui;
 	private Player player;
 	private Database database;
-	private Game game;
+	private GamePlay game;
 	private GameArena gameArena;
+	
+	private final int frameRateForSpeedoMeter = 10000;
+	
+	public int getFrameRateForSpeedoMeter() {
+		return frameRateForSpeedoMeter;
+	}
 	
 	public GameEngine(PlanetWarsApplication gui) throws Exception {
 		this.database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
@@ -65,7 +74,7 @@ public class GameEngine implements GameEngineInterface {
 		this.player = new Player(player.getUsername(), player.getPassword(),
 				player.getPoints(), player.getLevel());
 		this.gameArena = new GameArena(player.getLevel());
-		this.game = new Game(screenWidth, screenHeight, gameArena, player.getPoints());
+		this.game = new GamePlay(screenWidth, screenHeight, gameArena, player.getPoints());
 	}
 	
 	@Override
@@ -90,30 +99,53 @@ public class GameEngine implements GameEngineInterface {
 	}
 
 	@Override
-	public GameArena getGameArena() {
-		return gameArena;
+	public List<Planet> getPlanets() {
+		return gameArena.getPlanets();
 	}
 
 	public Ship getPlayerShip() {
-		return gameArena.getPlayer1Ship();
+		return gameArena.getPlayerShip();
+	}
+	
+	public Shape getPlayerShipShape() {
+		return gameArena.getPlayerShip().getShape();
 	}
 
 	public BoundaryRectangle getBoundaryRectangle() {
 		return gameArena.getBoundaryRectangle();
 	}
-
 	
-	public int getPlayer1StartingXCoord() {
-		return gameArena.getPlayer1StartingXCoord();
+	public Shape getBoundaryRectangleShape() {
+		return gameArena.getBoundaryRectangle().getShape();
+	}	
+
+	public int getPlayerStartingXCoord() {
+		return gameArena.getPlayerStartingXCoord();
 	}
 
-	public int getPlayer1StartingYCoord() {
-		return gameArena.getPlayer1StartingYCoord();
+	public int getPlayerStartingYCoord() {
+		return gameArena.getPlayerStartingYCoord();
 	}
+
+	public Shape getMapLocatorShape() {
+		return gameArena.getMapLocator().getShape();
+	}	
 	
 	@Override
-	public Game getGame() {
+	public GamePlay getGame() {
 		return game;
+	}
+
+	public GameArena getGameArena() {
+		return gameArena;
+	}
+
+	public int getSpaceWidth() {
+		return gameArena.getSpaceWidth();
+	}
+
+	public int getSpaceHeight() {
+		return gameArena.getSpaceHeight();
 	}
 
 	public long getStartTime() {
@@ -122,10 +154,6 @@ public class GameEngine implements GameEngineInterface {
 
 	public double getTimeLeft() {
 		return game.getTimeLeft();
-	}
-	
-	public MapLocator getMapLocator() {
-		return game.getMapLocator();
 	}
 
 	public long getPoints() {

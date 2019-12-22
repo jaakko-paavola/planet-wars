@@ -30,10 +30,9 @@ import java.util.stream.Stream;
  * @author jaakkpaa
  */
 public class LogicLayer {
-	private Game game;
+	private GamePlay game;
 	private GameArenaInterface gameArena;
 	private GameEngineInterface gameEngine;
-	private final int frameRateForSpeedoMeter = 10000;
 	private Player player;
 
 	public LogicLayer(GameEngineInterface gameEngine) throws Exception {
@@ -43,10 +42,6 @@ public class LogicLayer {
 		this.player = gameEngine.getPlayer();
 	}
 	
-	public int getFrameRateForSpeedoMeter() {
-		return frameRateForSpeedoMeter;
-	}
-
 	public GameEngineInterface getGameEngine() {
 		return gameEngine;
 	}
@@ -76,12 +71,12 @@ public class LogicLayer {
 	}
 	
 	private Torpedo fireTorpedo() {
-		Torpedo torpedo = new Torpedo((int) gameArena.getPlayer1Ship().getShape().getTranslateX(),
-				(int) gameArena.getPlayer1Ship().getShape().getTranslateY());
-		torpedo.getShape().setRotate(gameArena.getPlayer1Ship().getShape().getRotate());
+		Torpedo torpedo = new Torpedo((int) gameArena.getPlayerShip().getShape().getTranslateX(),
+				(int) gameArena.getPlayerShip().getShape().getTranslateY());
+		torpedo.getShape().setRotate(gameArena.getPlayerShip().getShape().getRotate());
 		gameArena.getTorpedos().add(torpedo);
-		torpedo.accelerateInReferenceTo(gameArena.getPlayer1Ship(), player.getPlayerTorpedoAcceleration(), game.getAccelerationFactor(), frameRateForSpeedoMeter);
-		torpedo.setMovement(torpedo.getMovement().multiply(player.getPlayerTorpedoSpeedMultiplier()), frameRateForSpeedoMeter);
+		torpedo.accelerateInReferenceTo(gameArena.getPlayerShip(), player.getPlayerTorpedoAcceleration(), game.getAccelerationFactor(), gameEngine.getFrameRateForSpeedoMeter());
+		torpedo.setMovement(torpedo.getMovement().multiply(player.getPlayerTorpedoSpeedMultiplier()), gameEngine.getFrameRateForSpeedoMeter());
 		game.setPreviousTorpedoFired(System.currentTimeMillis());
 		accelerateShip(player.getPlayerShipBraking());
 		return torpedo;
@@ -155,17 +150,15 @@ public class LogicLayer {
 
 	public void moveMovableGraphicObjects() {
 		gameArena.getTorpedos().forEach(torpedo -> torpedo.move());
-		game.getMapLocator().move();
+		gameArena.getMapLocator().move();
 		gameArena.getBoundaryRectangle().move();
 		gameArena.getPlanets().forEach(planet -> planet.move());
 	}
 
-
-
 	public ArrayList<Planet> handleShipHittingPlanets() {
 		ArrayList<Planet> conqueredPlanets = new ArrayList<Planet>();
 		gameArena.getPlanets().forEach(planet -> {
-			if (gameArena.getPlayer1Ship().collide(planet)) {
+			if (gameArena.getPlayerShip().collide(planet)) {
 				if (planet.isAlive() && !planet.isConquered()) {
 					game.setPoints(game.getPoints() + 1000);
 					game.setPlanetsLeft(game.getPlanetsLeft() - 1);
@@ -179,22 +172,18 @@ public class LogicLayer {
 	}
 
 	public void accelerateShip(int acceleration) {
-		game.getMapLocator().accelerateInReferenceTo(gameArena.getPlayer1Ship(), acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
-		gameArena.getBoundaryRectangle().accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+		gameArena.getMapLocator().accelerateInReferenceTo(gameArena.getPlayerShip(), acceleration, game.getAccelerationFactor(), gameEngine.getFrameRateForSpeedoMeter());
+		gameArena.getBoundaryRectangle().accelerateInReferenceTo(gameArena.getPlayerShip(), -acceleration, game.getAccelerationFactor(), gameEngine.getFrameRateForSpeedoMeter());
 
 		for (Planet planet : gameArena.getPlanets()) {
-			planet.accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
-			planet.getMapViewPlanet().accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+			planet.accelerateInReferenceTo(gameArena.getPlayerShip(), -acceleration, game.getAccelerationFactor(), gameEngine.getFrameRateForSpeedoMeter());
+			planet.getMapViewPlanet().accelerateInReferenceTo(gameArena.getPlayerShip(), -acceleration, game.getAccelerationFactor(), gameEngine.getFrameRateForSpeedoMeter());
 		}
 		for (Torpedo torpedo : gameArena.getTorpedos()) {
-			torpedo.accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+			torpedo.accelerateInReferenceTo(gameArena.getPlayerShip(), -acceleration, game.getAccelerationFactor(), gameEngine.getFrameRateForSpeedoMeter());
 		}
 	}
 
-	public double getTimePerLevel() {
-		return game.getTimePerLevel();
-	}
-	
 	public void handleLevelTimerRefresh(long timeNow) {
 		game.setStartTime(gameEngine.getStartTime() == 0 ? timeNow
 				: gameEngine.getStartTime());
@@ -208,7 +197,7 @@ public class LogicLayer {
 	}
 	
 	public boolean hasFlownOutOfBounds() throws InterruptedException, Exception {
-		if (!gameArena.getPlayer1Ship().collide(gameArena.getBoundaryRectangle())) {
+		if (!gameArena.getPlayerShip().collide(gameArena.getBoundaryRectangle())) {
 			return true;
 		}
 		return false;

@@ -43,17 +43,4 @@ public class MapLocator extends Shape {
 
         this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
     }
-	
-//	@Override
-//    public void brakeInReferenceTo(Shape reference, int playerBrakingFactor, double brakingFactor, int frameRateForSpeedoMeter) {
-//        double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-//        double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-//
-//        changeX *= -brakingFactor * playerBrakingFactor * (1.0 * PlanetWarsApplication.mapWidth /
-//				gameArena.getSpaceWidth());
-//        changeY *= -brakingFactor * playerBrakingFactor * (1.0 * PlanetWarsApplication.mapHeight /
-//				gameArena.getSpaceHeight());
-//
-//        this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
-//    }
 }

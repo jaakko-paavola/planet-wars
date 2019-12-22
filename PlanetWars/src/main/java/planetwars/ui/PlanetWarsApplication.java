@@ -43,7 +43,7 @@ import planetwars.database.Database;
 import planetwars.logic.Player;
 import planetwars.database.PlayerDao;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
-import planetwars.logic.Game;
+import planetwars.logic.GamePlay;
 import planetwars.logic.GameArena;
 import planetwars.logic.LogicLayer;
 import planetwars.logic.GameEngine;
@@ -71,7 +71,7 @@ public class PlanetWarsApplication extends Application{
 	private GameScene gameScene;
 	private Animation animation;
 	private GameEngine gameEngine;
-	private LogicLayer logicInterface;
+	private LogicLayer logicLayer;
 
 	public LoginScene getLoginScene() {
 		return loginScene;
@@ -106,21 +106,17 @@ public class PlanetWarsApplication extends Application{
 	 */
 	public void initializeGameScene() throws Exception {
 		gameEngine.newGame(screenWidth, screenHeight);
-		this.logicInterface = new LogicLayer(gameEngine);
+		this.logicLayer = new LogicLayer(gameEngine);
 		gameScene = new GameScene(gameEngine);
-		this.animation = new Animation(gameScene.getKeysPressed(), logicInterface, 
+		this.animation = new Animation(gameScene.getKeysPressed(), logicLayer, 
 				gameScene, this, gameEngine);
-		
-		gameScene.getGameView().getChildren().add(gameEngine.getPlayerShip()
-				.getShape());
-		gameScene.getMapView().getChildren().add(gameEngine.getMapLocator().getShape());
-		for (Planet planet : gameEngine.getGameArena().getPlanets()) {
+		gameScene.getGameView().getChildren().add(gameEngine.getPlayerShipShape());
+		gameScene.getMapView().getChildren().add(gameEngine.getMapLocatorShape());
+		for (Planet planet : gameEngine.getPlanets()) {
 			gameScene.getGameView().getChildren().add(planet.getShape());
 			gameScene.getMapView().getChildren().add(planet.getMapViewPlanet().getShape());
 		}
-		gameScene.getGameView().getChildren().add(gameEngine.getGameArena()
-				.getBoundaryRectangle().getShape());
-
+		gameScene.getGameView().getChildren().add(gameEngine.getBoundaryRectangleShape());
 		animation.start();
 		primaryStage.setScene(gameScene.createAndReturnScene());
 		primaryStage.setTitle("Planet Wars");

@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Torpedo;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
@@ -23,12 +24,14 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class GameArena implements GameArenaInterface {
-	private int spaceWidth = 10000;
-	private int spaceHeight = 10000;	
 	private ArrayList<Planet> planets;
 	private BoundaryRectangle boundaryRectangle;
 	private Ship player1Ship;
 	private List<Torpedo> torpedos;	
+	private MapLocator mapLocator;	
+	
+	private int spaceWidth = 10000;
+	private int spaceHeight = 10000;	
 	private final static int player1StartingXCoord = screenWidth / 2;
 	private final static int player1StartingYCoord = screenHeight / 2;
 	
@@ -43,6 +46,7 @@ public class GameArena implements GameArenaInterface {
 		planets = new ArrayList<>();
 		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
 		this.torpedos = new ArrayList<>();
+		this.mapLocator = new MapLocator(getPlayerShip(), this);
 
 		for (int i = 0; i < level; i++) {
 			planets.add(new Planet(new Random().nextInt(spaceWidth / 2 - 100) + 50,
@@ -55,6 +59,10 @@ public class GameArena implements GameArenaInterface {
 
 		boundaryRectangle = new BoundaryRectangle(Color.RED, spaceWidth, spaceHeight);
 		boundaryRectangle.getShape().setFill(Color.TRANSPARENT);
+	}
+
+	public MapLocator getMapLocator() {
+		return mapLocator;
 	}
 	
 	public int getSpaceWidth() {
@@ -74,15 +82,15 @@ public class GameArena implements GameArenaInterface {
 		return planets;
 	}
 	
-	public static int getPlayer1StartingXCoord() {
+	public static int getPlayerStartingXCoord() {
 		return player1StartingXCoord;
 	}
 
-	public static int getPlayer1StartingYCoord() {
+	public static int getPlayerStartingYCoord() {
 		return player1StartingYCoord;
 	}
 	
-	public Ship getPlayer1Ship() {
+	public Ship getPlayerShip() {
 		return player1Ship;
 	}	
 	

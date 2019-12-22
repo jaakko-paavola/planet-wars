@@ -21,9 +21,9 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * left, and planets left.
  * @author jaakkpaa
  */
-public class Game {
-	private MapLocator mapLocator;	
+public class GamePlay {
 	private GameArenaInterface gameArena;	
+	
 	private int points;
 	private int timePerLevel = 60;
 	private final double accelerationFactor = 0.005;
@@ -40,10 +40,9 @@ public class Game {
 	 * @param gameArena The game arena created for the game.
 	 * @param points The points in the current game.
 	 */
-	public Game(int screenWidth, int screenHeight, GameArenaInterface gameArena, int points) {
+	public GamePlay(int screenWidth, int screenHeight, GameArenaInterface gameArena, int points) {
 		this.gameArena = gameArena;
 		this.planetsLeft = gameArena.getPlanets().size();
-		this.mapLocator = new MapLocator(gameArena.getPlayer1Ship(), gameArena);
 		this.points = points;
 		this.timeLeft = timePerLevel;
 	}
@@ -99,10 +98,6 @@ public class Game {
 
 	public int getPlanetsLeft() {
 		return planetsLeft;
-	}
-	
-	public MapLocator getMapLocator() {
-		return mapLocator;
 	}
 }
 

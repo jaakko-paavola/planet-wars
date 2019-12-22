@@ -47,10 +47,4 @@ public class PlayerTest {
 		assertEquals(400, player2.getPoints());
 		assertEquals(3, player2.getLevel());
 	}
-
-	// TODO add test methods here.
-	// The methods must be annotated with annotation @Test. For example:
-	//
-	// @Test
-	// public void hello() {}
 }

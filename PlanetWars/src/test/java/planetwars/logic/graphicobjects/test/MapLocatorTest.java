@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logic.Game;
+import planetwars.logic.GamePlay;
 import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Ship;
 import static planetwars.logic.graphicobjects.test.ShipTest.HEIGHT;
@@ -31,7 +31,7 @@ public class MapLocatorTest {
 	private MapLocator mapLocator;	
 	private MapLocator mapLocatorReference;	
 	private GameArena gameArena;
-	private Game game;
+	private GamePlay game;
 	
 	public MapLocatorTest() {
 	}
@@ -50,7 +50,7 @@ public class MapLocatorTest {
 		gameArena = new GameArena(5);
 		mapLocator = new MapLocator(ship, gameArena);	
 		mapLocatorReference = new MapLocator(ship, new GameArena(5));	
-		game = new Game(800, 600, gameArena, 1000);
+		game = new GamePlay(800, 600, gameArena, 1000);
 	}
 	
 	@After

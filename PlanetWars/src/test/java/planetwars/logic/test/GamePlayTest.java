@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import planetwars.logic.Game;
+import planetwars.logic.GamePlay;
 import planetwars.logic.GameArena;
 import planetwars.logic.graphicobjects.Ship;
 import static planetwars.logic.graphicobjects.test.TorpedoTest.screenHeight;
@@ -23,14 +23,15 @@ import static planetwars.logic.graphicobjects.test.TorpedoTest.screenWidth;
  *
  * @author jaakkpaa
  */
-public class GameTest {
+public class GamePlayTest {
+	public static GameArena gameArena;
+	public static GamePlay game;
+	
 	public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int screenWidth = (int) resolution.getWidth();
 	public static int screenHeight = (int) resolution.getHeight(); 	
-	public static GameArena gameArena;
-	public static Game game;
 	
-	public GameTest() {
+	public GamePlayTest() {
 	}
 	
 	@BeforeClass
@@ -45,7 +46,7 @@ public class GameTest {
 	@Before
 	public void setUp() {
 		gameArena = new GameArena(1);
-		game = new Game(screenWidth, screenHeight, gameArena, 0);
+		game = new GamePlay(screenWidth, screenHeight, gameArena, 0);
 	}
 	
 	@After
@@ -54,17 +55,12 @@ public class GameTest {
 
 	@Test
 	public void creatingNewGamePlacesShipInTheMiddleOfTheScreen() {
-		assertEquals(screenWidth/2, gameArena.getPlayer1Ship().getXCoord());
-		assertEquals(screenHeight/2, gameArena.getPlayer1Ship().getYCoord());
+		assertEquals(screenWidth/2, gameArena.getPlayerShip().getXCoord());
+		assertEquals(screenHeight/2, gameArena.getPlayerShip().getYCoord());
 	}
 
 	@Test
 	public void withGameArenaOfLevel1NewGameWith1PlanetLeftIsCreated() {
 		assertEquals(1, game.getPlanetsLeft());
 	}
-	// TODO add test methods here.
-	// The methods must be annotated with annotation @Test. For example:
-	//
-	// @Test
-	// public void hello() {}
 }

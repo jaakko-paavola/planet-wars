@@ -7,6 +7,7 @@ package planetwars.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Shape;
 import planetwars.logic.graphicobjects.Ship;
@@ -26,8 +27,10 @@ public interface GameArenaInterface {
 
 	public Shape getBoundaryRectangle();
 
-	public Ship getPlayer1Ship();
+	public Ship getPlayerShip();
 
 	public List<Torpedo> getTorpedos();
+
+	public MapLocator getMapLocator();
 	
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
+import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Shape;
 import planetwars.logic.graphicobjects.Ship;
@@ -22,13 +23,15 @@ import static planetwars.ui.PlanetWarsApplication.screenHeight;
  */
 public class StubGameArena implements GameArenaInterface {
 	private ArrayList<Planet> planets;
-	private int spaceWidth = 10000;
-	private int spaceHeight = 10000;
 	private BoundaryRectangle boundaryRectangle;
 	private List<Torpedo> torpedos;	
+	private Ship player1Ship;
+	private MapLocator mapLocator;	
+
+	private int spaceWidth = 10000;
+	private int spaceHeight = 10000;
 	private final int player1StartingXCoord = screenWidth / 2;
 	private final int player1StartingYCoord = screenHeight / 2;
-	private Ship player1Ship;
 	
 	public StubGameArena(int level) {
 		player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
@@ -39,6 +42,7 @@ public class StubGameArena implements GameArenaInterface {
 		planets.get(0).setAlive(false);
 		planets.get(0).setConquered(true);
 		torpedos = new ArrayList<Torpedo>();
+		mapLocator = new MapLocator(player1Ship, this);
 	}
 
 	@Override
@@ -59,13 +63,18 @@ public class StubGameArena implements GameArenaInterface {
 		return boundaryRectangle;
 	}
 
-	public Ship getPlayer1Ship() {
+	public Ship getPlayerShip() {
 		return this.player1Ship;
 	}
 
 	@Override
 	public List<Torpedo> getTorpedos() {
 		return torpedos;
+	}
+
+	@Override
+	public MapLocator getMapLocator() {
+		return mapLocator;
 	}
 
 }

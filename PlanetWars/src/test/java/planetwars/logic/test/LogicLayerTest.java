@@ -18,7 +18,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import planetwars.logic.Game;
+import planetwars.logic.GamePlay;
 import planetwars.logic.LogicLayer;
 import planetwars.logic.StubEngine;
 import planetwars.logic.GameEngine;
@@ -59,7 +59,7 @@ public class LogicLayerTest {
 		logicLayer.handleArrowKeyPresses(keysPressed);
 		Assert.assertEquals(-logicLayer.getGameEngine().getGame().getAccelerationFactor()
 				* logicLayer.getGameEngine().getPlayer().getPlayerShipAcceleration(), 
-				logicLayer.getGameEngine().getGameArena().getPlanets().get(0).getMovement().magnitude(), 0.1);
+				logicLayer.getGameEngine().getPlanets().get(0).getMovement().magnitude(), 0.1);
 	}	
 
 	@Test
@@ -68,7 +68,7 @@ public class LogicLayerTest {
 		logicLayer.handleArrowKeyPresses(keysPressed);
 		Assert.assertEquals(logicLayer.getGameEngine().getGame().getBrakingFactor()
 				* logicLayer.getGameEngine().getPlayer().getPlayerShipBraking(), 
-				logicLayer.getGameEngine().getGameArena().getPlanets().get(0).getMovement().magnitude(), 0.1);
+				logicLayer.getGameEngine().getPlanets().get(0).getMovement().magnitude(), 0.1);
 	}	
 
 	@Test
@@ -76,7 +76,7 @@ public class LogicLayerTest {
 		keysPressed.put(KeyCode.LEFT, Boolean.TRUE);
 		logicLayer.handleArrowKeyPresses(keysPressed);
 		Assert.assertEquals(-logicLayer.getGameEngine().getPlayer().getPlayerShipRotationSpeed(), 
-				logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getShape().getRotate(), 0.1);
+				logicLayer.getGameEngine().getPlayerShip().getShape().getRotate(), 0.1);
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class LogicLayerTest {
 		keysPressed.put(KeyCode.RIGHT, Boolean.TRUE);
 		logicLayer.handleArrowKeyPresses(keysPressed);
 		Assert.assertEquals(logicLayer.getGameEngine().getPlayer().getPlayerShipRotationSpeed(),
-				logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getShape().getRotate(), 0.1);
+				logicLayer.getGameEngine().getPlayerShip().getShape().getRotate(), 0.1);
 	}
 
 	@Test
@@ -101,18 +101,18 @@ public class LogicLayerTest {
 	public void	planetHitByTorpedoGetsDestoyed() {
 		keysPressed.put(KeyCode.SPACE, Boolean.TRUE);
 		Torpedo torpedo = logicLayer.handleFiringTorpedoBySpaceKeyPress(keysPressed);	
-		torpedo.getShape().setTranslateX(logicLayer.getGameEngine().getGameArena().getPlanets().get(0).getXCoord());
-		torpedo.getShape().setTranslateY(logicLayer.getGameEngine().getGameArena().getPlanets().get(0).getYCoord());
+		torpedo.getShape().setTranslateX(logicLayer.getGameEngine().getPlanets().get(0).getXCoord());
+		torpedo.getShape().setTranslateY(logicLayer.getGameEngine().getPlanets().get(0).getYCoord());
 		logicLayer.handleTorpedosHittingPlanets();
-		Assert.assertTrue(!logicLayer.getGameEngine().getGameArena().getPlanets().get(0).isAlive());
+		Assert.assertTrue(!logicLayer.getGameEngine().getPlanets().get(0).isAlive());
 	}
 
 	@Test
 	public void planetHitByShipGetsConquered() {
-		Planet planet = logicLayer.getGameEngine().getGameArena().getPlanets().get(0);
-		planet.getShape().setTranslateX(logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getXCoord());
-		planet.getShape().setTranslateY(logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getYCoord());
+		Planet planet = logicLayer.getGameEngine().getPlanets().get(0);
+		planet.getShape().setTranslateX(logicLayer.getGameEngine().getPlayerShip().getXCoord());
+		planet.getShape().setTranslateY(logicLayer.getGameEngine().getPlayerShip().getYCoord());
 		logicLayer.handleShipHittingPlanets();
-		Assert.assertTrue(logicLayer.getGameEngine().getGameArena().getPlanets().get(0).isConquered());
+		Assert.assertTrue(logicLayer.getGameEngine().getPlanets().get(0).isConquered());
 	}
 }

@@ -56,7 +56,7 @@ public class GameEngineTest {
 		assertEquals("mockPassword", gameEngine.getPlayer().getPassword());
 		assertEquals(1000, gameEngine.getPlayer().getPoints());
 		assertEquals(4, gameEngine.getPlayer().getLevel());
-		assertEquals(4, gameEngine.getGameArena().getPlanets().size());
+		assertEquals(4, gameEngine.getPlanets().size());
 		assertEquals(1000, gameEngine.getGame().getPoints());
 	} 
 }

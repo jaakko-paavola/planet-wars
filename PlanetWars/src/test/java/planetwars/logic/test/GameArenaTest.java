@@ -43,10 +43,4 @@ public class GameArenaTest {
 		GameArena gameArena = new GameArena(4);
 		assertEquals(4, gameArena.getPlanets().size());
 	}
-
-	// TODO add test methods here.
-	// The methods must be annotated with annotation @Test. For example:
-	//
-	// @Test
-	// public void hello() {}
 }
