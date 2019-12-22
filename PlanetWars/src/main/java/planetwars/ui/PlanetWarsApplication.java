@@ -71,7 +71,6 @@ public class PlanetWarsApplication extends Application{
 	private GameScene gameScene;
 	private Animation animation;
 	private GameEngine gameEngine;
-
 	private LogicLayer logicInterface;
 
 	public LoginScene getLoginScene() {
@@ -97,8 +96,6 @@ public class PlanetWarsApplication extends Application{
 		this.loginScene = new LoginScene(this, gameEngine);
 		primaryStage.setScene(loginScene.createAndReturnScene());
 		primaryStage.show();
-//		logicInterface.signIn("abc", "abc");
-//		initializeGameScene();
     }
 
 	/**
@@ -124,11 +121,9 @@ public class PlanetWarsApplication extends Application{
 		gameScene.getGameView().getChildren().add(gameEngine.getGameArena()
 				.getBoundaryRectangle().getShape());
 
-//		primaryStage.close();
 		animation.start();
 		primaryStage.setScene(gameScene.createAndReturnScene());
 		primaryStage.setTitle("Planet Wars");
 		primaryStage.setFullScreen(true);
-//		primaryStage.show();		
 	}
 }

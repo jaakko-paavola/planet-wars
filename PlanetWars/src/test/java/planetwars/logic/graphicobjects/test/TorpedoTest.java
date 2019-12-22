@@ -52,10 +52,10 @@ public class TorpedoTest {
 
 	@Test
 	public void creatingTorpedoMakes() {
-		Torpedo torpedo = new Torpedo((int) game.getPlayer1Ship().getShape().getTranslateX(),
-				(int) game.getPlayer1Ship().getShape().getTranslateY());
-		assertEquals(game.getPlayer1Ship().getXCoord(), torpedo.getXCoord());
-		assertEquals(game.getPlayer1Ship().getYCoord(), torpedo.getYCoord());
+		Torpedo torpedo = new Torpedo((int) gameArena.getPlayer1Ship().getShape().getTranslateX(),
+				(int) gameArena.getPlayer1Ship().getShape().getTranslateY());
+		assertEquals(gameArena.getPlayer1Ship().getXCoord(), torpedo.getXCoord());
+		assertEquals(gameArena.getPlayer1Ship().getYCoord(), torpedo.getYCoord());
 		
 	}
 

@@ -6,8 +6,11 @@
 package planetwars.logic;
 
 import java.util.ArrayList;
+import java.util.List;
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Shape;
+import planetwars.logic.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.Torpedo;
 
 /**
  *
@@ -22,5 +25,9 @@ public interface GameArenaInterface {
 	public int getSpaceHeight();
 
 	public Shape getBoundaryRectangle();
+
+	public Ship getPlayer1Ship();
+
+	public List<Torpedo> getTorpedos();
 	
 }

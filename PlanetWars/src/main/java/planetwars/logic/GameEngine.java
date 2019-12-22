@@ -94,32 +94,21 @@ public class GameEngine implements GameEngineInterface {
 		return gameArena;
 	}
 
-	public long getStartTime() {
-		return game.getStartTime();
-	}
-
-	public double getTimeLeft() {
-		return game.getTimeLeft();
-	}
-
 	public Ship getPlayerShip() {
-		return game.getPlayer1Ship();
+		return gameArena.getPlayer1Ship();
 	}
 
 	public BoundaryRectangle getBoundaryRectangle() {
 		return gameArena.getBoundaryRectangle();
 	}
 
-	public long getPoints() {
-		return game.getPoints();
-	}
 	
 	public int getPlayer1StartingXCoord() {
-		return game.getPlayer1StartingXCoord();
+		return gameArena.getPlayer1StartingXCoord();
 	}
 
 	public int getPlayer1StartingYCoord() {
-		return game.getPlayer1StartingYCoord();
+		return gameArena.getPlayer1StartingYCoord();
 	}
 	
 	@Override
@@ -127,7 +116,19 @@ public class GameEngine implements GameEngineInterface {
 		return game;
 	}
 
+	public long getStartTime() {
+		return game.getStartTime();
+	}
+
+	public double getTimeLeft() {
+		return game.getTimeLeft();
+	}
+	
 	public MapLocator getMapLocator() {
 		return game.getMapLocator();
+	}
+
+	public long getPoints() {
+		return game.getPoints();
 	}
 }

@@ -23,7 +23,7 @@ public class StubEngine implements GameEngineInterface {
 	
 	public StubEngine() {
 		this.player = new Player("mockUser", "mockPassword", 1000, 3);
-		this.gameArena = new StubGameArena(player.getLevel(), this);
+		this.gameArena = new StubGameArena(player.getLevel());
 		this.game = new Game(800, 600, gameArena, player.getPoints());
 	}
 
@@ -42,7 +42,7 @@ public class StubEngine implements GameEngineInterface {
 
 	@Override
 	public Ship getPlayerShip() {
-		return game.getPlayer1Ship();
+		return gameArena.getPlayer1Ship();
 	}
 
 	@Override

@@ -22,17 +22,15 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class Game {
-	private Ship player1Ship;
-	private List<Torpedo> torpedos;	
 	private MapLocator mapLocator;	
+	private GameArenaInterface gameArena;	
 	private int points;
 	private int timePerLevel = 60;
 	private final double accelerationFactor = 0.005;
 	private final double brakingFactor = 0.001;
 	private double timeLeft;
-	private final static int player1StartingXCoord = screenWidth / 2;
-	private final static int player1StartingYCoord = screenHeight / 2;
-	private GameArenaInterface gameArena;	
+	private long startTime = 0;
+	private int planetsLeft;
 	
 	/**
 	 * Sets the settings for the current game.
@@ -45,9 +43,7 @@ public class Game {
 	public Game(int screenWidth, int screenHeight, GameArenaInterface gameArena, int points) {
 		this.gameArena = gameArena;
 		this.planetsLeft = gameArena.getPlanets().size();
-		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
-		this.mapLocator = new MapLocator(player1Ship, gameArena);
-		this.torpedos = new ArrayList<>();
+		this.mapLocator = new MapLocator(gameArena.getPlayer1Ship(), gameArena);
 		this.points = points;
 		this.timeLeft = timePerLevel;
 	}
@@ -62,15 +58,6 @@ public class Game {
 
 	public double getBrakingFactor() {
 		return brakingFactor;
-	}
-
-
-	public static int getPlayer1StartingXCoord() {
-		return player1StartingXCoord;
-	}
-
-	public static int getPlayer1StartingYCoord() {
-		return player1StartingYCoord;
 	}
 
 	public void setPreviousTorpedoFired(long previousTorpedoFired) {
@@ -97,8 +84,6 @@ public class Game {
 	public void setStartTime(long startTime) {
 		this.startTime = startTime;
 	}
-	private long startTime = 0;
-	private int planetsLeft;
 
 	public void setPoints(int points) {
 		this.points = points;
@@ -116,17 +101,8 @@ public class Game {
 		return planetsLeft;
 	}
 	
-	public Ship getPlayer1Ship() {
-		return player1Ship;
-	}	
-
 	public MapLocator getMapLocator() {
 		return mapLocator;
 	}
-
-	public List<Torpedo> getTorpedos() {
-		return torpedos;
-	}
-	
 }
 

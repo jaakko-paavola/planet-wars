@@ -76,11 +76,11 @@ public class LogicLayer {
 	}
 	
 	private Torpedo fireTorpedo() {
-		Torpedo torpedo = new Torpedo((int) game.getPlayer1Ship().getShape().getTranslateX(),
-				(int) game.getPlayer1Ship().getShape().getTranslateY());
-		torpedo.getShape().setRotate(game.getPlayer1Ship().getShape().getRotate());
-		game.getTorpedos().add(torpedo);
-		torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), player.getPlayerTorpedoAcceleration(), game.getAccelerationFactor(), frameRateForSpeedoMeter);
+		Torpedo torpedo = new Torpedo((int) gameArena.getPlayer1Ship().getShape().getTranslateX(),
+				(int) gameArena.getPlayer1Ship().getShape().getTranslateY());
+		torpedo.getShape().setRotate(gameArena.getPlayer1Ship().getShape().getRotate());
+		gameArena.getTorpedos().add(torpedo);
+		torpedo.accelerateInReferenceTo(gameArena.getPlayer1Ship(), player.getPlayerTorpedoAcceleration(), game.getAccelerationFactor(), frameRateForSpeedoMeter);
 		torpedo.setMovement(torpedo.getMovement().multiply(player.getPlayerTorpedoSpeedMultiplier()), frameRateForSpeedoMeter);
 		game.setPreviousTorpedoFired(System.currentTimeMillis());
 		accelerateShip(player.getPlayerShipBraking());
@@ -96,7 +96,7 @@ public class LogicLayer {
 	
 	public ArrayList<Planet> handleTorpedosHittingPlanets() {
 		ArrayList<Planet> destroyedPlanets = new ArrayList<Planet>();
-		game.getTorpedos().forEach(torpedo -> {
+		gameArena.getTorpedos().forEach(torpedo -> {
 			gameArena.getPlanets().forEach(planet -> {
 				if (torpedo.collide(planet)) {
 					torpedo.setAlive(false);
@@ -118,7 +118,7 @@ public class LogicLayer {
 	
 	
 	public void handleTorpedosHittingBoundary() {
-		game.getTorpedos().forEach(torpedo -> {
+		gameArena.getTorpedos().forEach(torpedo -> {
 			if (!torpedo.collide(gameEngine.getBoundaryRectangle())) {
 				torpedo.setAlive(false);
 			}
@@ -126,9 +126,9 @@ public class LogicLayer {
 	}
 
 	public List<Torpedo> removeTorpedosHittingPlanetsOrBoundary() {
-		List<Torpedo> torpedosToBeRemoved = game.getTorpedos().stream()
+		List<Torpedo> torpedosToBeRemoved = gameArena.getTorpedos().stream()
 				.filter(torpedo -> !torpedo.isAlive()).collect(Collectors.toList());
-		game.getTorpedos().removeAll(game.getTorpedos().stream()
+		gameArena.getTorpedos().removeAll(gameArena.getTorpedos().stream()
 						.filter(torpedo -> !torpedo.isAlive())
 						.collect(java.util.stream.Collectors.toList()));
 		return torpedosToBeRemoved;
@@ -154,7 +154,7 @@ public class LogicLayer {
 	}
 
 	public void moveMovableGraphicObjects() {
-		game.getTorpedos().forEach(torpedo -> torpedo.move());
+		gameArena.getTorpedos().forEach(torpedo -> torpedo.move());
 		game.getMapLocator().move();
 		gameArena.getBoundaryRectangle().move();
 		gameArena.getPlanets().forEach(planet -> planet.move());
@@ -165,7 +165,7 @@ public class LogicLayer {
 	public ArrayList<Planet> handleShipHittingPlanets() {
 		ArrayList<Planet> conqueredPlanets = new ArrayList<Planet>();
 		gameArena.getPlanets().forEach(planet -> {
-			if (game.getPlayer1Ship().collide(planet)) {
+			if (gameArena.getPlayer1Ship().collide(planet)) {
 				if (planet.isAlive() && !planet.isConquered()) {
 					game.setPoints(game.getPoints() + 1000);
 					game.setPlanetsLeft(game.getPlanetsLeft() - 1);
@@ -179,15 +179,15 @@ public class LogicLayer {
 	}
 
 	public void accelerateShip(int acceleration) {
-		game.getMapLocator().accelerateInReferenceTo(game.getPlayer1Ship(), acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
-		gameArena.getBoundaryRectangle().accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+		game.getMapLocator().accelerateInReferenceTo(gameArena.getPlayer1Ship(), acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+		gameArena.getBoundaryRectangle().accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
 
 		for (Planet planet : gameArena.getPlanets()) {
-			planet.accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
-			planet.getMapViewPlanet().accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+			planet.accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+			planet.getMapViewPlanet().accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
 		}
-		for (Torpedo torpedo : game.getTorpedos()) {
-			torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+		for (Torpedo torpedo : gameArena.getTorpedos()) {
+			torpedo.accelerateInReferenceTo(gameArena.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
 		}
 	}
 
@@ -208,7 +208,7 @@ public class LogicLayer {
 	}
 	
 	public boolean hasFlownOutOfBounds() throws InterruptedException, Exception {
-		if (!game.getPlayer1Ship().collide(gameArena.getBoundaryRectangle())) {
+		if (!gameArena.getPlayer1Ship().collide(gameArena.getBoundaryRectangle())) {
 			return true;
 		}
 		return false;

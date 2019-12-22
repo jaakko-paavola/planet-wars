@@ -11,6 +11,8 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
 import planetwars.logic.graphicobjects.Planet;
+import planetwars.logic.graphicobjects.Ship;
+import planetwars.logic.graphicobjects.Torpedo;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
 import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
@@ -25,6 +27,10 @@ public class GameArena implements GameArenaInterface {
 	private int spaceHeight = 10000;	
 	private ArrayList<Planet> planets;
 	private BoundaryRectangle boundaryRectangle;
+	private Ship player1Ship;
+	private List<Torpedo> torpedos;	
+	private final static int player1StartingXCoord = screenWidth / 2;
+	private final static int player1StartingYCoord = screenHeight / 2;
 	
 	/**
 	 * Creates a new game arena with the number of planets decided by the
@@ -35,6 +41,8 @@ public class GameArena implements GameArenaInterface {
 	 */	
 	public GameArena(int level) {
 		planets = new ArrayList<>();
+		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
+		this.torpedos = new ArrayList<>();
 
 		for (int i = 0; i < level; i++) {
 			planets.add(new Planet(new Random().nextInt(spaceWidth / 2 - 100) + 50,
@@ -64,5 +72,21 @@ public class GameArena implements GameArenaInterface {
 	@Override
 	public ArrayList<Planet> getPlanets() {
 		return planets;
+	}
+	
+	public static int getPlayer1StartingXCoord() {
+		return player1StartingXCoord;
+	}
+
+	public static int getPlayer1StartingYCoord() {
+		return player1StartingYCoord;
+	}
+	
+	public Ship getPlayer1Ship() {
+		return player1Ship;
+	}	
+	
+	public List<Torpedo> getTorpedos() {
+		return torpedos;
 	}
 }

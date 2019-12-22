@@ -76,7 +76,7 @@ public class LogicLayerTest {
 		keysPressed.put(KeyCode.LEFT, Boolean.TRUE);
 		logicLayer.handleArrowKeyPresses(keysPressed);
 		Assert.assertEquals(-logicLayer.getGameEngine().getPlayer().getPlayerShipRotationSpeed(), 
-				logicLayer.getGameEngine().getGame().getPlayer1Ship().getShape().getRotate(), 0.1);
+				logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getShape().getRotate(), 0.1);
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class LogicLayerTest {
 		keysPressed.put(KeyCode.RIGHT, Boolean.TRUE);
 		logicLayer.handleArrowKeyPresses(keysPressed);
 		Assert.assertEquals(logicLayer.getGameEngine().getPlayer().getPlayerShipRotationSpeed(),
-				logicLayer.getGameEngine().getGame().getPlayer1Ship().getShape().getRotate(), 0.1);
+				logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getShape().getRotate(), 0.1);
 	}
 
 	@Test
@@ -98,23 +98,20 @@ public class LogicLayerTest {
 	}
 
 	@Test
-	public void	torpodeHittingPlanetDiesAndPlanetGetsDestoyed() {
+	public void	planetHitByTorpedoGetsDestoyed() {
 		keysPressed.put(KeyCode.SPACE, Boolean.TRUE);
 		Torpedo torpedo = logicLayer.handleFiringTorpedoBySpaceKeyPress(keysPressed);	
 		torpedo.getShape().setTranslateX(logicLayer.getGameEngine().getGameArena().getPlanets().get(0).getXCoord());
 		torpedo.getShape().setTranslateY(logicLayer.getGameEngine().getGameArena().getPlanets().get(0).getYCoord());
 		logicLayer.handleTorpedosHittingPlanets();
-		Assert.assertTrue(torpedo.isAlive());
-		Planet planet = logicLayer.getGameEngine().getGameArena().getPlanets().get(0);
-		Assert.assertTrue(!planet.isAlive());
+		Assert.assertTrue(!logicLayer.getGameEngine().getGameArena().getPlanets().get(0).isAlive());
 	}
 
 	@Test
 	public void planetHitByShipGetsConquered() {
-		Game game = logicLayer.getGameEngine().getGame();
 		Planet planet = logicLayer.getGameEngine().getGameArena().getPlanets().get(0);
-		planet.getShape().setTranslateX(game.getPlayer1Ship().getXCoord());
-		planet.getShape().setTranslateY(game.getPlayer1Ship().getYCoord());
+		planet.getShape().setTranslateX(logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getXCoord());
+		planet.getShape().setTranslateY(logicLayer.getGameEngine().getGameArena().getPlayer1Ship().getYCoord());
 		logicLayer.handleShipHittingPlanets();
 		Assert.assertTrue(logicLayer.getGameEngine().getGameArena().getPlanets().get(0).isConquered());
 	}

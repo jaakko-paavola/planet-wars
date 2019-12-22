@@ -54,8 +54,8 @@ public class GameTest {
 
 	@Test
 	public void creatingNewGamePlacesShipInTheMiddleOfTheScreen() {
-		assertEquals(screenWidth/2, game.getPlayer1Ship().getXCoord());
-		assertEquals(screenHeight/2, game.getPlayer1Ship().getYCoord());
+		assertEquals(screenWidth/2, gameArena.getPlayer1Ship().getXCoord());
+		assertEquals(screenHeight/2, gameArena.getPlayer1Ship().getYCoord());
 	}
 
 	@Test
