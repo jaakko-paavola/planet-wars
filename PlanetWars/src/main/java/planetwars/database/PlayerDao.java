@@ -107,6 +107,16 @@ public class PlayerDao implements Dao<Player, String> {
 		}
 	}
 
+	@Override
+	public void delete(String username) throws SQLException, Exception {
+		try (Connection conn = database.getConnection()) {
+			PreparedStatement stmt = conn.prepareStatement(
+					"Delete FROM Player WHERE username = ?");
+			stmt.setString(1, username);
+			stmt.executeUpdate();
+		}		
+	}
+
 	/**
 	 * Checks if Player table exists and creates it if it does not.
 	 * @throws SQLException

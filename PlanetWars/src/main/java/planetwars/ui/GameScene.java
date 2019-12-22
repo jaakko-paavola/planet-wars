@@ -30,7 +30,7 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  */
 public class GameScene {
 	private Text textMessage = new Text(10, 20, "");
-	private Text textCoordinates = new Text(10, 20, "Coordinates: 0.0");
+//	private Text textCoordinates = new Text(10, 20, "Coordinates: 0.0");
 	private Text textSpeed = new Text(10, 20, "Speed: 0.0");
 	private Text textPoints = new Text(10, 20, "Points: 0");
 	private Text textTimer = new Text(10, 20, "Time left: 0");
@@ -46,9 +46,9 @@ public class GameScene {
 		this.textMessage.setText(textMessage);
 	}
 
-	public void setTextCoordinates(String textCoordinates) {
-		this.textCoordinates.setText(textCoordinates);
-	}
+//	public void setTextCoordinates(String textCoordinates) {
+//		this.textCoordinates.setText(textCoordinates);
+//	}
 
 	public void setTextSpeed(String textSpeed) {
 		this.textSpeed.setText(textSpeed);
@@ -94,7 +94,7 @@ public class GameScene {
 		textPlayerName.setFill(Color.WHITE);
 		textLevel.setText("Level: " + Integer.toString(gameEngine.getPlayerLevel()));
 		textLevel.setFill(Color.WHITE);
-		textCoordinates.setFill(Color.WHITE);
+//		textCoordinates.setFill(Color.WHITE);
 		textSpeed.setFill(Color.WHITE);
 		textPoints.setFill(Color.WHITE);
 		textPoints.setText("Points: " + gameEngine.getPlayerPoints());
@@ -106,7 +106,7 @@ public class GameScene {
 		gridPane.add(textMessage, 1, 1);
 		gridPane.add(textPlayerName, 2, 1);
 		gridPane.add(textLevel, 3, 1);
-		gridPane.add(textCoordinates, 4, 1);
+//		gridPane.add(textCoordinates, 4, 1);
 		gridPane.add(textSpeed, 5, 1);
 		gridPane.add(textPoints, 6, 1);
 		gridPane.add(textTimer, 7, 1);

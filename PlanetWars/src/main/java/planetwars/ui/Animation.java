@@ -118,8 +118,8 @@ public class Animation extends javafx.animation.AnimationTimer {
 		gameScene.setTextSpeed("Speed: " + logicInterface.round(Math.sqrt(
 						Math.pow(gameEngine.getBoundaryRectangle().getXSpeed(gameEngine.getPlayerShip()), 2)
 						+ Math.pow(gameEngine.getBoundaryRectangle().getYSpeed(gameEngine.getPlayerShip()), 2)) / 1000, 1));
-		gameScene.setTextCoordinates("Coordinates: " + (-gameEngine.getBoundaryRectangle().getXCoord() + gameEngine.getPlayer1StartingXCoord())
-						+ "." + (-gameEngine.getBoundaryRectangle().getYCoord() + gameEngine.getPlayer1StartingYCoord()));
+//		gameScene.setTextCoordinates("Coordinates: " + (-gameEngine.getBoundaryRectangle().getXCoord() + gameEngine.getPlayer1StartingXCoord())
+//						+ "." + (-gameEngine.getBoundaryRectangle().getYCoord() + gameEngine.getPlayer1StartingYCoord()));
 		gameScene.setTextTimer("Time left: " + timeLeft);
 	}
 

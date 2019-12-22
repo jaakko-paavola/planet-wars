@@ -29,7 +29,29 @@ public class Game {
 	private int timePerLevel = 60;
 	private final double accelerationFactor = 0.005;
 	private final double brakingFactor = 0.001;
-
+	private double timeLeft;
+	private final static int player1StartingXCoord = screenWidth / 2;
+	private final static int player1StartingYCoord = screenHeight / 2;
+	private GameArenaInterface gameArena;	
+	
+	/**
+	 * Sets the settings for the current game.
+	 *
+	 * @param screenWidth The width of the screen in pixels.
+	 * @param screenHeight The height of the screen in pixels.
+	 * @param gameArena The game arena created for the game.
+	 * @param points The points in the current game.
+	 */
+	public Game(int screenWidth, int screenHeight, GameArenaInterface gameArena, int points) {
+		this.gameArena = gameArena;
+		this.planetsLeft = gameArena.getPlanets().size();
+		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
+		this.mapLocator = new MapLocator(player1Ship, gameArena);
+		this.torpedos = new ArrayList<>();
+		this.points = points;
+		this.timeLeft = timePerLevel;
+	}
+	
 	public int getTimePerLevel() {
 		return timePerLevel;
 	}
@@ -41,16 +63,13 @@ public class Game {
 	public double getBrakingFactor() {
 		return brakingFactor;
 	}
-	private double timeLeft;
-	private int player1StartingXCoord;
-	private int player1StartingYCoord;
-	private GameArena gameArena;
 
-	public int getPlayer1StartingXCoord() {
+
+	public static int getPlayer1StartingXCoord() {
 		return player1StartingXCoord;
 	}
 
-	public int getPlayer1StartingYCoord() {
+	public static int getPlayer1StartingYCoord() {
 		return player1StartingYCoord;
 	}
 
@@ -87,25 +106,6 @@ public class Game {
 
 	public int getPoints() {
 		return points;
-	}
-
-	/**
-	 * Sets the settings for the current game.
-	 * @param screenWidth The width of the screen in pixels.
-	 * @param screenHeight The height of the screen in pixels.
-	 * @param gameArena The game arena created for the game.
-	 * @param points The points in the current game.
-	 */
-	public Game(int screenWidth, int screenHeight, GameArena gameArena, int points) {
-		this.gameArena = gameArena;
-		this.planetsLeft = gameArena.getPlanets().size();
-		this.player1StartingXCoord = screenWidth / 2; 
-		this.player1StartingYCoord = screenHeight / 2; 
-		this.player1Ship = new Ship(player1StartingXCoord, player1StartingYCoord);
-		this.mapLocator = new MapLocator(player1Ship, gameArena);
-        this.torpedos = new ArrayList<>();
-		this.points = points;
-		this.timeLeft = timePerLevel;
 	}
 
 	public void setPlanetsLeft(int planetsLeft) {

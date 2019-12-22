@@ -20,10 +20,35 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * the player is on.
  * @author jaakkpaa
  */
-public class GameArena {
+public class GameArena implements GameArenaInterface {
 	private int spaceWidth = 10000;
 	private int spaceHeight = 10000;	
+	private ArrayList<Planet> planets;
+	private BoundaryRectangle boundaryRectangle;
+	
+	/**
+	 * Creates a new game arena with the number of planets decided by the
+	 * player's level. The planets are placed in random locations in the game
+	 * arena having random sizes and colors.
+	 *
+	 * @param level The player's level.
+	 */	
+	public GameArena(int level) {
+		planets = new ArrayList<>();
 
+		for (int i = 0; i < level; i++) {
+			planets.add(new Planet(new Random().nextInt(spaceWidth / 2 - 100) + 50,
+					new Random().nextInt(spaceHeight / 2 - 100) + 50,
+					new Random().nextInt(80) + 20,
+					Color.rgb(new Random().nextInt(200) + 56,
+							new Random().nextInt(200) + 56,
+							new Random().nextInt(200) + 56), spaceWidth, spaceHeight));
+		}
+
+		boundaryRectangle = new BoundaryRectangle(Color.RED, spaceWidth, spaceHeight);
+		boundaryRectangle.getShape().setFill(Color.TRANSPARENT);
+	}
+	
 	public int getSpaceWidth() {
 		return spaceWidth;
 	}
@@ -31,36 +56,12 @@ public class GameArena {
 	public int getSpaceHeight() {
 		return spaceHeight;
 	}
-	
-	private ArrayList<Planet> planets;
-	private BoundaryRectangle boundaryRectangle;
-
-	/**
-	 * Creates a new game arena with the number of planets decided by the player's
-	 * level. The planets are placed in random locations in the game arena having
-	 * random sizes and colors.
-	 * @param level The player's level.
-	 */
-	public GameArena(int level) {
-		planets = new ArrayList<>();
-		
-		for (int i = 0; i < level; i++) {
-			planets.add(new Planet(new Random().nextInt(spaceWidth / 2 - 100) + 50, 
-							new Random().nextInt(spaceHeight / 2 - 100) + 50, 
-							new Random().nextInt(80) + 20, 
-							Color.rgb(new Random().nextInt(200) + 56,
-									new Random().nextInt(200) + 56,
-									new Random().nextInt(200) + 56), spaceWidth, spaceHeight));	
-		}
-		
-		boundaryRectangle = new BoundaryRectangle(Color.RED, spaceWidth, spaceHeight);
-		boundaryRectangle.getShape().setFill(Color.TRANSPARENT);
-	}
 
 	public BoundaryRectangle getBoundaryRectangle() {
 		return boundaryRectangle;
 	}
 	
+	@Override
 	public ArrayList<Planet> getPlanets() {
 		return planets;
 	}

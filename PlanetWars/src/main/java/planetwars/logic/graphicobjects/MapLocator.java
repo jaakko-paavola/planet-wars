@@ -10,6 +10,7 @@ import planetwars.ui.PlanetWarsApplication;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import planetwars.logic.GameArenaInterface;
 import static planetwars.ui.PlanetWarsApplication.mapHeight;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
@@ -20,9 +21,9 @@ import static planetwars.ui.PlanetWarsApplication.screenWidth;
  * @author jaakkpaa
  */
 public class MapLocator extends Shape {
-	private GameArena gameArena;
+	private GameArenaInterface gameArena;
 	
-    public MapLocator(Ship player1Ship, GameArena gameArena) {
+    public MapLocator(Ship player1Ship, GameArenaInterface gameArena) {
 	    super(new Rectangle((player1Ship.getXCoord() / gameArena.getSpaceWidth()) * mapWidth, 
 			(player1Ship.getYCoord() / gameArena.getSpaceHeight()) * mapHeight, 
 			(int) Math.round((1.0 * screenWidth / gameArena.getSpaceWidth()) * mapWidth), 

@@ -29,27 +29,26 @@ import java.util.stream.Stream;
  *
  * @author jaakkpaa
  */
-public class LogicLayer implements Logic {
+public class LogicLayer {
 	private Game game;
-	private GameArena gameArena;
-	private Engine gameEngine;
-
-	public int getFrameRateForSpeedoMeter() {
-		return frameRateForSpeedoMeter;
-	}
+	private GameArenaInterface gameArena;
+	private GameEngineInterface gameEngine;
 	private final int frameRateForSpeedoMeter = 10000;
-
-	@Override
-	public Engine getGameEngine() {
-		return gameEngine;
-	}
 	private Player player;
 
-	public LogicLayer(Engine gameEngine) throws Exception {
-		this.gameEngine = gameEngine;	
+	public LogicLayer(GameEngineInterface gameEngine) throws Exception {
+		this.gameEngine = gameEngine;
 		this.game = gameEngine.getGame();
 		this.gameArena = gameEngine.getGameArena();
 		this.player = gameEngine.getPlayer();
+	}
+	
+	public int getFrameRateForSpeedoMeter() {
+		return frameRateForSpeedoMeter;
+	}
+
+	public GameEngineInterface getGameEngine() {
+		return gameEngine;
 	}
 
 	public void handleArrowKeyPresses(Map<KeyCode, Boolean> keysPressed) {
@@ -179,7 +178,6 @@ public class LogicLayer implements Logic {
 		return conqueredPlanets;
 	}
 
-	@Override
 	public void accelerateShip(int acceleration) {
 		game.getMapLocator().accelerateInReferenceTo(game.getPlayer1Ship(), acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
 		gameArena.getBoundaryRectangle().accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);

@@ -5,25 +5,22 @@
  */
 package planetwars.logic;
 
+import java.util.ArrayList;
+import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Shape;
-import planetwars.logic.graphicobjects.Ship;
 
 /**
  *
  * @author jaakkpaa
  */
-public interface Engine {
+public interface GameArenaInterface {
 
-	Game getGame();
+	ArrayList<Planet> getPlanets();
 
-	GameArena getGameArena();
+	public int getSpaceWidth();
 
-	Player getPlayer();
-
-	public Ship getPlayerShip();
+	public int getSpaceHeight();
 
 	public Shape getBoundaryRectangle();
-
-	public long getStartTime();
 	
 }

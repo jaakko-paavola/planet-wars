@@ -15,15 +15,15 @@ import planetwars.ui.PlanetWarsApplication;
  *
  * @author jaakkpaa
  */
-public class StubEngine implements Engine {
+public class StubEngine implements GameEngineInterface {
 
 	private Player player;
 	private Game game;
-	private GameArena gameArena;
+	private StubGameArena gameArena;
 	
 	public StubEngine() {
 		this.player = new Player("mockUser", "mockPassword", 1000, 3);
-		this.gameArena = new GameArena(player.getLevel());
+		this.gameArena = new StubGameArena(player.getLevel(), this);
 		this.game = new Game(800, 600, gameArena, player.getPoints());
 	}
 
@@ -35,7 +35,8 @@ public class StubEngine implements Engine {
 		return game;
 	}
 
-	public GameArena getGameArena() {
+	@Override
+	public StubGameArena getGameArena() {
 		return gameArena;
 	}
 

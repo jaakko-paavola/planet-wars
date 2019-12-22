@@ -84,6 +84,7 @@ public class LoginScene {
 				application.getPrimaryStage().setTitle(ex.getMessage());
 			}
 		});	
+		application.getPrimaryStage().setTitle("Planet Wars login");
 		return new Scene(paneSignIn);
 	}
 }

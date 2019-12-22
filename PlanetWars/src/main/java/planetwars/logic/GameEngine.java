@@ -16,34 +16,31 @@ import planetwars.ui.PlanetWarsApplication;
  *
  * @author jaakkpaa
  */
-public class GameEngine implements Engine {
+public class GameEngine implements GameEngineInterface {
 	private PlayerDao playerDao;
 	private PlanetWarsApplication gui;
 	private Player player;
 	private Database database;
 	private Game game;
 	private GameArena gameArena;
-
-	@Override
-	public Player getPlayer() {
-		return player;
-	}
-
-	@Override
-	public Game getGame() {
-		return game;
-	}
-
-	@Override
-	public GameArena getGameArena() {
-		return gameArena;
-	}
 	
 	public GameEngine(PlanetWarsApplication gui) throws Exception {
 		this.database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
 		this.playerDao = new PlayerDao(database);
 		this.gui = gui;
 	}
+	
+	public void initializeDatabase() {
+		playerDao.createTableIfNotExist();
+	}
+
+	public Player getPlayerFromDb(String userName) throws Exception {
+		return playerDao.findOne(userName);
+	}	
+
+	public void saveGame(Player player) throws Exception {
+		playerDao.saveOrUpdate(player);
+	}	
 	
 	public void signUp(String textFieldUsername, String textFieldPassword) throws Exception {
 		Player findOne;
@@ -64,16 +61,16 @@ public class GameEngine implements Engine {
 		}
 	}
 
-	public void initializeDatabase() {
-		playerDao.createTableIfNotExist();
-		
+	public void newGame(int screenWidth, int screenHeight) {
+		this.player = new Player(player.getUsername(), player.getPassword(),
+				player.getPoints(), player.getLevel());
+		this.gameArena = new GameArena(player.getLevel());
+		this.game = new Game(screenWidth, screenHeight, gameArena, player.getPoints());
 	}
-
-	public Player getPlayer(String userName) throws Exception {
-		return playerDao.findOne(userName);
-	}
-	public MapLocator getMapLocator() {
-		return game.getMapLocator();
+	
+	@Override
+	public Player getPlayer() {
+		return player;
 	}
 
 	public int getPlayerLevel() {
@@ -86,6 +83,15 @@ public class GameEngine implements Engine {
 
 	public int getPlayerPoints() {
 		return player.getPoints();
+	}
+	
+	public Player.Rank getPlayerRank() {
+		return player.getRank();
+	}
+
+	@Override
+	public GameArena getGameArena() {
+		return gameArena;
 	}
 
 	public long getStartTime() {
@@ -107,21 +113,6 @@ public class GameEngine implements Engine {
 	public long getPoints() {
 		return game.getPoints();
 	}
-
-	public void saveGame(Player player) throws Exception {
-		playerDao.saveOrUpdate(player);
-	}
-
-	public void newGame(int screenWidth, int screenHeight) {
-		this.player = new Player(player.getUsername(), player.getPassword(), 
-				player.getPoints(), player.getLevel());
-		this.gameArena = new GameArena(player.getLevel());
-		this.game = new Game(screenWidth, screenHeight, gameArena, player.getPoints());
-	}	
-
-	public Player.Rank getPlayerRank() {
-		return player.getRank();
-	}
 	
 	public int getPlayer1StartingXCoord() {
 		return game.getPlayer1StartingXCoord();
@@ -129,5 +120,14 @@ public class GameEngine implements Engine {
 
 	public int getPlayer1StartingYCoord() {
 		return game.getPlayer1StartingYCoord();
+	}
+	
+	@Override
+	public Game getGame() {
+		return game;
+	}
+
+	public MapLocator getMapLocator() {
+		return game.getMapLocator();
 	}
 }

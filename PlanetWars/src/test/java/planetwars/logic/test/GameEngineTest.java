@@ -11,12 +11,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import planetwars.database.Database;
+import planetwars.database.PlayerDao;
+import planetwars.logic.GameEngine;
+import planetwars.logic.Player;
+import planetwars.logic.StubEngine;
+import planetwars.ui.PlanetWarsApplication;
 
 /**
  *
  * @author jaakkpaa
  */
 public class GameEngineTest {
+	private GameEngine gameEngine;
 	
 	public GameEngineTest() {
 	}
@@ -30,16 +37,26 @@ public class GameEngineTest {
 	}
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
+		gameEngine = new GameEngine(new PlanetWarsApplication());
+		gameEngine.saveGame(new Player("mockUsername", "mockPassword", 1000, 4));
+		gameEngine.signIn("mockUsername", "mockPassword");
 	}
 	
 	@After
-	public void tearDown() {
+	public void tearDown() throws Exception {
+		PlayerDao playerDao = new PlayerDao(new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db"));
+		playerDao.delete("mockUsername");
 	}
 
-	// TODO add test methods here.
-	// The methods must be annotated with annotation @Test. For example:
-	//
-	// @Test
-	// public void hello() {}
+	@Test
+	public void newGame() {
+		gameEngine.newGame(800, 600);
+		assertEquals("mockUsername", gameEngine.getPlayer().getUsername());
+		assertEquals("mockPassword", gameEngine.getPlayer().getPassword());
+		assertEquals(1000, gameEngine.getPlayer().getPoints());
+		assertEquals(4, gameEngine.getPlayer().getLevel());
+		assertEquals(4, gameEngine.getGameArena().getPlanets().size());
+		assertEquals(1000, gameEngine.getGame().getPoints());
+	} 
 }

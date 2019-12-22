@@ -19,6 +19,9 @@ import static org.junit.Assert.*;
  * @author jaakkpaa
  */
 public class PlayerDaoTest {
+	Database database;
+	PlayerDao playerDao;
+	Player player;
 	
 	public PlayerDaoTest() {
 	}
@@ -32,7 +35,9 @@ public class PlayerDaoTest {
 	}
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
+		database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
+		playerDao = new PlayerDao(database);
 	}
 	
 	@After
@@ -40,39 +45,48 @@ public class PlayerDaoTest {
 	}
 
 	@Test
-	public void savingAndUpdatingPlayerWorksCorrectly() throws Exception {
-		Database database = new Database("org.sqlite.JDBC", "jdbc:sqlite:planetwars.db");
-		PlayerDao playerDao = new PlayerDao(database);
-
-		Player player = new Player("testUsername", "testPassword", 400, 3);
+	public void creatingAndUpdatingPlayerWorksCorrectly() throws Exception {
+		playerDao.createTableIfNotExist();
+		
+		player = new Player("testUsername1", "testPassword");
 		playerDao.saveOrUpdate(player);
-		Player playerFetched = playerDao.findOne("testUsername");
-		assertEquals("testUsername", playerFetched.getUsername());
+		Player playerFetched = playerDao.findOne("testUsername1");
+		assertEquals("testUsername1", playerFetched.getUsername());
+		assertEquals("testPassword", playerFetched.getPassword());
+		assertEquals(0, playerFetched.getPoints());
+		assertEquals(1, playerFetched.getLevel());
+		
+		player = new Player("testUsername1", "testPassword", 400, 3);
+		playerDao.saveOrUpdate(player);
+		playerFetched = playerDao.findOne("testUsername1");
+		assertEquals("testUsername1", playerFetched.getUsername());
 		assertEquals("testPassword", playerFetched.getPassword());
 		assertEquals(400, playerFetched.getPoints());
 		assertEquals(3, playerFetched.getLevel());
 		
-		player = new Player("testUsername", "testPassword", 600, 4);
+		player = new Player("testUsername1", "testPassword", 600, 4);
 		playerDao.saveOrUpdate(player);
-		playerFetched = playerDao.findOne("testUsername");
-		assertEquals("testUsername", playerFetched.getUsername());
+		playerFetched = playerDao.findOne("testUsername1");
+		assertEquals("testUsername1", playerFetched.getUsername());
 		assertEquals("testPassword", playerFetched.getPassword());
 		assertEquals(600, playerFetched.getPoints());
 		assertEquals(4, playerFetched.getLevel());
-
-		int nextInt = new Random().nextInt(1000);
-		player = new Player("testUsername" + nextInt, "testPassword");
-		playerDao.saveOrUpdate(player);
-		playerFetched = playerDao.findOne("testUsername" + nextInt);
-		assertEquals("testUsername" + nextInt, playerFetched.getUsername());
-		assertEquals("testPassword", playerFetched.getPassword());
-		assertEquals(0, playerFetched.getPoints());
-		assertEquals(1, playerFetched.getLevel());
 	}
 
-	// TODO add test methods here.
-	// The methods must be annotated with annotation @Test. For example:
-	//
-	// @Test
-	// public void hello() {}
+	@Test
+	public void fetchingNonExistingUserAndDeletingWorksAsExpected() throws Exception {	
+		Player findOne = null;
+		try {
+			findOne = playerDao.findOne("nonExistingUserName");
+		} catch (Exception e) {
+			assertEquals(null, findOne);
+		}
+
+		playerDao.delete("testUsername1");
+		try {
+			findOne = playerDao.findOne("testUsername1");
+		} catch (Exception e) {
+			assertEquals(null, findOne);
+		}		
+	}
 }
