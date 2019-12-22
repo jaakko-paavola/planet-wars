@@ -29,8 +29,9 @@ Sovellus käyttää tietokantatiedostoa planetwars.db oikean pelidatan tallentam
 
 ### Päätoiminnallisuudet
 #### Käyttäjän kirjautuminen, pelin jatkaminen käyttäjän tasolta sekä tallennus
-<img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio.jpg" width="160">
+<img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio%20signin.jpg" width="160">
 
-#### Muut toiminnallisuudet
+#### Uuden käyttäjän luominen
+<img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/sekvenssikaavio%20signup.jpg" width="160">
 
 ## Ohjelman rakenteeseen jääneet heikkoudet
