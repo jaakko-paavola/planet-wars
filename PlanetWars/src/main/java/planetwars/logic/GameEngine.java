@@ -6,7 +6,6 @@
 package planetwars.logic;
 
 import planetwars.database.Database;
-import planetwars.database.Player;
 import planetwars.database.PlayerDao;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
 import planetwars.logic.graphicobjects.MapLocator;
@@ -17,7 +16,7 @@ import planetwars.ui.PlanetWarsApplication;
  *
  * @author jaakkpaa
  */
-public class GameEngine {
+public class GameEngine implements Engine {
 	private PlayerDao playerDao;
 	private PlanetWarsApplication gui;
 	private Player player;
@@ -25,14 +24,17 @@ public class GameEngine {
 	private Game game;
 	private GameArena gameArena;
 
+	@Override
 	public Player getPlayer() {
 		return player;
 	}
 
+	@Override
 	public Game getGame() {
 		return game;
 	}
 
+	@Override
 	public GameArena getGameArena() {
 		return gameArena;
 	}
@@ -44,15 +46,27 @@ public class GameEngine {
 	}
 	
 	public void signUp(String textFieldUsername, String textFieldPassword) throws Exception {
-		playerDao.saveOrUpdate(new Player(textFieldUsername, textFieldPassword));
-		signIn(textFieldUsername, textFieldPassword);
+		Player findOne;
+		try {
+			findOne = playerDao.findOne(textFieldUsername);
+		} catch (Exception e) {
+			playerDao.saveOrUpdate(new Player(textFieldUsername, textFieldPassword));
+			signIn(textFieldUsername, textFieldPassword);
+			return;
+		}
+		throw new Exception("Username already taken.");
 	}
 
 	public void signIn(String textFieldUsername, String textFieldPassword) throws Exception {
 		this.player = playerDao.findOne(textFieldUsername);
 		if (!player.getPassword().equals(textFieldPassword)) {
-			gui.getPrimaryStage().setTitle("Wrong password");
+			throw new Exception("Wrong password");
 		}
+	}
+
+	public void initializeDatabase() {
+		playerDao.createTableIfNotExist();
+		
 	}
 
 	public Player getPlayer(String userName) throws Exception {
@@ -82,7 +96,7 @@ public class GameEngine {
 		return game.getTimeLeft();
 	}
 
-	public Ship getPlayer1Ship() {
+	public Ship getPlayerShip() {
 		return game.getPlayer1Ship();
 	}
 

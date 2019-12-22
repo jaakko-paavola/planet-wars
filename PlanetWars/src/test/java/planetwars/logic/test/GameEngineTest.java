@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.database;
+package planetwars.logic.test;
 
-import planetwars.logic.Player;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author jaakkpaa
  */
-public class PlayerTest {
+public class GameEngineTest {
 	
-	public PlayerTest() {
+	public GameEngineTest() {
 	}
 	
 	@BeforeClass
@@ -36,16 +35,6 @@ public class PlayerTest {
 	
 	@After
 	public void tearDown() {
-	}
-
-	@Test
-	public void playerCreatedRight() {
-		Player player = new Player("aaa", "bbb");
-		Player player2 = new Player("aaa", "bbb", 400, 3);
-		assertEquals("aaa", player.getUsername());
-		assertEquals("bbb", player.getPassword());
-		assertEquals(400, player2.getPoints());
-		assertEquals(3, player2.getLevel());
 	}
 
 	// TODO add test methods here.

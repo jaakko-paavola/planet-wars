@@ -11,7 +11,6 @@ import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Torpedo;
 import javafx.scene.shape.Shape;
 import planetwars.database.Database;
-import planetwars.database.Player;
 import planetwars.database.PlayerDao;
 import planetwars.ui.Animation;
 import planetwars.ui.PlanetWarsApplication;
@@ -30,14 +29,23 @@ import java.util.stream.Stream;
  *
  * @author jaakkpaa
  */
-public class LogicInterface {
+public class LogicLayer implements Logic {
 	private Game game;
 	private GameArena gameArena;
-	private GameEngine gameEngine;
-	private Map<KeyCode, Boolean> keysPressed = new HashMap<>();
+	private Engine gameEngine;
+
+	public int getFrameRateForSpeedoMeter() {
+		return frameRateForSpeedoMeter;
+	}
+	private final int frameRateForSpeedoMeter = 10000;
+
+	@Override
+	public Engine getGameEngine() {
+		return gameEngine;
+	}
 	private Player player;
 
-	public LogicInterface(GameEngine gameEngine) throws Exception {
+	public LogicLayer(Engine gameEngine) throws Exception {
 		this.gameEngine = gameEngine;	
 		this.game = gameEngine.getGame();
 		this.gameArena = gameEngine.getGameArena();
@@ -46,16 +54,16 @@ public class LogicInterface {
 
 	public void handleArrowKeyPresses(Map<KeyCode, Boolean> keysPressed) {
 		if (keysPressed.getOrDefault(KeyCode.LEFT, false)) {
-			gameEngine.getPlayer1Ship().turnLeft(1);
+			gameEngine.getPlayerShip().turnLeft(player.getPlayerShipRotationSpeed());
 		}
 		if (keysPressed.getOrDefault(KeyCode.RIGHT, false)) {
-			gameEngine.getPlayer1Ship().turnRight(1);
+			gameEngine.getPlayerShip().turnRight(player.getPlayerShipRotationSpeed());
 		}
 		if (keysPressed.getOrDefault(KeyCode.DOWN, false)) {
-			brakeShip();
+			accelerateShip(player.getPlayerShipBraking());
 		}
 		if (keysPressed.getOrDefault(KeyCode.UP, false)) {
-			accelerateShip();
+			accelerateShip(player.getPlayerShipAcceleration());
 		}
 	}
 	
@@ -68,15 +76,15 @@ public class LogicInterface {
 		return torpedo;
 	}
 	
-	public Torpedo fireTorpedo() {
+	private Torpedo fireTorpedo() {
 		Torpedo torpedo = new Torpedo((int) game.getPlayer1Ship().getShape().getTranslateX(),
 				(int) game.getPlayer1Ship().getShape().getTranslateY());
 		torpedo.getShape().setRotate(game.getPlayer1Ship().getShape().getRotate());
 		game.getTorpedos().add(torpedo);
-		torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-		torpedo.setMovement(torpedo.getMovement().normalize().multiply(9));
+		torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), player.getPlayerTorpedoAcceleration(), game.getAccelerationFactor(), frameRateForSpeedoMeter);
+		torpedo.setMovement(torpedo.getMovement().multiply(player.getPlayerTorpedoSpeedMultiplier()), frameRateForSpeedoMeter);
 		game.setPreviousTorpedoFired(System.currentTimeMillis());
-		brakeShip();
+		accelerateShip(player.getPlayerShipBraking());
 		return torpedo;
 	}
 	
@@ -171,29 +179,17 @@ public class LogicInterface {
 		return conqueredPlanets;
 	}
 
-	public void accelerateShip() {
-		game.getMapLocator().accelerateInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-		gameArena.getBoundaryRectangle().accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
+	@Override
+	public void accelerateShip(int acceleration) {
+		game.getMapLocator().accelerateInReferenceTo(game.getPlayer1Ship(), acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+		gameArena.getBoundaryRectangle().accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
 
 		for (Planet planet : gameArena.getPlanets()) {
-			planet.accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-			planet.getMapViewPlanet().accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
+			planet.accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
+			planet.getMapViewPlanet().accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
 		}
 		for (Torpedo torpedo : game.getTorpedos()) {
-			torpedo.accelerateToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-		}
-	}
-
-	public void brakeShip() {
-		game.getMapLocator().brakeInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-		gameArena.getBoundaryRectangle().brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-
-		for (Planet planet : gameArena.getPlanets()) {
-			planet.brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-			planet.getMapViewPlanet().brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
-		}
-		for (Torpedo torpedo : game.getTorpedos()) {
-			torpedo.brakeToOppositeDirectionInReferenceTo(game.getPlayer1Ship(), player.getPlayer1ShipAcceleration());
+			torpedo.accelerateInReferenceTo(game.getPlayer1Ship(), -acceleration, game.getAccelerationFactor(), frameRateForSpeedoMeter);
 		}
 	}
 

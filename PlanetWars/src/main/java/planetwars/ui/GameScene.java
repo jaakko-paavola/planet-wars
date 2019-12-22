@@ -16,9 +16,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import planetwars.database.Player;
+import planetwars.logic.Player;
 import planetwars.logic.GameEngine;
-import planetwars.logic.LogicInterface;
+import planetwars.logic.LogicLayer;
 import static planetwars.ui.PlanetWarsApplication.mapHeight;
 import static planetwars.ui.PlanetWarsApplication.mapWidth;
 import static planetwars.ui.PlanetWarsApplication.screenHeight;
@@ -89,7 +89,7 @@ public class GameScene {
 				+ ", your mission is to conquer or destroy the "
 				+ (gameEngine.getPlayerLevel() == 1 ? "planet" : 
 						gameEngine.getPlayerLevel() + " planets")
-				+ " in this solar system.\"");
+				+ " in this solar system before the mission timer runs out.\"");
 		textPlayerName.setText("Pilot: " + gameEngine.getPlayerUsername());
 		textPlayerName.setFill(Color.WHITE);
 		textLevel.setText("Level: " + Integer.toString(gameEngine.getPlayerLevel()));

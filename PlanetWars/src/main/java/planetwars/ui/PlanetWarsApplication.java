@@ -40,12 +40,12 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.*;
 import javax.swing.plaf.RootPaneUI;
 import planetwars.database.Database;
-import planetwars.database.Player;
+import planetwars.logic.Player;
 import planetwars.database.PlayerDao;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
 import planetwars.logic.Game;
 import planetwars.logic.GameArena;
-import planetwars.logic.LogicInterface;
+import planetwars.logic.LogicLayer;
 import planetwars.logic.GameEngine;
 import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Planet;
@@ -72,7 +72,7 @@ public class PlanetWarsApplication extends Application{
 	private Animation animation;
 	private GameEngine gameEngine;
 
-	private LogicInterface logicInterface;
+	private LogicLayer logicInterface;
 
 	public LoginScene getLoginScene() {
 		return loginScene;
@@ -109,12 +109,12 @@ public class PlanetWarsApplication extends Application{
 	 */
 	public void initializeGameScene() throws Exception {
 		gameEngine.newGame(screenWidth, screenHeight);
-		this.logicInterface = new LogicInterface(gameEngine);
+		this.logicInterface = new LogicLayer(gameEngine);
 		gameScene = new GameScene(gameEngine);
 		this.animation = new Animation(gameScene.getKeysPressed(), logicInterface, 
 				gameScene, this, gameEngine);
 		
-		gameScene.getGameView().getChildren().add(gameEngine.getPlayer1Ship()
+		gameScene.getGameView().getChildren().add(gameEngine.getPlayerShip()
 				.getShape());
 		gameScene.getMapView().getChildren().add(gameEngine.getMapLocator().getShape());
 		for (Planet planet : gameEngine.getGameArena().getPlanets()) {

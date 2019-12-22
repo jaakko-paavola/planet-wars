@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package planetwars.database;
+package planetwars.logic;
 
 /**
  * The class handles all information regarding the player: username, password,
@@ -25,10 +25,30 @@ public class Player {
 		Colonel
 	}
 
-	private int player1ShipAcceleration = 3;
+	private int playerShipAcceleration = 3;
+	private int playerTorpedoAcceleration = 3;
+	private int playerTorpedoSpeedMultiplier = 1000;
 
-	public int getPlayer1ShipAcceleration() {
-		return player1ShipAcceleration;
+	public int getPlayerTorpedoAcceleration() {
+		return playerTorpedoAcceleration;
+	}
+
+	public int getPlayerTorpedoSpeedMultiplier() {
+		return playerTorpedoSpeedMultiplier;
+	}
+	private int playerShipBraking = -1;
+
+	public int getPlayerShipBraking() {
+		return playerShipBraking;
+	}
+	private int playerShipRotationSpeed = 1;
+
+	public int getPlayerShipRotationSpeed() {
+		return playerShipRotationSpeed;
+	}
+
+	public int getPlayerShipAcceleration() {
+		return playerShipAcceleration;
 	}
 	public Rank getRank() {
 		return rank;

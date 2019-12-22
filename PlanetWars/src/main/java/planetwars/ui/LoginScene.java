@@ -18,8 +18,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import planetwars.database.Database;
 import planetwars.database.PlayerDao;
-import planetwars.database.Player;
-import planetwars.logic.LogicInterface;
+import planetwars.logic.Player;
+import planetwars.logic.LogicLayer;
 import planetwars.logic.Game;
 import planetwars.logic.GameEngine;
 
@@ -30,12 +30,12 @@ import planetwars.logic.GameEngine;
 public class LoginScene {
 	
 	private PlanetWarsApplication application;
-	private GameEngine playerHandler;
+	private GameEngine gameEngine;
 	
 	public LoginScene(PlanetWarsApplication application, 
-			GameEngine playerHandler) throws Exception {
+			GameEngine gameEngine) throws Exception {
 		this.application = application;
-		this.playerHandler = playerHandler;
+		this.gameEngine = gameEngine;
 	}
 	
 	public Scene createAndReturnScene() throws Exception {
@@ -54,12 +54,15 @@ public class LoginScene {
 		paneSignIn.add(buttonSignIn, 1, 3);
 		paneSignIn.add(buttonSignUp, 3, 3);
 
+		gameEngine.initializeDatabase();
+
 		buttonSignUp.setOnAction(click -> {
  			try {
-				playerHandler.signUp(textFieldUsername.getText(), 
+				gameEngine.signUp(textFieldUsername.getText(), 
 						textFieldPassword.getText());
 			} catch (Exception ex) {
 				application.getPrimaryStage().setTitle(ex.getMessage());
+				return;
 			}
 			try {
 				application.initializeGameScene();
@@ -70,7 +73,7 @@ public class LoginScene {
 		
 		buttonSignIn.setOnAction((click) -> {
  			try {
-				playerHandler.signIn(textFieldUsername.getText(), 
+				gameEngine.signIn(textFieldUsername.getText(), 
 						textFieldPassword.getText());
 				try {
 					application.initializeGameScene();

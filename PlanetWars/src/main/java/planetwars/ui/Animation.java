@@ -18,10 +18,10 @@ import planetwars.logic.Game;
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Torpedo;
 import planetwars.ui.PlanetWarsApplication;
-import planetwars.database.Player;
+import planetwars.logic.Player;
 import planetwars.database.PlayerDao;
 import planetwars.logic.GameEngine;
-import planetwars.logic.LogicInterface;
+import planetwars.logic.LogicLayer;
 
 /**
  * The class animates movement and checks for eventualities, and in case they 
@@ -33,12 +33,12 @@ import planetwars.logic.LogicInterface;
 
 public class Animation extends javafx.animation.AnimationTimer {
 	private Map<KeyCode, Boolean> keysPressed;
-	private LogicInterface logicInterface;
+	private LogicLayer logicInterface;
 	private GameScene gameScene;
 	private PlanetWarsApplication gui;
 	private GameEngine gameEngine;
 
-	public Animation(Map<KeyCode, Boolean> keysPressed, LogicInterface logicInterface, 
+	public Animation(Map<KeyCode, Boolean> keysPressed, LogicLayer logicInterface, 
 			GameScene gameScene, PlanetWarsApplication gui, GameEngine gameEngine) {
 		this.keysPressed = keysPressed;
 		this.logicInterface = logicInterface;
@@ -116,8 +116,8 @@ public class Animation extends javafx.animation.AnimationTimer {
 	private void refreshGauges(double timeLeft, long timeNow, long startTime) {
 		gameScene.setTextPoints("Points: " + gameEngine.getPoints());
 		gameScene.setTextSpeed("Speed: " + logicInterface.round(Math.sqrt(
-						Math.pow(gameEngine.getBoundaryRectangle().getXSpeed(gameEngine.getPlayer1Ship()), 2)
-						+ Math.pow(gameEngine.getBoundaryRectangle().getYSpeed(gameEngine.getPlayer1Ship()), 2)) / 1000, 1));
+						Math.pow(gameEngine.getBoundaryRectangle().getXSpeed(gameEngine.getPlayerShip()), 2)
+						+ Math.pow(gameEngine.getBoundaryRectangle().getYSpeed(gameEngine.getPlayerShip()), 2)) / 1000, 1));
 		gameScene.setTextCoordinates("Coordinates: " + (-gameEngine.getBoundaryRectangle().getXCoord() + gameEngine.getPlayer1StartingXCoord())
 						+ "." + (-gameEngine.getBoundaryRectangle().getYCoord() + gameEngine.getPlayer1StartingYCoord()));
 		gameScene.setTextTimer("Time left: " + timeLeft);

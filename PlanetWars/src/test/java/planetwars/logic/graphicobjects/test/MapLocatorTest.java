@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import planetwars.logic.Game;
 import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Ship;
 import static planetwars.logic.graphicobjects.test.ShipTest.HEIGHT;
@@ -30,6 +31,7 @@ public class MapLocatorTest {
 	private MapLocator mapLocator;	
 	private MapLocator mapLocatorReference;	
 	private GameArena gameArena;
+	private Game game;
 	
 	public MapLocatorTest() {
 	}
@@ -48,6 +50,7 @@ public class MapLocatorTest {
 		gameArena = new GameArena(5);
 		mapLocator = new MapLocator(ship, gameArena);	
 		mapLocatorReference = new MapLocator(ship, new GameArena(5));	
+		game = new Game(800, 600, gameArena, 1000);
 	}
 	
 	@After
@@ -57,30 +60,30 @@ public class MapLocatorTest {
 	@Test
 	public void mapLocatorHasCorrectDimensions() {
 		assertEquals((int) Math.round(((Rectangle)(mapLocator.getShape())).getWidth()), 
-				(int) Math.round((1.0*PlanetWarsApplication.screenWidth/gameArena.getSpaceWidth())*mapWidth));
+				(int) Math.round((1.0*PlanetWarsApplication.screenWidth/gameArena.getSpaceWidth()) * mapWidth));
 		assertEquals((int) Math.round(((Rectangle)(mapLocator.getShape())).getHeight()), 
-				(int) Math.round((1.0*PlanetWarsApplication.screenHeight/gameArena.getSpaceHeight())*mapHeight));
+				(int) Math.round((1.0*PlanetWarsApplication.screenHeight/gameArena.getSpaceHeight()) * mapHeight));
 	}
 
     @Test
     public void mapLocatorFixedToPlayersLocationCorrectly() {
-        assertEquals(mapLocator.getXCoord(), (ship.getXCoord()/gameArena.getSpaceWidth())*mapWidth);
-        assertEquals(mapLocator.getYCoord(), (ship.getYCoord()/gameArena.getSpaceHeight())*mapHeight);
+        assertEquals(mapLocator.getXCoord(), (ship.getXCoord()/gameArena.getSpaceWidth()) * mapWidth);
+        assertEquals(mapLocator.getYCoord(), (ship.getYCoord()/gameArena.getSpaceHeight()) * mapHeight);
     }
 
 	@Test
 	public void accelerateInReferenceToShipMoveMapLocatorCorrectAmount() {
-		mapLocator.accelerateInReferenceTo(ship, 1);
-		assertEquals(mapLocatorReference.getMovement().getX() + 0.005 * 
+		mapLocator.accelerateInReferenceTo(ship, 1, game.getAccelerationFactor(), 10000);
+		assertEquals(mapLocatorReference.getMovement().getX() + game.getAccelerationFactor() * 
 			(1.0 * PlanetWarsApplication.mapWidth / gameArena.getSpaceWidth()),
-			mapLocator.getMovement().getX(), 1);
+			mapLocator.getMovement().getX(), 0.1);
 	}
 
 	@Test
 	public void brakeInReferenceToShipMoveMapLocatorCorrectAmount() {
-		mapLocator.brakeInReferenceTo(ship, 1);
-		assertEquals(mapLocatorReference.getMovement().getX() - 0.001 * 
+		mapLocator.accelerateInReferenceTo(ship, -1, game.getBrakingFactor(), 10000);
+		assertEquals(mapLocatorReference.getMovement().getX() - game.getBrakingFactor() * 
 			(1.0 * PlanetWarsApplication.mapWidth / gameArena.getSpaceWidth()),
-			mapLocator.getMovement().getX(), 1);		
+			mapLocator.getMovement().getX(), 0.1);	
 	}	
 }

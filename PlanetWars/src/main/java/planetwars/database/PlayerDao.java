@@ -5,10 +5,13 @@
  */
 package planetwars.database;
 
+import planetwars.logic.Player;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import sun.security.util.Password;
 
 /**
@@ -81,25 +84,47 @@ public class PlayerDao implements Dao<Player, String> {
 			}
         }
     }
+	
+	@Override
+	public void createTableIfNotExist() {
+		try (Connection conn = database.getConnection()) {
+
+			conn.prepareStatement("CREATE TABLE IF NOT EXISTS Player ("
+					+ " id IDENTITY,"
+					+ " username VARCHAR(100) UNIQUE,"
+					+ " password VARCHAR(100),"
+					+ " points INTEGER,"
+					+ " level INTEGER,"
+					+ " PRIMARY KEY(id)"
+					+ ");").executeUpdate();
+
+			conn.prepareStatement("CREATE INDEX IF NOT EXISTS player_idx"
+					+ " ON Player (id);").executeUpdate();
+
+			conn.close();
+		} catch (Exception ex) {
+			Logger.getLogger(PlayerDao.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
 	/**
 	 * Checks if Player table exists and creates it if it does not.
 	 * @throws SQLException
 	 * @throws Exception 
 	 */
-	@Override
-	public void createTable() throws SQLException, Exception {
-		Connection conn = database.getConnection();
-		try {
-			PreparedStatement stmt = conn.prepareStatement(
-							"SELECT * FROM Player");
-			ResultSet executeQuery = stmt.executeQuery();
-		} catch (Exception e) {
-			PreparedStatement stmt = conn.prepareStatement(
-							"CREATE TABLE Player (username varchar, password varchar, "
-							+ "points integer, level integer)");
-			stmt.executeUpdate();
-		}
-		conn.close();
-	}
+//	@Override
+//	public void createTable() throws SQLException, Exception {
+//		Connection conn = database.getConnection();
+//		try {
+//			PreparedStatement stmt = conn.prepareStatement(
+//							"SELECT * FROM Player");
+//			ResultSet executeQuery = stmt.executeQuery();
+//		} catch (Exception e) {
+//			PreparedStatement stmt = conn.prepareStatement(
+//							"CREATE TABLE Player (username varchar, password varchar, "
+//							+ "points integer, level integer)");
+//			stmt.executeUpdate();
+//		}
+//		conn.close();
+//	}
 }

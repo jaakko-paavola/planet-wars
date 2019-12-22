@@ -27,9 +27,19 @@ public class Game {
 	private MapLocator mapLocator;	
 	private int points;
 	private int timePerLevel = 60;
+	private final double accelerationFactor = 0.005;
+	private final double brakingFactor = 0.001;
 
 	public int getTimePerLevel() {
 		return timePerLevel;
+	}
+
+	public double getAccelerationFactor() {
+		return accelerationFactor;
+	}
+
+	public double getBrakingFactor() {
+		return brakingFactor;
 	}
 	private double timeLeft;
 	private int player1StartingXCoord;

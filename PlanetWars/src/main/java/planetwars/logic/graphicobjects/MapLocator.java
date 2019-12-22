@@ -31,27 +31,28 @@ public class MapLocator extends Shape {
 		this.gameArena = gameArena;
     } 	
 	@Override
-    public void accelerateInReferenceTo(Shape reference, int quantity) {
+    public void accelerateInReferenceTo(Shape reference, int playerAccelerationFactor, double accelerationFactor, int frameRateForSpeedoMeter) {
         double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
         double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 
-        changeX *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
+        changeX *= accelerationFactor * playerAccelerationFactor * (1.0 * PlanetWarsApplication.mapWidth /
 				gameArena.getSpaceWidth());
-        changeY *= 0.005 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
+        changeY *= accelerationFactor * playerAccelerationFactor * (1.0 * PlanetWarsApplication.mapHeight /
 				gameArena.getSpaceHeight());
 
-        this.setMovement(this.getMovement().add(changeX, changeY));
+        this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
     }
-	@Override
-    public void brakeInReferenceTo(Shape reference, int quantity) {
-        double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-        double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-
-        changeX *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapWidth /
-				gameArena.getSpaceWidth());
-        changeY *= -0.001 * quantity * (1.0 * PlanetWarsApplication.mapHeight /
-				gameArena.getSpaceHeight());
-
-        this.setMovement(this.getMovement().add(changeX, changeY));
-    }
+	
+//	@Override
+//    public void brakeInReferenceTo(Shape reference, int playerBrakingFactor, double brakingFactor, int frameRateForSpeedoMeter) {
+//        double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
+//        double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
+//
+//        changeX *= -brakingFactor * playerBrakingFactor * (1.0 * PlanetWarsApplication.mapWidth /
+//				gameArena.getSpaceWidth());
+//        changeY *= -brakingFactor * playerBrakingFactor * (1.0 * PlanetWarsApplication.mapHeight /
+//				gameArena.getSpaceHeight());
+//
+//        this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
+//    }
 }

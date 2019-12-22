@@ -27,7 +27,7 @@ public abstract class Shape {
 	private Point2D previous;
 	private int visits = 0;
 	private boolean alive = true;
-	
+
 	public Shape(Polygon polygon, double x, double y) {
 		this.shape = polygon;
 		this.shape.setTranslateX(x);
@@ -68,53 +68,53 @@ public abstract class Shape {
 		this.shape = shape;
 	}
 	
-	public void turnLeft(int quantity) {
-		this.shape.setRotate(this.shape.getRotate() - quantity);
+	public void turnLeft(int playerRotationFactor) {
+		this.shape.setRotate(this.shape.getRotate() - playerRotationFactor);
 	}
 	
-	public void turnRight(int quantity) {
-		this.shape.setRotate(this.shape.getRotate() + quantity);
+	public void turnRight(int playerRotationFactor) {
+		this.shape.setRotate(this.shape.getRotate() + playerRotationFactor);
 	}
 
-	public void accelerateInReferenceTo(Shape reference, int quantity) {
+	public void accelerateInReferenceTo(Shape reference, int playerAccelerationFactor, double accelerationFactor, int frameRateForSpeedoMeter) {
 		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
 		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
 		
-		changeX *= 0.005 * quantity;
-		changeY *= 0.005 * quantity;
+		changeX *= accelerationFactor * playerAccelerationFactor;
+		changeY *= accelerationFactor * playerAccelerationFactor;
 		
-		this.setMovement(this.getMovement().add(changeX, changeY));
+		this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
 	}
 	
-	public void brakeInReferenceTo(Shape reference, int quantity) {
-		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-		
-		changeX *= -0.001 * quantity;
-		changeY *= -0.001 * quantity;
-		
-		this.setMovement(this.getMovement().add(changeX, changeY));
-	}
+//	public void brakeInReferenceTo(Shape reference, int playerBrakingFactor, double brakingFactor, int frameRateForSpeedoMeter) {
+//		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
+//		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
+//		
+//		changeX *= -brakingFactor * playerBrakingFactor;
+//		changeY *= -brakingFactor * playerBrakingFactor;
+//		
+//		this.setMovement(this.getMovement().add(changeX, changeY), frameRateForSpeedoMeter);
+//	}
 	
-	public void accelerateToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
-		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-		
-		changeX *= -0.005 * quantity;
-		changeY *= -0.005 * quantity;
-		
-		this.setMovement(this.getMovement().add(changeX, changeY));
-	}
+//	public void accelerateToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
+//		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
+//		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
+//		
+//		changeX *= -accelerationFactor * quantity;
+//		changeY *= -accelerationFactor * quantity;
+//		
+//		this.setMovement(this.getMovement().add(changeX, changeY));
+//	}
 	
-	public void brakeToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
-		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
-		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
-		
-		changeX *= 0.001 * quantity;
-		changeY *= 0.001 * quantity;
-		
-		this.setMovement(this.getMovement().add(changeX, changeY));
-	}
+//	public void brakeToOppositeDirectionInReferenceTo(Shape reference, int quantity) {
+//		double changeX = Math.cos(Math.toRadians(reference.getShape().getRotate()));
+//		double changeY = Math.sin(Math.toRadians(reference.getShape().getRotate()));
+//		
+//		changeX *= brakingFactor * quantity;
+//		changeY *= brakingFactor * quantity;
+//		
+//		this.setMovement(this.getMovement().add(changeX, changeY));
+//	}
 	
 	public void move() {
 		this.shape.setTranslateX(this.shape.getTranslateX() + this.getMovement().getX());
@@ -141,8 +141,8 @@ public abstract class Shape {
 		return movement;
 	}
 	
-	public void setMovement(Point2D movement) {
-		if (visits == 10000) {
+	public void setMovement(Point2D movement, int frameRateForSpeedoMeter) {
+		if (visits == frameRateForSpeedoMeter) {
 			this.previous = this.movement;
 			visits = 0;
 		}

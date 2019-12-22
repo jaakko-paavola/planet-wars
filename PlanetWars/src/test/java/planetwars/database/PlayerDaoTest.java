@@ -5,6 +5,7 @@
  */
 package planetwars.database;
 
+import planetwars.logic.Player;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
