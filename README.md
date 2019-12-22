@@ -13,6 +13,8 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 [Arkkitehtuurikuvaus](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuurikuvaus.md)
 
+[Testausdokumentti](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 ### Releaset
 [Viikko 5](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.2)
 
