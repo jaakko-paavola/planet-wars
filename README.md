@@ -1,7 +1,8 @@
-# Helsingin yliopiston ohjelmistotekniikan kurssin harjoitustyö
-
-## Planet Wars
+# Planet Wars
 Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluksia vastaan.
+
+## Helsingin yliopiston ohjelmistotekniikan kurssin harjoitustyö
+## A course project in the course Software Development Methods at the University of Helsinki
 
 ### Harjoitustyön dokumentaatio
 
@@ -15,12 +16,12 @@ Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluk
 
 [Testausdokumentti](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
 
-### Releaset
-[Viikko 5](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.2)
+### Releases
+[Week 5](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.2)
 
-[Viikko 6](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.8)
+[Week 6](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.8)
 
-[Loppupalautus](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/1.0)
+[Final release](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/1.0)
 
 ### Peliohje
 Ohjaa avaruusalusta nuolinäppäimillä. Huomaa, että alaspäin-nuoli jarruttaa ja space ampuu torpedon.
