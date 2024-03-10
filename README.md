@@ -1,8 +1,8 @@
 # Planet Wars
 Avaruuslentelypeli, jossa vallataan planeettoja ja taistellaan muita avaruusaluksia vastaan.
 
-## Helsingin yliopiston ohjelmistotekniikan kurssin harjoitustyö
-## A course project in the course Software Development Methods at the University of Helsinki
+## Helsingin yliopiston ohjelmistotekniikan kurssin harjoitustyö 2019
+A course project in the course Software Development Methods at the University of Helsinki in 2019
 
 ### Harjoitustyön dokumentaatio
 
