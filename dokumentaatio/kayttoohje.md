@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [PlanetWars-0.8.jar](https://github.com/mluukkai/OtmTodoApp/releases/tag/0.8)
+Lataa tiedosto [PlanetWars-0.8.jar](https://github.com/mluukkai/OtmTodoApp/releases/tag/1.0)
 
 ## Konfigurointi
 
