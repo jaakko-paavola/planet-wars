@@ -1,7 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [PlanetWars-1.0.jar](https://github.com/mluukkai/OtmTodoApp/releases/tag/1.0)
-
+Lataa tiedosto [PlanetWars-1.0.jar](https://github.com/mluukkai/OtmTodoApp](https://github.com/jaakko-paavola/planet-wars)/releases/tag/1.0)
 ## Konfigurointi
 
 Ohjelma olettaa, että sqlite-tietokanta toimii käyttäjän ympäristössä. Ohjelma vaikuttaa toimivan ainoastaan Java 8/1.8:lla. Esim. Java 11:llä jar:n käynnistysyritys antaa virheilmoituksen: "Error: JavaFX runtime components are missing, and are required to run this application"
