@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [PlanetWars-1.0.jar](https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/releases/download/Loppupalautus/PlanetWars-1.01.jar)
+Lataa tiedosto [PlanetWars-1.01.jar](https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/releases/download/Loppupalautus/PlanetWars-1.01.jar)
 ## Konfigurointi
 
 Ohjelma olettaa, että sqlite-tietokanta toimii käyttäjän ympäristössä. Ohjelma vaikuttaa toimivan ainoastaan Java 8/1.8:lla. Esim. Java 11:llä jar:n käynnistysyritys antaa virheilmoituksen: "Error: JavaFX runtime components are missing, and are required to run this application"
