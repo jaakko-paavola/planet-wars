@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>PlanetWars</groupId>
     <artifactId>PlanetWars</artifactId>
-    <version>1.0</version>
+    <version>1.01</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -54,7 +54,7 @@
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>2.8.1</version> <!-- Use the latest version available -->
 			</plugin>
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.3</version>
@@ -71,7 +71,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> -->
+			</plugin>
 			<plugin>
 				<groupId>org.openjfx</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
