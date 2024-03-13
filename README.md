@@ -11,11 +11,11 @@ A course project in the course Software Development Methods at the University of
 
 [Requirements specification document](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-[Work-hour records](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+[Work-hour records](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md) (in Finnish)
 
-[Architecture description](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuurikuvaus.md)
+[Architecture description](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuurikuvaus.md) (in Finnish)
 
-[Testing documentation](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+[Testing documentation](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md) (in Finnish)
 
 ### Releases
 [Week 5](https://github.com/Jakoviz/ot-harjoitustyo/releases/tag/0.2)
