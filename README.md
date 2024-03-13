@@ -3,8 +3,7 @@ A space flying game where you race against the clock trying to conquer or destro
 
 A course project in the course Software Development Methods at the University of Helsinki in 2019
 
-<img src="https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/blob/master/gameplay.git" width="1000">
-
+![gameplay sample gif]("https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/blob/master/gameplay.git")
 ### Documentation
 
 [Usage instructions](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
