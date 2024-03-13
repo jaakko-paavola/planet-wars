@@ -1,9 +1,9 @@
 # A little software engineering project in Java: Planet Wars
-A space flying game where you race against the clock trying to capture or destroy planets.
+A space flying game where you race against the clock trying to conquer or destroy planets.
 
 A course project in the course Software Development Methods at the University of Helsinki in 2019
 
-<img src="https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/blob/master/gameplay.jpg" width="1000">
+![gameplay](https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/assets/7263106/c954465a-1c99-4a78-8006-b34c6e942383)
 
 ### Documentation
 
@@ -63,7 +63,7 @@ The command
 mvn package
 ```
 
-generates an executable jar file _PlanetWars-1.0-SNAPSHOT.jar_ in the directory _target_
+generates an executable jar file _PlanetWars-1.01.jar_ in the directory _target_
 
 #### JavaDoc
 
