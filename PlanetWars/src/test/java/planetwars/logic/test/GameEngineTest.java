@@ -5,17 +5,18 @@
  */
 package planetwars.logic.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 import planetwars.database.Database;
 import planetwars.database.PlayerDao;
 import planetwars.logic.GameEngine;
 import planetwars.logic.Player;
-import planetwars.logic.StubEngine;
 import planetwars.ui.PlanetWarsApplication;
 
 /**

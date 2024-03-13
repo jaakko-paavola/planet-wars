@@ -1,17 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.logic;
 
 import java.util.List;
-import planetwars.database.Database;
-import planetwars.database.PlayerDao;
+
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Shape;
 import planetwars.logic.graphicobjects.Ship;
-import planetwars.ui.PlanetWarsApplication;
 
 /**
  *

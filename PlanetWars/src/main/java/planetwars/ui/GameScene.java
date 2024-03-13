@@ -1,12 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.ui;
+
+import static planetwars.ui.PlanetWarsApplication.mapHeight;
+import static planetwars.ui.PlanetWarsApplication.mapWidth;
+import static planetwars.ui.PlanetWarsApplication.screenHeight;
+import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -16,13 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import planetwars.logic.Player;
 import planetwars.logic.GameEngine;
-import planetwars.logic.LogicLayer;
-import static planetwars.ui.PlanetWarsApplication.mapHeight;
-import static planetwars.ui.PlanetWarsApplication.mapWidth;
-import static planetwars.ui.PlanetWarsApplication.screenHeight;
-import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
 /**
  * The class creates the game scene contains the game view, the map view and

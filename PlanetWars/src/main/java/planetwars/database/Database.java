@@ -1,7 +1,12 @@
+/*
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.database;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  * The class provides database connection functionality.

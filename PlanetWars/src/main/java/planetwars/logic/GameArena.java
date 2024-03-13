@@ -1,21 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.logic;
+
+import static planetwars.ui.PlanetWarsApplication.screenHeight;
+import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import javafx.scene.paint.Color;
 import planetwars.logic.graphicobjects.BoundaryRectangle;
+import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Planet;
 import planetwars.logic.graphicobjects.Ship;
-import planetwars.logic.graphicobjects.MapLocator;
 import planetwars.logic.graphicobjects.Torpedo;
-import static planetwars.ui.PlanetWarsApplication.screenHeight;
-import static planetwars.ui.PlanetWarsApplication.screenWidth;
 
 /**
  * The class handles the current game arena with its planets and boundaries and

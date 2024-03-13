@@ -1,29 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.logic;
 
-import planetwars.logic.graphicobjects.Planet;
-import planetwars.logic.graphicobjects.Ship;
-import planetwars.logic.graphicobjects.MapLocator;
-import planetwars.logic.graphicobjects.Torpedo;
-import javafx.scene.shape.Shape;
-import planetwars.database.Database;
-import planetwars.database.PlayerDao;
-import planetwars.ui.Animation;
-import planetwars.ui.PlanetWarsApplication;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import planetwars.logic.graphicobjects.BoundaryRectangle;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import javafx.scene.input.KeyCode;
+import planetwars.logic.graphicobjects.Planet;
+import planetwars.logic.graphicobjects.Torpedo;
 
 /**
  * The class functions as the interface to the UI and caters mostly for the

@@ -1,0 +1,9 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "/home/jaakkpaa/javafx-sdk-21.0.2/lib/**/*.jar",
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
+}

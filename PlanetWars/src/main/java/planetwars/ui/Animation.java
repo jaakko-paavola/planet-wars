@@ -1,27 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.ui;
 
-import planetwars.logic.GameArena;
-import java.util.stream.Collectors;
-import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.stage.Stage;
-import planetwars.logic.GamePlay;
-import planetwars.logic.graphicobjects.Planet;
-import planetwars.logic.graphicobjects.Torpedo;
-import planetwars.ui.PlanetWarsApplication;
-import planetwars.logic.Player;
-import planetwars.database.PlayerDao;
+
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import planetwars.logic.GameEngine;
 import planetwars.logic.LogicLayer;
+import planetwars.logic.graphicobjects.Planet;
+import planetwars.logic.graphicobjects.Torpedo;
 
 /**
  * The class animates movement and checks for eventualities, and in case they 

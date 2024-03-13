@@ -1,11 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.database;
 
-import planetwars.logic.Player;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +12,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //import sun.security.util.Password;
+
+import planetwars.logic.Player;
 
 /**
  * The class provides database access functionality for the Player class. 
@@ -31,7 +32,7 @@ public class PlayerDao implements Dao<Player, String> {
 		
 	/**
 	 * Finds the user with the username from database. If does not find, throws
-	 * and exception.
+	 * an exception.
 	 * @param username The username to be looked for.
 	 * @return A player object with the data from the database for given username.
 	 * @throws SQLException

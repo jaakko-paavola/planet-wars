@@ -1,19 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package planetwars.logic;
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import planetwars.database.PlayerDao;
-import planetwars.logic.graphicobjects.MapLocator;
-import planetwars.logic.graphicobjects.Ship;
-import planetwars.logic.graphicobjects.Torpedo;
-import static planetwars.ui.PlanetWarsApplication.screenHeight;
-import static planetwars.ui.PlanetWarsApplication.screenWidth;
+package planetwars.logic;
 
 /**
  * The class handles all information regarding the current game: the player's ship,
@@ -27,7 +17,9 @@ public class GamePlay {
 	private int points;
 	private int timePerLevel = 60;
 	private final double accelerationFactor = 0.005;
+	// private final double accelerationFactor = 0.050;
 	private final double brakingFactor = 0.001;
+	// private final double brakingFactor = 0.010;
 	private double timeLeft;
 	private long startTime = 0;
 	private int planetsLeft;

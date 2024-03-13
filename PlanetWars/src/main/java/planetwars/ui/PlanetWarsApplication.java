@@ -1,62 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+MIT License
+Copyright (c) 2019 Jaakko Paavola
+*/
+
 package planetwars.ui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-import javafx.animation.AnimationTimer;
-import javafx.application.*;
-import javafx.beans.property.ObjectProperty;
-import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.Effect;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.*;
-import javax.swing.plaf.RootPaneUI;
-import planetwars.database.Database;
-import planetwars.logic.Player;
-import planetwars.database.PlayerDao;
-import planetwars.logic.graphicobjects.BoundaryRectangle;
-import planetwars.logic.GamePlay;
-import planetwars.logic.GameArena;
-import planetwars.logic.LogicLayer;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
 import planetwars.logic.GameEngine;
-import planetwars.logic.graphicobjects.MapLocator;
+import planetwars.logic.LogicLayer;
 import planetwars.logic.graphicobjects.Planet;
-import planetwars.logic.graphicobjects.Ship;
-import planetwars.logic.graphicobjects.Torpedo;
-import planetwars.logic.graphicobjects.Shape;
 
 /**
  * The main class of Planet Wars, providing the graphical user interface.
  * @author jaakkpaa
  */
+
 public class PlanetWarsApplication extends Application{
     
 	public static Dimension resolution = Toolkit.getDefaultToolkit().getScreenSize();
