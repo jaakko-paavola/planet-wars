@@ -1,34 +1,29 @@
-# Käyttöohje
+# Usage
 
-Lataa tiedosto [PlanetWars-1.01.jar](https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/releases/download/Loppupalautus/PlanetWars-1.01.jar)
-## Konfigurointi
+Load the file [PlanetWars-1.01.jar](https://github.com/jaakko-paavola/a-little-software-engineering-project-in-java/releases/download/v1.01/PlanetWars-1.01.jar)
 
-Ohjelma olettaa, että sqlite-tietokanta toimii käyttäjän ympäristössä. Ohjelma vaikuttaa toimivan ainoastaan Java 8/1.8:lla. Esim. Java 11:llä jar:n käynnistysyritys antaa virheilmoituksen: "Error: JavaFX runtime components are missing, and are required to run this application"
+## Configuration
 
-## Ohjelman käynnistäminen
+Sqlite database is a pre-requirement. The final release has been tested with Java 17.
 
-Ohjelma käynnistetään komennolla 
+## Starting the program
+
+Use the command
 
 ```
-java -jar PlanetWars-1.0.jar
+java -jar PlanetWars-1.01.jar
 ```
 
-## Kirjautuminen
+## Signing up a new user or logging in an existing user
 
-Sovellus käynnistyy kirjautumisnäkymään:
+The program starts up in the login screen:
 
 <img src="https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/Screenshot%20from%202019-12-10%2001-12-58.png" width="400">
 
-Kirjautuminen onnistuu kirjoittamalla olemassaoleva käyttäjätunnus ja oikea salasana syötekenttään ja painamalla _sign in_.
+Either sign up a new user with a password, or sign in an existing user (and the progress of the game will continue were it left off).
 
-Jos kirjautuminen onnistuu, avautuu seuraavaksi pelinäkymä.
+After signing in successfully the game scene will open.
 
-## Uuden käyttäjän luominen
+## Gameplay
 
-Uusi käyttäjä luodaan syöttämällä käyttäjänimi ja salasana syötekenttiin ja painamalla _sign up_
-
-Jos käyttäjän luominen onnistuu, avautuu seuraavaksi pelinäkymä.
-
-## Pelaaminen
-
-Alusta ohjataan nuolinäppäimillä ja välilyönnillä ammutaan torpedo. Pelissä on tarkoitus lentää päin tai ampua jokaista pelikentän planeettaa ennen kuin oikeassa yläkulmassa juoksevasta sekuntikellosta loppuu aika. Jos pelaaja onnistuu läpäisemään kentän, hän etenee seuraavalle, astetta vaikeammalle tasolle.
+The space ship is controlled using the arrow keys, and space key fires a torpedo. The goal of the game is to fly towards (conquer) or shoot at (destroy) every planet in the game scene before the timer in the upper right corner runs out. If the player succeeds in conquering or destroying every planet on the level, they advance to the next, more difficult, level.
