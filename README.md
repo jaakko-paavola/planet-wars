@@ -1,7 +1,6 @@
 # A little software engineering project in Java: Planet Wars
 A space flying game where you race against the clock trying to capture or destroy planets.
 
-## Helsingin yliopiston ohjelmistotekniikan kurssin harjoitustyö 2019
 A course project in the course Software Development Methods at the University of Helsinki in 2019
 
 ### Documentation
