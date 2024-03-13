@@ -9,7 +9,7 @@ A course project in the course Software Development Methods at the University of
 
 [Usage instructions](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
-[Requirements specification document](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Requirements specification document](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md) (in Finnish)
 
 [Work-hour records](https://github.com/Jakoviz/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md) (in Finnish)
 
