@@ -63,7 +63,7 @@ The command
 mvn package
 ```
 
-generates an executable jar file _PlanetWars-1.0-SNAPSHOT.jar_ in the directory _target_
+generates an executable jar file _PlanetWars-1.01.jar_ in the directory _target_
 
 #### JavaDoc
 
